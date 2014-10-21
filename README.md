@@ -1,4 +1,7 @@
-3d-Models
-=========
+# Models for 3D printing
 
-3D models created for 3D printing
+This repository contains my creations for 3D printing. Here you will find a variety of usefull stuff
+
+All the models are created using [OpenScad](http://www.openscad.org) and are designed to be easily adapted to your necessities
+
+Enjoy it!

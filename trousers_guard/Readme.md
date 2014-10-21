@@ -1,7 +1,10 @@
 # Trousers Guard - Salva Pantalón #
 
-Author: Diego Viejo
+Author: [Diego Viejo](www.dccia.ua.es/~dviejo)
+
 Printing time: < 20 minutes
+
+![Salva pantalón](images/salvapantalon.jpg)
 
 ## Description - Descripción
 

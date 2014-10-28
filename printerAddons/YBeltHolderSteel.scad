@@ -14,8 +14,8 @@ belt_tooth_ratio = 0.8; //0.675//0.5;
 
 
 module belt_holder_base(){
- translate([-33-8.5, 0,-1-4.5]) cube([33,26,16+4.5]);
- translate([-33-8.5, 22, -1-4.5]) cube([33, 4, 16+9]);	
+ translate([-33-8.5, 0,-1-8]) cube([33,26,16+8]);
+ translate([-33-8.5, 22, -1-8]) cube([33, 4, 16+16]);	
 }
 
 module belt_holder_beltcut(){
@@ -36,24 +36,25 @@ module belt_holder_holes(){
  translate([-45.5,0,7.5]) rotate([-90,0,0]) cylinder(h=30, r=1.7, $fn=10);
  
  //new holes
- translate([-25 -23.5/2, 15, 6.5 + 17.5/2]) rotate([-90,0,0]) cylinder(h=15, r=1.7, $fn=10);
- translate([-25 +23.5/2, 15, 6.5 + 17.5/2]) rotate([-90,0,0]) cylinder(h=15, r=1.7, $fn=10);
- translate([-25 -23.5/2, 15, 6.5 - 17.5/2]) rotate([-90,0,0]) cylinder(h=15, r=1.7, $fn=10);
- translate([-25 +23.5/2, 15, 6.5 - 17.5/2]) rotate([-90,0,0]) cylinder(h=15, r=1.7, $fn=10);
+ translate([-25 - 17.5/2, 15, 6.5 + 23.5/2]) rotate([-90,0,0]) cylinder(h=15, r=1.7, $fn=10);
+ translate([-25 + 17.5/2, 15, 6.5 + 23.5/2]) rotate([-90,0,0]) cylinder(h=15, r=1.7, $fn=10);
+ translate([-25 - 17.5/2, 15, 6.5 - 23.5/2]) rotate([-90,0,0]) cylinder(h=15, r=1.7, $fn=10);
+ translate([-25 + 17.5/2, 15, 6.5 - 23.5/2]) rotate([-90,0,0]) cylinder(h=15, r=1.7, $fn=10);
+
  
  //nuts
- translate([-25 -23.5/2, 18, 6.5 + 17.5/2]) rotate([-90,0,0]) cylinder(h=4, r=6.75/2, $fn=6);
- translate([-25 +23.5/2, 18, 6.5 + 17.5/2]) rotate([-90,0,0]) cylinder(h=4, r=6.75/2, $fn=6);
+ translate([-25 - 17.5/2, 18, 6.5 + 23.5/2]) rotate([-90,0,0]) cylinder(h=4, r=6.65/2, $fn=6);
+ translate([-25 + 17.5/2, 18, 6.5 + 23.5/2]) rotate([-90,0,0]) cylinder(h=4, r=6.65/2, $fn=6);
  hull()
  {
-    translate([-25 -23.5/2, 18, 6.5 - 17.5/2]) rotate([-90,0,0]) cylinder(h=4, r=6.75/2, $fn=6);
-    translate([-25 -23.5/2, 18, 6.5 - 17.5]) rotate([-90,0,0]) cylinder(h=4, r=6.75/2, $fn=6);
+    translate([-25 - 17.5/2, 18, 6.5 - 23.5/2]) rotate([-90,0,0]) cylinder(h=4, r=6.65/2, $fn=6);
+    translate([-25 - 17.5/2, 18, 6.5 - 23.5]) rotate([-90,0,0]) cylinder(h=4, r=6.65/2, $fn=6);
  }
  
  hull()
  {
-    translate([-25 +23.5/2, 18, 6.5 - 17.5/2]) rotate([-90,0,0]) cylinder(h=4, r=6.75/2, $fn=6);
-    translate([-25 +23.5/2, 18, 6.5 - 17.5]) rotate([-90,0,0]) cylinder(h=4, r=6.75/2, $fn=6);
+    translate([-25 + 17.5/2, 18, 6.5 - 23.5/2]) rotate([-90,0,0]) cylinder(h=4, r=6.65/2, $fn=6);
+    translate([-25 + 17.5/2, 18, 6.5 - 23.5]) rotate([-90,0,0]) cylinder(h=4, r=6.65/2, $fn=6);
  }
 }
 

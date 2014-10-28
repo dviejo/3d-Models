@@ -8,27 +8,43 @@
  * a straight belt when used with YBeltHolderSteel part (also included in this project)
  */
 
+pulleyWidth = 15 + 1;
 
-distEjeIdler = 38 - 25.5 -4-3.5; 
+boltHoleDesp = 6.5; //check!!!
 
-width = 22;
+height = 5;
+width = boltHoleDesp*2 + 10;
 
 module idlerBlock()
 {
+  translate([-width/2, 0, 0]) cube([width, 17, height]);
+  
+  translate([pulleyWidth/2-3, 0, 0])
   hull()
   {
-    cube([width, 15, 18.5]);
-    translate([width, 15+10, 7+1.5]) rotate([0, -90, 0]) cylinder(r=7+1.5, h=width);
+    translate([0, 5 + 5.5, 15]) rotate([0, 90, 0]) cylinder(r=4, h=3);
+    translate([0, 9, 0]) cube([3, 8, height]);
+  }
+
+  translate([-pulleyWidth/2, 0, 0])
+  hull()
+  {
+    translate([0, 5 + 5.5, 15]) rotate([0, 90, 0]) cylinder(r=4, h=3);
+    translate([0, 9, 0]) cube([3, 8, height]);
   }
 }
 
 module idlerHoles()
 {
-    translate([width+1, 15+10+1.5, 7+1.5]) rotate([0, -90, 0]) cylinder(r=4, h=width+2);
-    
-    translate([3, -1, 3]) cube([width -6, 35, 16]);
-    
-    #translate([width+1, 5, 7+1.5+distEjeIdler]) rotate([0, -90, 0]) cylinder(r=1.8, h=width+2);
+  //pulley rod
+  #translate([-width/2-1, 5 + 5.5, 15]) rotate([0, 90, 0]) cylinder(r=1.65, h=width+2);
+  
+  translate([boltHoleDesp, 5, -1]) cylinder(r=1.65, h=height+2);
+  translate([-boltHoleDesp, 5, -1]) cylinder(r=1.65, h=height+2);
+
+  //nuts
+  translate([boltHoleDesp, 5, height-2]) cylinder(r=6.75/2, h=4, $fn=6);
+  translate([-boltHoleDesp, 5, height-2]) cylinder(r=6.75/2, h=4, $fn=6);
 
 }
 

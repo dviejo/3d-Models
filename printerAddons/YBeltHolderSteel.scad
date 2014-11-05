@@ -66,6 +66,8 @@ module head()
     //bolts
     translate([0, (32-holeSeparation)/2, -1]) cylinder(r=1.65, h=height+2, $fn=10);
     translate([0, (32+holeSeparation)/2, -1]) cylinder(r=1.65, h=height+2, $fn=10);
+    translate([0, (32-holeSeparation)/2, -1]) cylinder(r=6.65/2, h=2.5, $fn=10);
+    translate([0, (32+holeSeparation)/2, -1]) cylinder(r=6.65/2, h=2.5, $fn=10);
 
     //teeth
     for ( i = [0 : 8] ){
@@ -138,4 +140,4 @@ module belt_holder(){
 
 translate([25, 0, 3.5]) rotate([0, -90, 0])
 heels();
-head();
+translate([0, 0, 4]) rotate([0, 180, 0]) head();

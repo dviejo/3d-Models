@@ -8,6 +8,8 @@
  * 
  */
 
-cube(25);
+side = 20;
 
-translate([50, 12.5, 0]) cylinder(r=12.5, h=25, $fn=70);
+cube(side);
+
+translate([50, side/2, 0]) cylinder(r=side/2, h=side, $fn=70);

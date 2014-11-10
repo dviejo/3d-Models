@@ -38,11 +38,11 @@ AjusteNozzle = 1.25;
 //  simpleExtruder(nozzle=jHead, extra_width=6.5);
 //for showing
 //showSimpleExtruder();
-//newIdler();
-//mirror([1, 0, 0]) 
-//  translate([-30, -20, 0]) rotate(90)
-//    newIdler();
-printDualExtruder(n=E3D); //jHead prusaNozzle
+newIdler();
+mirror([1, 0, 0]) 
+  translate([-30, -20, 0]) rotate(90)
+    newIdler();
+//printDualExtruder(n=E3D); //other options: jHead prusaNozzle
 
 //showDualExtruder(nozzle=E3D);
 
@@ -366,7 +366,7 @@ module newIdler()
     translate([-50, -93, mainHeight + baseHeight - 1]) cube([100, 100, 100]);
     
     //idler attaching hole
-    #rotate(-9) translate([15.5 - 10 - filament_d+2.5, -15.5, 0])
+    rotate(-9) translate([15.5 - 10 - filament_d+2.5, -15.5, 0])
     {
       translate([0, 0, 5.3])
 	cylinder(r = 2.5/2, h = 2);
@@ -378,6 +378,7 @@ module newIdler()
       %translate([0, 0, mainHeight/2 + offset -4.2/2])
 	cylinder(r = 5, h = 4);
     }
+    
     translate([0, 0, mainHeight/2 + offset]) {
 	//idler bearing main hole
 	translate ([-2, 0, 0]) rotate(-9) 
@@ -400,12 +401,12 @@ module newIdler()
       #translate([0, 0, idlerHeight / 2 + offset - 9]) rotate([90, 0, 30]) translate([31, 0, -2]) cylinder(r = spring_d * 7/12, h = 13, $fn = 6);
       
       //bearing holes
-      translate([0, 0, -0.1]) cylinder(r=bearingRad+0.3, h=bearingHeight+1.1, $fn=30);
+      translate([0, 0, -0.1]) cylinder(r=bearingRad+0.2, h=bearingHeight+1.1, $fn=30);
       translate([0, 0, baseHeight+mainHeight-bearingHeight - 0.5])
-	cylinder(r=bearingRad+0.3, h=bearingHeight+0.3, $fn=30);
+	cylinder(r=bearingRad+0.2, h=bearingHeight+0.3, $fn=30);
       
       //main screew hole
-      translate([0, 0, bearingHeight+1.2]) cylinder(r=3.1 * 7/12, h=40, $fn=15);
+      #translate([0, 0, bearingHeight+1.2]) cylinder(r=3, h=40, $fn=15);
       
       //clearance for motor's frontal
       difference()

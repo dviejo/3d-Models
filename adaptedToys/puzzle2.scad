@@ -66,5 +66,5 @@ module pieceSet()
       }
 }
 
-
-pieceSet();
+puzzle2Board();
+//pieceSet();

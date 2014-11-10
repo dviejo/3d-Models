@@ -1,6 +1,6 @@
 /**
  * Minimalistic single and dual extruder 
- * Derived from the direct extruder by whosasis
+ * Derived from the direct extruder by Whosa whatsis
  * Created by DViejo
  */
 
@@ -42,11 +42,10 @@ AjusteNozzle = 1.25;
 //mirror([1, 0, 0]) 
 //  translate([-30, -20, 0]) rotate(90)
 //    newIdler();
-//printDualExtruder(n=E3D); //jHead prusaNozzle
+printDualExtruder(n=E3D); //jHead prusaNozzle
 
-showDualExtruder(nozzle=E3D);
+//showDualExtruder(nozzle=E3D);
 
-//translate([20, 0, 0]) mirror ([1, 0, 0]) idler();
 //fanMount(nozzle=jHead);
 
 module simpleExtruder(nozzle = prusaNozzle, extra_width=0)
@@ -291,12 +290,14 @@ module fanMount(nozzle=prusaNozzle)
   }
 }
 
+
+//TODO Check this extrudre: it's outdated!
 module showSimpleExtruder()
 {
   color("red")
   translate([0, -48, 0]) 
   rotate([0, 180, 0]) 
-  import("/home/dviejo/Dropbox/3DPrinter/piezas/Prusa3/Prusa3-master/single_plate/output/x-carriageDual.stl");
+  import("x-carriageDual.stl");
   
   *translate([trackerDiam/2 + AjusteNozzle, -31.5, baseHeight+mainHeight/2]) rotate([-90, 0, 0]) PrusaNozzlePlate();
   *translate([0, 6.5, 9.65]) union() {
@@ -365,7 +366,7 @@ module newIdler()
     translate([-50, -93, mainHeight + baseHeight - 1]) cube([100, 100, 100]);
     
     //idler attaching hole
-    rotate(-9) translate([15.5 - 10 - filament_d+2.5, -15, 0])
+    #rotate(-9) translate([15.5 - 10 - filament_d+2.5, -15.5, 0])
     {
       translate([0, 0, 5.3])
 	cylinder(r = 2.5/2, h = 2);
@@ -399,9 +400,9 @@ module newIdler()
       #translate([0, 0, idlerHeight / 2 + offset - 9]) rotate([90, 0, 30]) translate([31, 0, -2]) cylinder(r = spring_d * 7/12, h = 13, $fn = 6);
       
       //bearing holes
-      translate([0, 0, -0.1]) cylinder(r=bearingRad+0.4, h=bearingHeight+1.1, $fn=30);
+      translate([0, 0, -0.1]) cylinder(r=bearingRad+0.3, h=bearingHeight+1.1, $fn=30);
       translate([0, 0, baseHeight+mainHeight-bearingHeight - 0.5])
-	cylinder(r=bearingRad+0.4, h=bearingHeight+0.3, $fn=30);
+	cylinder(r=bearingRad+0.3, h=bearingHeight+0.3, $fn=30);
       
       //main screew hole
       translate([0, 0, bearingHeight+1.2]) cylinder(r=3.1 * 7/12, h=40, $fn=15);
@@ -496,8 +497,8 @@ module base(nozzle=prusaNozzle, alone=0, extra_width=0)
 		difference()
 		{
 		  translate([0, -15.5, -1]) cylinder(r=12, h=baseHeight*2 + mainHeight+ 2);
-		  //estos huecos son para poner una guía
-		  translate([trackerDiam/2 + AjusteNozzle, -31, baseHeight + mainHeight/2+offset]) rotate([-90, 0, 0]) cylinder(r1=12, r2=6.25/2, h=15.5-trackerDiam/2-2);
+		  //estos huecos son para hacer una guía que mejore la impresión con materiales flexibles
+		  translate([trackerDiam/2 + AjusteNozzle, -29, baseHeight + mainHeight/2+offset]) rotate([-90, 0, 0]) cylinder(r1=12, r2=6.15/2, h=15.5-trackerDiam/2-2);
 		}
 	}
 	difference()
@@ -516,7 +517,7 @@ module base(nozzle=prusaNozzle, alone=0, extra_width=0)
 	difference()
 	{
 	  translate([-50, -26, baseHeight]) cube([100, 20, mainHeight+baseHeight+1]);
-	  translate([trackerDiam/2 + AjusteNozzle, -31, baseHeight + mainHeight/2+offset]) rotate([-90, 0, 0]) cylinder(r1=12, r2=6.25/2, h=15.5-trackerDiam/2-2);
+	  translate([trackerDiam/2 + AjusteNozzle, -29, baseHeight + mainHeight/2+offset]) rotate([-90, 0, 0]) cylinder(r1=12, r2=5.8/2, h=15.5-trackerDiam/2-2);
 	}
 	//Springs
 	#translate([-15.5, 0, baseHeight + mainHeight / 2+offset+3]) rotate([90, 0, 150 - 4.5]) translate([5, 0, 5.5+correction*1.25]) 

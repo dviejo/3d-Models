@@ -8,7 +8,7 @@
  * 
  */
 
-height = 15;
+height = 13;
 width = 50;
 length = 150;
 
@@ -16,7 +16,7 @@ holeRad = 7;
 holeDepth = 7; //under the surface
 
 beamHeight = 40;
-beamRad = holeRad * 0.85;
+beamRad = holeRad * 0.925;
 
 module puzzleBase()
 {

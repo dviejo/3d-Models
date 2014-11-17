@@ -16,7 +16,7 @@ boardSide = 180;
 objectHoleSide = 35;
 objectGap= 8;
 
-objectSide = objectHoleSide*0.85;
+objectSide = objectHoleSide*0.875;
 objectHeight = 15;
 
 module puzzleBase()
@@ -66,5 +66,5 @@ module pieceSet()
       }
 }
 
-puzzle2Board();
-//pieceSet();
+//puzzle2Board();
+pieceSet();

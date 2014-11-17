@@ -9,14 +9,16 @@ Enjoy it!
 
 ## Contents
 
-* adapted Toys - A set of toys adapted for disabled children
+* Adapted Toys - A set of toys adapted for disabled children
 
-* Trousers guard - A piece for saving your jeans when cycling
-
-* Rear light support - A replacement part for a byke's rear light
+* Custom Zip - A fully customizable zip part. 
 
 * Dual Extruder - Dual extruder for [RepRap](www.reprap.org) Prusa Mendel iteration 3
 
 * Printer Addons - Some pieces designed for changing/improving some RepRap printers features
 
-* Commons - Auxiliary files used in many projects
+* Rear light support - A replacement part for a byke's rear light
+
+* Trousers guard - A piece for saving your jeans when cycling
+
+* Commons - Auxiliary files used in many projects. Not a project by itself.

@@ -4,75 +4,57 @@
  * Created by DViejo
  * 27/Oct/2014
  *
- *  This part allows you to use 623 bearings in your i3 Steel. It makes possible to have
- * a straight belt when used with YBeltHolderSteel part (also included in this project)
+ *  This part allows you to use 624 bearings in your i3 Steel. It makes possible to have
+ * a straight belt when used with YBeltHolderSteel part (also included in this project). This can be used 
+ * in a 'vanilla' i3steel although it is designed to be used with the model sold in moebyus.com (Madrid - Spain)
  */
 
  
-pulleyInnerRad = 2 * 1.1; //1.65 for 623zz
-pulleyWidth = 9 + 1;
+pulleyInnerRad = 2 * 1.1; //change 2 by 1.65 for 623zz bearings
+pulleyWidth = 5 + 1;
 
-boltHoleDesp = 6.5; //check!!!
+height = 6;
+motorHeight = 30;
 
-height = 5;
-width = boltHoleDesp*2 + 12;
-
-module idlerBlock()
-{
-  translate([-width/2, 0, 0]) cube([width, 17, height]);
-  
-  translate([pulleyWidth/2, 0, 0])
-  hull()
-  {
-    translate([0, 5 + 5.5, 15]) rotate([0, 90, 0]) cylinder(r=4.5, h=5);
-    translate([0, 9, 0]) cube([5, 8, height]);
-  }
-
-  translate([-pulleyWidth/2-3, 0, 0])
-  hull()
-  {
-    translate([-2, 5 + 5.5, 15]) rotate([0, 90, 0]) cylinder(r=4.5, h=5);
-    translate([-2, 9, 0]) cube([5, 8, height]);
-  }
-  
-  %translate([-pulleyWidth/2, 5 + 5.5, 15]) rotate([0, 90, 0]) cylinder(r=9, h=pulleyWidth);
-}
-
-module idlerHoles()
-{
-  //pulley rod
-  #translate([-width/2-1, 5 + 5.5, 15]) rotate([0, 90, 0]) cylinder(r=pulleyInnerRad, h=width+2);
-  
-  translate([boltHoleDesp, 5, -1]) cylinder(r=1.65, h=height+2);
-  translate([-boltHoleDesp, 5, -1]) cylinder(r=1.65, h=height+2);
-
-  //nuts
-  translate([boltHoleDesp, 5, height-2.5]) cylinder(r=6.75/2, h=4, $fn=6);
-  translate([-boltHoleDesp, 5, height-2.5]) cylinder(r=6.75/2, h=4, $fn=6);
-  
-  translate([-pulleyWidth/2, 5 + 5.5, 15]) rotate([0, 90, 0]) cylinder(r=9+2, h=pulleyWidth);
-  
-  
-  //fancy cuts
-  translate([pulleyWidth/2+4, 17, -1]) rotate(15)
-    translate([5,0,0]) rotate(180) 
-      cube([5, 17, 40]);
-  
-  mirror([1, 0, 0])
-  translate([pulleyWidth/2+4, 17, -1]) rotate(15)
-    translate([5,0,0]) rotate(180) 
-      cube([5, 17, 40]);
-}
+//watch();
+print();
 
 
-module idler()
+module idlerPlate()
 {
   difference()
   {
-    idlerBlock();
-    idlerHoles();
+    hull()
+    {
+      cube([35, 10, height]);
+      translate([1.5, 13.5, 0]) cylinder(r=1.5, h=height);
+      translate([motorHeight, 15, 0]) cylinder(r=5, h=height);
+    }
+    //bearing beam hole
+    translate([motorHeight, 15, -1]) cylinder(r=pulleyInnerRad, h=height+2);
+    
+    //frame attaching hole
+    #translate([26.5, -1, height/2]) rotate([-90, 0, 0]) cylinder(r=1.65, h=15);
+    //nut
+    hull()
+    {
+      translate([26.5, 6, height/2]) rotate([-90, 0, 0]) cylinder(r=6.75/2, h=4, $fn=6);
+      translate([26.5, 6, height]) rotate([-90, 0, 0]) cylinder(r=6.75/2, h=4, $fn=6);
+    }
   }
 }
 
+module watch()
+{
+  translate([height/2, 0, 0]) rotate([0, -90, 0]) idlerPlate();
+  translate([height/2 + 13, 0, 0]) rotate([0, -90, 0]) idlerPlate();
+  
+  %translate([(13+pulleyWidth)/2, 15, 30]) rotate([0, -90, 0]) cylinder(r=13/2, h=pulleyWidth);
+  
+}
 
-idler();
+module print()
+{
+  idlerPlate();
+  translate([0, -2, 0]) mirror([0, -1, 0]) idlerPlate();
+}

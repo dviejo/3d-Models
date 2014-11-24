@@ -10,3 +10,19 @@
  */
 
 heatBedHeight=3; //check!!
+
+module stand()
+{
+  difference()
+  {
+    cube([20, 20, 20]);
+    
+    translate([10, 20-heatBedHeight, 10]) cube([10+1, heatBedHeight+1, 10+1]);
+    translate([2, 2, -1]) cube([16, 10, 22]);
+    #translate([10+2, -1, 10+2]) rotate([-90, 0, 0]) cylinder(r=1.75, h=10);
+    
+  }
+  
+}
+
+stand();

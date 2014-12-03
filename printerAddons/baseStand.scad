@@ -9,20 +9,54 @@
  * 
  */
 
-heatBedHeight=3; //check!!
+heatBedHeight=1.61 - 0.1; 
+
+magnetRad = 17.5/2;
+magnetHeight = 5;
+
+side = 31;
+height = 20;
 
 module stand()
 {
   difference()
   {
-    cube([20, 20, 20]);
+    cube([side, side, height]);
     
-    translate([10, 20-heatBedHeight, 10]) cube([10+1, heatBedHeight+1, 10+1]);
-    translate([2, 2, -1]) cube([16, 10, 22]);
-    #translate([10+2, -1, 10+2]) rotate([-90, 0, 0]) cylinder(r=1.75, h=10);
+    //heatbed dock
+    difference()
+    {
+      translate([-1, -1, height-heatBedHeight]) cube([side+2, 11, heatBedHeight+1]);
+      translate([side-3, 10-3, height-heatBedHeight-1]) cylinder(r=1.35, h=1+heatBedHeight/2, $fn=15); 
+    }
+    
+    //height adjustment chamber
+    difference()
+    {
+      translate([side - 3, 10 - 3, 3]) cylinder(r=12, h=13);
+      translate([side, 0, 0]) cylinder(r=3.5, h=height);
+    }
+    
+    //connection beam
+    translate([side-3, 10 - 3, -1]) cylinder(r=1.75, h=10);
+    
+    //magnet hub
+    #translate([magnetRad+2, 10 + (side-10)/2, height-(2*magnetHeight)]) cylinder(r=magnetRad*1.04, h=2*magnetHeight+1);
     
   }
   
 }
 
+module wheel()
+{
+  difference()
+  {
+    cylinder(r=10, h=3);
+    
+    translate([0, 0, -1]) cylinder(r=1.7, h=5);
+    translate([0, 0, 1.5]) cylinder(r=3.1, h=3, $fn = 6);
+  }
+}
+
 stand();
+//translate([50, 0, 0]) wheel();

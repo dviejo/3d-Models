@@ -5,7 +5,8 @@ This repository contains my creations for 3D printing. Here you will find a vari
 All the models are created using [OpenScad](http://www.openscad.org) and are designed to be easily adapted to your necessities
 
 Enjoy it!
-[Diego Viejo](www.dccia.ua.es/~dviejo)
+
+[Diego Viejo](http://www.dccia.ua.es/~dviejo)
 
 ## Contents
 
@@ -13,7 +14,7 @@ Enjoy it!
 
 * Custom Zip - A fully customizable zip part. 
 
-* Dual Extruder - Dual extruder for [RepRap](www.reprap.org) Prusa Mendel iteration 3
+* Dual Extruder - Dual extruder for [RepRap](http://www.reprap.org) Prusa Mendel iteration 3
 
 * Printer Addons - Some pieces designed for changing/improving some RepRap printers features
 

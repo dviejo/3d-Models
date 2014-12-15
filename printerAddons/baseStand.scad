@@ -15,33 +15,34 @@ magnetRad = 17.5/2;
 magnetHeight = 5;
 
 side = 31;
-height = 20;
+height = 16;
 
 module stand()
 {
   difference()
   {
-    cube([side, side, height]);
+    cube([side+2, side, height]);
     
     //heatbed dock
     difference()
     {
-      translate([-1, -1, height-heatBedHeight]) cube([side+2, 11, heatBedHeight+1]);
+      translate([-1, -1, height-heatBedHeight]) cube([side+1, 11, heatBedHeight+1]);
       translate([side-3, 10-3, height-heatBedHeight-1]) cylinder(r=1.3, h=1+heatBedHeight/2, $fn=15); 
     }
     
     //height adjustment chamber
     difference()
     {
-      translate([side - 3, 10 - 3, 3]) cylinder(r=12, h=13);
-      translate([side, 0, 0]) cylinder(r=3.5, h=height);
+      translate([side - 3, 10 - 3, 3]) cylinder(r=12, h=height-3-4);
+      translate([side, 0, 0]) cylinder(r=2.5, h=height); //you have to remove this after printing
     }
     
     //connection beam
     translate([side-3, 10 - 3, -1]) cylinder(r=1.75, h=10, $fn=15);
     
     //magnet hub
-    #translate([magnetRad+2, 10 + (side-10)/2, height-(2*magnetHeight)]) cylinder(r=magnetRad*1.04, h=2*magnetHeight+1);
+    translate([magnetRad+2, 10 + (side-10)/2, height-(2*magnetHeight)]) cylinder(r=magnetRad*1.04, h=2*magnetHeight+1, $fn=70);
+    translate([magnetRad+2-2.5, side-3, height-(2*magnetHeight)]) cube([5, 10, height]);
     
   }
   

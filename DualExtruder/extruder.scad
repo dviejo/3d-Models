@@ -604,7 +604,7 @@ color("silver")
 wade_block_depth=28;
 module wildseyed_mount_holes(insulator_d=12.7)  
 {  
-	extruder_recess_d=insulator_d+0.7;
+	extruder_recess_d=insulator_d+0.6;
 	extruder_recess_h=10;
 
 	// Recess in base
@@ -613,7 +613,7 @@ module wildseyed_mount_holes(insulator_d=12.7)
 	
 	for (hole=[-1,1])
 	  rotate(90,[1,0,0])
-	    translate([hole*(extruder_recess_d/2-1.45),2.3+1.5,-wade_block_depth/2-1])
+	    translate([hole*(extruder_recess_d/2-1.5),2.3+1.5,-wade_block_depth/2-1])
 	      cylinder(r=1.5,h=wade_block_depth+2,$fn=10);
 }
 

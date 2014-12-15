@@ -8,25 +8,32 @@
  * 
  */
 
+moebyus = 31/2;
+standard = 10;
+ 
+sideDist = standard;
+
+shift = 0; //0 for standard, 6 for moebyus
+
 module martir()
 {
   difference()
   {
     union()
     {
-      translate([-16, -14, 0]) cube([32, 28, 4]);
+      translate([-18, -18, 0]) cube([36+shift/3, 36, 4]);
       hull()
       {
-	translate([-8, 0, 0]) cylinder(r=3.5, h=5.5, $fn=20);
-	translate([8, 0, 0]) cylinder(r=3.5, h=5.5, $fn=20);
+	translate([-12.5, 0, 0]) cylinder(r=4.775, h=5.5, $fn=20);
+	translate([12.5, 0, 0]) cylinder(r=4.775, h=5.5, $fn=20);
       }
     }
     
     for(i = [-1, 1])
     {
-      translate([0, 8*i, -1]) cylinder(r=1.65, h=10);
+      translate([0, sideDist*i, -1]) cylinder(r=1.65, h=10);
       for(j = [-1, 1])
-	#translate([12*i, 9*j, -1]) cylinder(r=2, h=10, $fn=20);
+	#translate([9*i+shift, 12*j, -1]) cylinder(r=2.15, h=10, $fn=20);
     }
   }
 }

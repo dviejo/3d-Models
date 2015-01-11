@@ -4,7 +4,6 @@
 // Licence Creative commons atribution & share alike.
 // Modified by dviejo
 
-//include <Code_Config.scad>;
 //************************************//
 // Parámetros de configuración global //
 //************************************//
@@ -12,7 +11,7 @@
 $fn = 100;
 
 // Cojinetes Lineales
-dCoLi = 16.2 ;	// Diámetro
+dCoLi = 15; //16.2 ;	// Diámetro
 
 // Varillas lisas
 dVaLi = 8.15 ; // Diámetro
@@ -227,6 +226,11 @@ module pieza(){
 			translate([29, 5, -9])
 			rotate( 90, [1, 0, 0])
 			cylinder(h = 25, r = 1.5);
+			// Cilindro pasador del tornillo de la correa
+			translate([43+0.3, 16.5, 2]) rotate([0, 90, 0])
+			  cylinder(h = 20, r = 3.6/2);
+			translate([39, 16.5, 2]) rotate([0, 90, 0])
+			  cylinder(h = 2, r = 3.6/2);
 		}
 	}
 }

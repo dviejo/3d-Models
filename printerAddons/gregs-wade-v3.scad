@@ -47,7 +47,7 @@ wade(hotend_mount=default_extruder_mount,
 color("red")
 translate([24,-32.75,base_extra_depth+wade_block_depth]) 
   rotate([0,0,0]) 
-    import("output/x-carriageV2.stl");
+    import("output/Code_Xcarriage_v1.stl");
 /*
 %translate([45.0, 55.50, 1]) //[46.78,55, 1]
   rotate([0, 0, 0])

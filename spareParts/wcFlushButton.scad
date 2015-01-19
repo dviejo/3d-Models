@@ -6,12 +6,12 @@
  * 
  */
 
-externalRad = 15;
-internalRad = 5.25;
-connectionHole = 2.15;
+externalRad = 16;
+internalRad = 5.5;
+connectionHole = 2.65;
 
 height = 3;
-beamHeight = 24;
+beamHeight = 18;
 connectionHoleDepth = 3;
 
 module button()

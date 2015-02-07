@@ -46,4 +46,4 @@ Issues:
 
 Printing time: about 90 minutes at 65mm/min 3mm filament.
 
-Status: **Alpha**. Under development. Not tested
+Status: **Alpha**. Under development. Not tested. Stl ready to print

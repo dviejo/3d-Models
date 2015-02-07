@@ -241,5 +241,5 @@ module pieza(){
 
 // Generamos la pieza!!
 
-//rotate([0, -90, 0])
-//pieza();	
+rotate([0, -90, 0])
+  pieza();	

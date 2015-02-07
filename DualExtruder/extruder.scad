@@ -7,7 +7,7 @@
  */
 
 include<config.scad>
-include<XCarriageDual.scad>
+//include<XCarriageDual.scad>
 
 module base(action) translate([-trackerDiam/2 - AjusteNozzle, 15.5*2+5, -baseHeight - mainHeight/2-offset])
 {
@@ -113,4 +113,3 @@ difference() {
 
 dualExtruder();
 
-translate([mainWidth/2, alturaSoporte, -extruderSeparation]) rotate(180) color("red") pieza();	

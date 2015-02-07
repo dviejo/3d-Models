@@ -173,7 +173,14 @@ module soporteExtrusor()
         
     for(i=[-1, 1])
     {
-      translate([mainWidth/2+i*headDist/2, alturaSoporte+1, extruderSeparation]) rotate([90, 180, 0]) e3dMount();
+      difference()
+      {
+	translate([mainWidth/2+i*headDist/2, alturaSoporte+1, extruderSeparation]) rotate([90, 180, 0]) e3dMount();
+	
+	//Support. Remove after printing
+	translate([mainWidth/2+i*headDist/2-8, alturaSoporte+1+e3dHeight1, 41-0.6]) 
+	  cube([16, e3dHeight2,0.6]);
+      }
       //holes for attaching the extruder
       translate([mainWidth/2+i*mountingHoleSep, -1.5, extruderSeparation]) 
 	rotate([-90, 0, 0]) 
@@ -241,5 +248,5 @@ module pieza(){
 
 // Generamos la pieza!!
 
-rotate([0, -90, 0])
+rotate([0, -90, 0]) //uncomment this for printing, comment for modeling
   pieza();	

@@ -11,7 +11,7 @@
 fichaHeight = 1.1;
 fichaRad = 15/2;
 
-cubileteHeight = 50;
+cubileteHeight = 45;
 cubileteRad1 = 28/2;
 cubileteRad2 = 29.5/2;
 cubileteWall = 1;
@@ -29,14 +29,14 @@ module cubilete()
     chained_hull()
     {
       cylinder(r=cubileteRad1, h=2, $fn=40);
-      translate([0, 0, cubileteHeight/2-5]) cylinder(r=cubileteRad2, h=10, $fn=40);
+      translate([0, 0, cubileteHeight/2-4]) cylinder(r=cubileteRad2, h=8, $fn=40);
       translate([0, 0, cubileteHeight]) cylinder(r=cubileteRad1, h=1, $fn=40);
     }
     
     chained_hull()
     {
       translate([0, 0, 1]) cylinder(r=cubileteRad1-cubileteWall, h=1, $fn=40);
-      translate([0, 0, cubileteHeight/2-5]) cylinder(r=cubileteRad2-cubileteWall, h=10, $fn=40);
+      translate([0, 0, cubileteHeight/2-4]) cylinder(r=cubileteRad2-cubileteWall, h=8, $fn=40);
       translate([0, 0, cubileteHeight]) cylinder(r=cubileteRad1-cubileteWall, h=2, $fn=40);
     }
 

@@ -171,17 +171,23 @@ module soporteExtrusor()
   {
     translate([0, alturaSoporte, 0]) cube([mainWidth, 11.5, 41]);
         
-    translate([mainWidth/2+headDist/2,alturaSoporte+1,extruderSeparation])mirror([1,0,0])rotate([90,180,0]) e3dMount();
-    translate([mainWidth/2-headDist/2, alturaSoporte+1, extruderSeparation]) rotate([90, 180, 0]) e3dMount();
+    difference()
+    {
+	translate([mainWidth/2+headDist/2,alturaSoporte+1,extruderSeparation])mirror([1,0,0])rotate([90,180,0]) e3dMount();
+	//Support. Remove after printing
+	translate([mainWidth/2+headDist/2-8, alturaSoporte+1+e3dHeight1, 41-1]) 
+	  cube([16, e3dHeight2,1]);
+    }
+
+    difference()
+    {
+      translate([mainWidth/2-headDist/2, alturaSoporte+1, extruderSeparation]) rotate([90, 180, 0]) e3dMount();
+	translate([mainWidth/2-headDist/2-8, alturaSoporte+1+e3dHeight1, 41-1]) 
+	  cube([16, e3dHeight2,1]);
+    }
 	
     for(i=[-1, 1])
     {
-      difference()
-      {
-	//Support. Remove after printing
-	translate([mainWidth/2+i*headDist/2-8, alturaSoporte+1+e3dHeight1, 41-1]) 
-	  cube([16, e3dHeight2,1]);
-      }
       //holes for attaching the extruder
       translate([mainWidth/2+i*mountingHoleSep, -1.5, extruderSeparation]) 
 	rotate([-90, 0, 0]) 

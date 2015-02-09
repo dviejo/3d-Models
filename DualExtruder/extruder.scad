@@ -56,6 +56,7 @@ module base(action) translate([-trackerDiam/2 - AjusteNozzle, 15.5*2+5, -baseHei
 		  cylinder(r = spring_d * 7/12, h = 10, $fn = 6);
 		//hole for filament intake
 		translate([trackerDiam/2 + AjusteNozzle, -60, baseHeight + mainHeight/2+offset]) rotate([-90, 0, 0]) cylinder(r=1.85, h=100, $fn = 25);
+		translate([trackerDiam/2 + AjusteNozzle-5, -15.5, baseHeight + mainHeight/2+offset+5]) rotate([-90, 0, 0]) cube([10, 15, 10]);
 
 		//internal room. The structure for guiding filament is here!
 		translate([-21, -26, baseHeight]) cube([21, 20, mainHeight+baseHeight+1]);

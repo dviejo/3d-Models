@@ -1,7 +1,7 @@
 
 
 //separation between nozzles
-headDist = 15.5*2+1;
+headDist = 15.5*2+5;
 
 
 simple = 0;
@@ -69,5 +69,6 @@ module e3dMount()
   }
   
   translate([0, 0, -15]) cylinder(r=1.85, h=50);
-  translate([25, -6-1.25, -e3dHeight1-1.65]) rotate([0, -90, 0]) cylinder(r=1.55, h=50);
+  #translate([22.00-10.3, -6-1.25, -e3dHeight1-1.65]) rotate([0, -90, 0]) cylinder(r=1.55, h=50);
+  #translate([23.00, -6-1.25, -e3dHeight1-1.65]) rotate([0, -90, 0]) cylinder(r=3, h=11);
 }

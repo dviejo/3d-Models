@@ -94,8 +94,8 @@ difference() {
     translate([-25.5, 0, -baseHeight - mainHeight/2-offset]) cube([41, 41, baseHeight]);
     hull()
     {
-      translate([-5, 5, -baseHeight - mainHeight/2-offset]) cylinder(r=5, h=baseHeight*2 + mainHeight);
-      translate([5, 5, -baseHeight - mainHeight/2-offset]) cylinder(r=5, h=baseHeight*2 + mainHeight);
+      translate([-10, 5, -baseHeight - mainHeight/2-offset]) cylinder(r=5, h=baseHeight*2 + mainHeight);
+      translate([10, 5, -baseHeight - mainHeight/2-offset]) cylinder(r=5, h=baseHeight*2 + mainHeight);
     }
   }
   translate([-headDist/2, 0, 0])

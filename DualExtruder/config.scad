@@ -27,7 +27,7 @@ bearingHeight = b623zzHeight;
 trackerDiam1 = 10.56;
 trackerDiam2 = 6.56;
 trackerDiam = trackerDiam2;
-AjusteNozzle = 1.25;
+AjusteNozzle = 1.0; //1.25;
 correction = (trackerDiam1 - trackerDiam) / 2;
 
 PTFE = false;

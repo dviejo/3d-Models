@@ -41,14 +41,14 @@ longStright = 10;
 mountingHoleSep = 32;
 
 
-e3dDiam = 16 + 0.725;
-e3dDiam2 = 12 + 0.7;
+e3dDiam = 16 + 0.7;
+e3dDiam2 = 12 + 0.625;
 
-e3dHeight1 = 3.75 + 0.425; 
+e3dHeight1 = 3.75 + 0.4; 
 e3dHeight2 = 6 - 0.4; 
 e3dHeight3 = 15; 
 
-module e3dMount()
+module e3dMount(mirror=false)
 {
   translate([0, 0, -e3dHeight1]) hull()
   {
@@ -69,6 +69,16 @@ module e3dMount()
   }
   
   translate([0, 0, -15]) cylinder(r=1.85, h=50);
-  #translate([22.00-10.3, -6-1.25, -e3dHeight1-1.65]) rotate([0, -90, 0]) cylinder(r=1.55, h=50);
-  #translate([23.00, -6-1.25, -e3dHeight1-1.65]) rotate([0, -90, 0]) cylinder(r=3, h=11);
+  if(mirror==true)
+  {
+    #translate([23.00-10.3, -6-1.25, -e3dHeight1-1.65]) rotate([0, -90, 0]) cylinder(r=1.55, h=23.00-10.3-e3dDiam2/2-0.3);
+    translate([-e3dDiam2/2-0.3, -6-1.25, -e3dHeight1-1.65]) rotate([0, -90, 0]) cylinder(r=1.55, h=20);
+    translate([23.00, -6-1.25, -e3dHeight1-1.65]) rotate([0, -90, 0]) cylinder(r=3, h=11);
+  }
+  else
+  {
+    translate([23.00-11.3, -6-1.25, -e3dHeight1-1.65]) rotate([0, -90, 0]) cylinder(r=1.55, h=23.00-11.3-e3dDiam2/2+0.3);
+    translate([-e3dDiam2/2-0.3, -6-1.25, -e3dHeight1-1.65]) rotate([0, -90, 0]) cylinder(r=1.55, h=25);
+    #translate([23.00, -6-1.25, -e3dHeight1-1.65]) rotate([0, -90, 0]) cylinder(r=3, h=11);
+  }
 }

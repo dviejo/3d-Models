@@ -164,34 +164,37 @@ module baserec(){
 
 
 alturaSoporte = 21.5;
-extruderSeparation = 28;
+extruderSeparation = 28; //Distance from the X axle
 module soporteExtrusor()
 {
   difference()
   {
-    translate([0, alturaSoporte, 0]) cube([mainWidth, 11.5, 41]);
+    translate([0, alturaSoporte, 0]) cube([mainWidth, 13.5, 41]);
         
     difference()
     {
-	translate([mainWidth/2+headDist/2,alturaSoporte+1,extruderSeparation])mirror([1,0,0])rotate([90,180,0]) e3dMount();
+	translate([mainWidth/2+headDist/2,alturaSoporte+3,extruderSeparation])mirror([1,0,0])rotate([90,180,0]) e3dMount(mirror=true);
 	//Support. Remove after printing
-	translate([mainWidth/2+headDist/2-8, alturaSoporte+1+e3dHeight1, 41-1]) 
+	translate([mainWidth/2+headDist/2-8, alturaSoporte+3+e3dHeight1, 41-1]) 
 	  cube([16, e3dHeight2,1]);
     }
 
     difference()
     {
-      translate([mainWidth/2-headDist/2, alturaSoporte+1, extruderSeparation]) rotate([90, 180, 0]) e3dMount();
-	translate([mainWidth/2-headDist/2-8, alturaSoporte+1+e3dHeight1, 41-1]) 
+      translate([mainWidth/2-headDist/2, alturaSoporte+3, extruderSeparation]) rotate([90, 180, 0]) e3dMount(mirror=false);
+	translate([mainWidth/2-headDist/2-8, alturaSoporte+3+e3dHeight1, 41-1]) 
 	  cube([16, e3dHeight2,1]);
     }
 	
     for(i=[-1, 1])
     {
-      //holes for attaching the extruder
+      //holes for attaching the extruder (M4)
       translate([mainWidth/2+i*mountingHoleSep, -1.5, extruderSeparation]) 
 	rotate([-90, 0, 0]) 
 	  cylinder(r=2.1, h=alturaSoporte*3);
+      translate([mainWidth/2+i*mountingHoleSep, alturaSoporte+13.5-6.5, extruderSeparation]) 
+	rotate([-90, 0, 0]) 
+	  cylinder(r=3.7, h=7);
     }
   }
 }

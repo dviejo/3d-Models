@@ -176,14 +176,14 @@ module soporteExtrusor()
     {
 	translate([mainWidth/2+headDist/2,alturaSoporte+3,extruderSeparation])mirror([1,0,0])rotate([90,180,0]) e3dMount(mirror=true);
 	//Support. Remove after printing
-	translate([mainWidth/2+headDist/2-8, alturaSoporte+3+e3dHeight1, 41-1]) 
+	#translate([mainWidth/2+headDist/2-8, alturaSoporte+3+e3dHeight1, extruderSeparation+e3dDiam/2+2-epsilon-1]) 
 	  cube([16, e3dHeight2,1]);
     }
 
     difference()
     {
       translate([mainWidth/2-headDist/2, alturaSoporte+3, extruderSeparation]) rotate([90, 180, 0]) e3dMount(mirror=false);
-	translate([mainWidth/2-headDist/2-8, alturaSoporte+3+e3dHeight1, 41-1]) 
+	translate([mainWidth/2-headDist/2-8, alturaSoporte+3+e3dHeight1, extruderSeparation+e3dDiam/2+2-epsilon-1]) 
 	  cube([16, e3dHeight2,1]);
     }
 	
@@ -259,8 +259,7 @@ module pieza(){
 
 // Generamos la pieza!!
 
-*rotate([0, -90, 0]) //uncomment this for printing, comment for modeling
+rotate([0, -90, 0]) //uncomment this for printing, comment for modeling
   pieza();
-rotate([-90, 0, 0])  
+*rotate([-90, 0, 0])  
     e3dMountB();
-//e3dMount();

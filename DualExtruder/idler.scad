@@ -35,7 +35,7 @@ module idler()
     union()
     {
       cylinder(r=5, h=idlerHeight);
-      #translate([0, -15+correction, 0]) cylinder(r=5, h=idlerHeight);
+      translate([0, -15+correction, 0]) cylinder(r=5, h=idlerHeight);
       translate([-5, -15+correction, 0]) cube([10, 15.5+correction, idlerHeight]);
 
       rotate(-60) nestedHull()
@@ -50,6 +50,8 @@ module idler()
       cylinder(r=bearingRad+1.5, h=idlerHeight);
       
     }
+    
+    //clearance for the extruder structure
     translate([-50, -93, mainHeight + baseHeight - 1]) cube([100, 100, 100]);
     
     //idler attaching hole
@@ -62,15 +64,15 @@ module idler()
       translate([0, 0, mainHeight/2 + offset + 4.5])
 	cylinder(r = 3.2, h = 10);
       // idler bearing, for viewing
-      %translate([0, 0, mainHeight/2 + offset -4.2/2])
+      %translate([0, 0, mainHeight/2 + offset -4.7/2])
 	cylinder(r = 5, h = 4);
     }
     
     translate([0, 0, mainHeight/2 + offset]) {
 	//idler bearing main hole
-	translate ([-2, 0, 0]) rotate(-9) 
-	  translate([15.5 - 10 - filament_d+2.5, -15.5, -5.5/2]) 
-	    cylinder(r = 6.5, h = 5.2);
+	translate ([0, 0, 0]) rotate(-9) 
+	  translate([15.5 - 10 - filament_d+2.5, -15.5+1.25, -6.25/2]) //-5.5/2
+	    cylinder(r = 6.5, h = 5.4);
 	//filament through hole
 	hull()
 	{
@@ -89,7 +91,7 @@ module idler()
       
       //bearing holes
       translate([0, 0, -0.15]) cylinder(r=bearingRad+0.18, h=bearingHeight+0.3, $fn=30);
-      #translate([0, 0, baseHeight+mainHeight - 1 - bearingHeight])
+      translate([0, 0, baseHeight+mainHeight - 1 - bearingHeight])
 	cylinder(r=bearingRad+0.18, h=bearingHeight+0.3, $fn=30);
       
       //main screew hole
@@ -100,8 +102,8 @@ module idler()
       {
 	hull()
 	{
-	  translate([0, -15.5, -1]) cylinder(r=5.25, h=5+1);
-	  translate([-5.25, -11, -1]) cube([5.25*2, 5.25*2, 5+1]);
+	  translate([0, -15.5, -1]) cylinder(r=5.25, h=5);
+	  translate([-5.25, -11, -1]) cube([5.25*2, 5.25*2, 5]);
 	}
 	translate([0, 0, -1]) cylinder(r=bearingRad+1.5, h=10);
       }

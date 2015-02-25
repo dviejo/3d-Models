@@ -28,7 +28,7 @@ trackerDiam1 = 10.56;
 trackerDiam2 = 6.56;
 trackerDiam = trackerDiam2;
 AjusteNozzle = 1.0; //1.25;
-correction = (trackerDiam1 - trackerDiam) / 2;
+correction = 0.0; //(trackerDiam1 - trackerDiam) / 2;
 
 PTFE = false;
 ptfeTubeRad = 3.2;
@@ -68,17 +68,85 @@ module e3dMount(mirror=false)
     translate([0, -30, 0]) cylinder(r=e3dDiam/2, h=e3dHeight3);
   }
   
+  //filament hole
   translate([0, 0, -15]) cylinder(r=1.85, h=50);
-  if(mirror==true)
+
+  *for(i=[-1, 1]) //general
   {
-    #translate([23.00-10.3, -6-1.25, -e3dHeight1-1.65]) rotate([0, -90, 0]) cylinder(r=1.55, h=23.00-10.3-e3dDiam2/2-0.3);
-    translate([-e3dDiam2/2-0.3, -6-1.25, -e3dHeight1-1.65]) rotate([0, -90, 0]) cylinder(r=1.55, h=20);
-    translate([23.00, -6-1.25, -e3dHeight1-1.65]) rotate([0, -90, 0]) cylinder(r=3, h=11);
+    translate([i*(e3dDiam2/2 + 7), -20, -e3dHeight1-e3dHeight2/2]) rotate([-90, 0, 0]) 
+      cylinder(r=1.55, h=30);
+    hull()
+    {
+      translate([i*(e3dDiam2/2 + 7), -2, -e3dHeight1-e3dHeight2/2]) rotate([-90, 90, 0]) 
+	cylinder(r=3.2, h=3, $fn=6);
+      #translate([i*(e3dDiam2/2 + 7), -2, -30]) rotate([-90, 90, 0]) 
+	cylinder(r=3.2, h=3, $fn=6);
+    }
   }
-  else
+  
+  //dual extruder particular
+  translate([e3dDiam2/2 + 7, -20, -e3dHeight1-e3dHeight2/2]) rotate([-90, 0, 0]) 
+      cylinder(r=1.55, h=16);
+  hull()
+    {
+      translate([e3dDiam2/2 + 7, -e3dDiam/2, -e3dHeight1-e3dHeight2/2]) rotate([-90, 90, 0]) 
+	cylinder(r=3.2, h=3, $fn=6);
+      translate([e3dDiam2/2 + 7, -e3dDiam/2, -30]) rotate([-90, 90, 0]) 
+	cylinder(r=3.2, h=3, $fn=6);
+    }
+
+  //dual extruder particular
+  translate([-(e3dDiam2/2 + 7), -20, -e3dHeight1-e3dHeight2/2]) rotate([-90, 0, 0]) 
+      cylinder(r=1.55, h=30);
+  hull()
+    {
+      translate([-(e3dDiam2/2 + 7), -2, -e3dHeight1-e3dHeight2/2]) rotate([-90, 90, 0]) 
+	cylinder(r=3.2, h=3, $fn=6);
+      translate([-(e3dDiam2/2 + 7), -2, -30]) rotate([-90, 90, 0]) 
+	cylinder(r=3.2, h=3, $fn=6);
+    }
+}
+
+mountB_H3 = 1;
+module e3dMountB() translate([0, 0, -e3dHeight1-e3dHeight2-mountB_H3])
+{
+  difference()
   {
-    translate([23.00-11.3, -6-1.25, -e3dHeight1-1.65]) rotate([0, -90, 0]) cylinder(r=1.55, h=23.00-11.3-e3dDiam2/2+0.3);
-    translate([-e3dDiam2/2-0.3, -6-1.25, -e3dHeight1-1.65]) rotate([0, -90, 0]) cylinder(r=1.55, h=25);
-    #translate([23.00, -6-1.25, -e3dHeight1-1.65]) rotate([0, -90, 0]) cylinder(r=3, h=11);
+    union()
+    {
+      translate([-(e3dDiam-0.2)/2, 0, 0]) cube([e3dDiam-0.2, e3dDiam/2+3, e3dHeight1+e3dHeight2+mountB_H3]);
+      translate([-36/2, e3dDiam/2+2, 0]) cube([36, 7, e3dHeight1+e3dHeight2+mountB_H3]);
+    }
+    
+    translate([0, 0, -1]) cylinder(d=e3dDiam, h=1+mountB_H3);
+    translate([0, 0, -1]) cylinder(d=e3dDiam2, h=e3dHeight1+e3dHeight2+mountB_H3+2);
+    translate([0, 0, e3dHeight2+mountB_H3]) cylinder(d=e3dDiam, h=1+e3dHeight1);
+    
+    translate([-e3dDiam2/2-10, -1, mountB_H3]) cube([10, e3dDiam/2+3, e3dHeight2]);
+    translate([e3dDiam2/2, -1, mountB_H3]) cube([10, e3dDiam/2+3, e3dHeight2]);
+    
+    translate([-e3dDiam/2-1, -1, -1]) cube([e3dDiam+2, e3dDiam2/2+1, 1+mountB_H3]);
+    translate([-e3dDiam/2-1, -1, mountB_H3+e3dHeight2]) cube([e3dDiam+2, e3dDiam2/2+1, 1+e3dHeight1]);
+    
+    for(i=[-1, 1]) //general
+    {
+      translate([i*(e3dDiam2/2 + 7), 0, e3dHeight1+e3dHeight2/2]) rotate([-90, 0, 0]) 
+	cylinder(r=1.55, h=e3dDiam/2+6);
+      translate([i*(e3dDiam2/2 + 7), e3dDiam/2+6.3, e3dHeight1+e3dHeight2/2]) rotate([-90, 0, 0]) 
+	cylinder(r=3.2, h=6);
+
+    }
   }
+  
+}
+
+//auxiliary method
+module nestedHull()
+{
+  for(i=[0:$children-2])
+    hull()
+    {
+      children(i);
+      children(i+1);
+    }
 }

@@ -165,11 +165,12 @@ module baserec(){
 
 alturaSoporte = 21.5;
 extruderSeparation = 28; //Distance from the X axle
+epsilon=0.4;
 module soporteExtrusor()
 {
   difference()
   {
-    translate([0, alturaSoporte, 0]) cube([mainWidth, 13.5, 41]);
+    translate([0, alturaSoporte, 0]) cube([mainWidth, 13.5, extruderSeparation+e3dDiam/2+2-epsilon]); // 41
         
     difference()
     {
@@ -258,5 +259,8 @@ module pieza(){
 
 // Generamos la pieza!!
 
-rotate([0, -90, 0]) //uncomment this for printing, comment for modeling
-  pieza();	
+*rotate([0, -90, 0]) //uncomment this for printing, comment for modeling
+  pieza();
+rotate([-90, 0, 0])  
+    e3dMountB();
+//e3dMount();

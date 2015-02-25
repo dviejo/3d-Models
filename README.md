@@ -22,4 +22,8 @@ Enjoy it!
 
 * Trousers guard - A piece for saving your jeans when cycling
 
+* Parchis set. A set for dice shaker and chips for the popular spahish parchis game
+
+* Spare parts. Different models for reparing different kind of stuff
+
 * Commons - Auxiliary files used in many projects. Not a project by itself.

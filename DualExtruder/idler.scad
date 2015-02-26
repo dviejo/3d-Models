@@ -11,6 +11,7 @@ include<config.scad>
 
 idlerHeight = mainHeight + 2* baseHeight - 1;
 
+fineTunning = 1.15;
 
 module support(h=5, r=5, n=1)
 {
@@ -55,7 +56,7 @@ module idler()
     translate([-50, -93, mainHeight + baseHeight - 1]) cube([100, 100, 100]);
     
     //idler attaching hole
-    rotate(-9) translate([15.5 - 10 - filament_d+2.5, -15.5 + 1.25, 0])
+    rotate(-9) translate([15.5 - 10 - filament_d+2.5, -15.5 + fineTunning, 0])
     {
       translate([0, 0, 5.3])
 	cylinder(r = 2.5/2, h = 2);
@@ -71,7 +72,7 @@ module idler()
     translate([0, 0, mainHeight/2 + offset]) {
 	//idler bearing main hole
 	translate ([0, 0, 0]) rotate(-9) 
-	  translate([15.5 - 10 - filament_d+2.5, -15.5+1.25, -6.25/2]) //-5.5/2
+	  translate([15.5 - 10 - filament_d+2.5, -15.5+ fineTunning, -6.25/2]) //-5.5/2
 	    cylinder(r = 6.5, h = 5.4);
 	//filament through hole
 	hull()

@@ -1,8 +1,8 @@
 /*
  * Idler.scad
  * 
- * Idler part for uterus extruder
- * Based on the original idea from Whosa whatsis
+ * Idler part for direct extruders like Dual extruder, compact extruder or uterus.
+ * Based on the direct extruder from Whosa whatsis
  * Created by Diego Viejo
  */
 

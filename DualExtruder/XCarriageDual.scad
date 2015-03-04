@@ -261,5 +261,7 @@ module pieza(){
 
 rotate([0, -90, 0]) //uncomment this for printing, comment for modeling
   pieza();
-*rotate([-90, 0, 0])  
+translate([-30, 10, +height1+height2+mountB_H3+7]) rotate([-90, 0, 0])  //uncomment this for printing, comment for modeling
     e3dMountB();
+translate([-30, -5, +height1+height2+mountB_H3+7]) rotate([-90, 0, 0])  //uncomment this for printing, comment for modeling
+    e3dMountB(); //uncomment this for printing, comment for modeling

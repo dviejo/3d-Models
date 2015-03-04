@@ -135,31 +135,31 @@ module extruderMount()
 }
 
 mountB_H3 = 1;
-module e3dMountB() translate([0, 0, -e3dHeight1-e3dHeight2-mountB_H3])
+module e3dMountB() translate([0, 0, -height1-height2-mountB_H3])
 {
   difference()
   {
     union()
     {
-      translate([-(e3dDiam-0.4)/2, 0, 0]) cube([e3dDiam-0.4, e3dDiam/2+3, e3dHeight1+e3dHeight2+mountB_H3]);
-      translate([-35/2, e3dDiam/2+2, 0]) cube([35, 7, e3dHeight1+e3dHeight2+mountB_H3]);
+      translate([-(diam-0.4)/2, 0, 0]) cube([diam-0.4, diam/2+3, height1+height2+mountB_H3]);
+      translate([-35/2, diam/2+2, 0]) cube([35, 7, height1+height2+mountB_H3]);
     }
     
-    translate([0, 0, -1]) cylinder(d=e3dDiam, h=1+mountB_H3);
-    translate([0, 0, -1]) cylinder(d=e3dDiam2, h=e3dHeight1+e3dHeight2+mountB_H3+2);
-    translate([0, 0, e3dHeight2+mountB_H3]) cylinder(d=e3dDiam, h=1+e3dHeight1);
+    translate([0, 0, -1]) cylinder(d=diam, h=1+mountB_H3);
+    translate([0, 0, -1]) cylinder(d=diam2, h=height1+height2+mountB_H3+2);
+    translate([0, 0, height2+mountB_H3]) cylinder(d=diam, h=1+height1);
     
-    translate([-e3dDiam2/2-10, -1, mountB_H3-0.15]) cube([10.3, e3dDiam/2+3, e3dHeight2+0.3]);
-    translate([e3dDiam2/2-0.3, -1, mountB_H3-0.15]) cube([10, e3dDiam/2+3, e3dHeight2+0.3]);
+    translate([-diam2/2-10, -1, mountB_H3-0.15]) cube([10.3, diam/2+3, height2+0.3]);
+    translate([diam2/2-0.3, -1, mountB_H3-0.15]) cube([10, diam/2+3, height2+0.3]);
     
-    translate([-e3dDiam/2-1, -1, -1]) cube([e3dDiam+2, e3dDiam2/2+1, 1+mountB_H3]);
-    translate([-e3dDiam/2-1, -1, mountB_H3+e3dHeight2]) cube([e3dDiam+2, e3dDiam2/2+1, 1+e3dHeight1]);
+    translate([-diam/2-1, -1, -1]) cube([diam+2, diam2/2+1, 1+mountB_H3]);
+    translate([-diam/2-1, -1, mountB_H3+height2]) cube([diam+2, diam2/2+1, 1+height1]);
     
     for(i=[-1, 1]) 
     {
-      translate([i*(e3dDiam2/2 + 7), 0, mountB_H3+e3dHeight2/2]) rotate([-90, 0, 0]) 
-	cylinder(r=1.55, h=e3dDiam/2+6);
-      translate([i*(e3dDiam2/2 + 7), e3dDiam/2+6.3, mountB_H3+e3dHeight2/2]) rotate([-90, 0, 0]) 
+      translate([i*(diam2/2 + 7), 0, mountB_H3+height2/2]) rotate([-90, 0, 0]) 
+	cylinder(r=1.55, h=diam/2+6);
+      translate([i*(diam2/2 + 7), diam/2+6.3, mountB_H3+height2/2]) rotate([-90, 0, 0]) 
 	cylinder(r=3.2, h=6);
 
     }

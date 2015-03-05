@@ -6,6 +6,7 @@
 
 include <config.scad>
 
+
 //************************************//
 // Parámetros de configuración global //
 //************************************//
@@ -13,10 +14,10 @@ include <config.scad>
 $fn = 100;
 
 // Cojinetes Lineales
-dCoLi = 15; //16.2 ;	// Diámetro
+dCoLi = 15.05; //16.2 ;	// Diámetro
 
 // Varillas lisas
-dVaLi = 8.15 ; // Diámetro
+//dVaLi = 8.15 ; // Diámetro
 
 
 //************************************//
@@ -63,13 +64,13 @@ module medialuna(d,h,w){
 module soportecojili(){
 	// Separadores de los cojinetes
 	translate([(mainWidth-58)/2, 0, 0])
-	medialuna(dCoLi, 2, 6.1);
+	medialuna(dCoLi, 2, 4.5);
 	
 	translate([(mainWidth-3.6)/2, 0, 0])
-	medialuna(dCoLi, 3.6, 6.1);
+	medialuna(dCoLi, 3.6, 4.5);
 	
 	translate([(mainWidth+58)/2-2, 0, 0])
-	medialuna(dCoLi, 2, 6.1);
+	medialuna(dCoLi, 2, 4.5);
 	
 	difference(){
 		union(){
@@ -78,7 +79,7 @@ module soportecojili(){
 				rotate( 90, [0, 1, 0])
 				cylinder(h = mainWidth, r = 11.1);
 				// Aplanado lateral
-				translate([0, -11.1, 0])
+				translate([0, -11.1, 1])
 				cube([mainWidth, 11.1, 11.1]);
 			}
 		}
@@ -88,12 +89,12 @@ module soportecojili(){
 			rotate( 90, [0, 1, 0])
 			cylinder(h = mainWidth+2, r = dCoLi/2);
 			// Corte a 60º
-			translate([-1, 5.73, 0])
+			translate([-1, 5.3, 0])
 			rotate( 60 , [1, 0, 0])
 			cube([mainWidth+2, 10, 10]);
 			// Corte vertical
-			translate([-1, -7.5, 0])
-			cube([mainWidth+2, 10, 12]);
+			translate([-1, -7.0, 0])
+			cube([mainWidth+2, 10, 13]);
 		}
 	}
 }
@@ -163,7 +164,7 @@ module baserec(){
 }
 
 
-alturaSoporte = 21.5;
+alturaSoporte = 19.5;
 extruderSeparation = 28; //Distance from the X axle
 epsilon=0.4;
 module soporteExtrusor()
@@ -231,7 +232,7 @@ module pieza(){
 			// Base rectangular preformada
 			baserec();
 			// Soporte cilíndrico preformado
-			translate([mainWidth, -7.5, -4])
+			translate([mainWidth, -7, -4]) //y was -7.5
 			  rotate( 180, [0, 0, 1])
 			    soportecojili();
 			// Soporte para la correa

@@ -1,14 +1,12 @@
-
+/**
+ * Dual extruder configuration
+ * 
+ */
 
 //separation between nozzles
 headDist = 15.5*2+5;
 
-// Next 4 lines are not used anymore. Delete them 
-simple = 0;
-prusaNozzle = 1; //for prusaNozzle and Budas
-jHead = 2; //jor jHead 
-E3D = 3;
-
+/*
 filament_d = 3;
 spring_d = 10;
 
@@ -33,37 +31,38 @@ correction = 0.0; //(trackerDiam1 - trackerDiam) / 2;
 ptfeTubeRad = 3.2;
 simpleTubeRad = 1.9;
 tubeRad = simpleTubeRad;
-
+*/
 mountingHoleSep = 32;
 
 /*
  * E3d v6 mount dimensions +/- tolerances
  * Tolerances are set up for a .4 mm nozzle 
  */
-
+/*
 e3dDiam = 16 + 0.7;
 e3dDiam2 = 12 + 0.625;
 
 e3dHeight1 = 3.75 + 0.4; 
 e3dHeight2 = 6 - 0.4; 
 e3dHeight3 = 15; 
-
+*/
 /*
  * JHead mount dimensions +/- tolerances
  * Tolerances are set up for a .4 mm nozzle 
  */
-
+/*
 jhDiam = 16 + 0.7;
 jhDiam2 = 12 + 0.625;
 
 jhHeight1 = 4.8 + 0.4; 
 jhHeight2 = 4.6 - 0.4; 
 jhHeight3 = 15; 
-
+*/
 
 /**
  * Grooved extruder mounting
  */
+/*
 height1 = e3dHeight1;
 height2 = e3dHeight2;
 height3 = e3dHeight3; 
@@ -177,3 +176,4 @@ module nestedHull()
       children(i+1);
     }
 }
+*/

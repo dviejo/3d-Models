@@ -5,6 +5,7 @@
 // Modified by dviejo
 
 include <config.scad>
+include<../Commons/extruderCommons.scad>
 
 
 //************************************//
@@ -171,21 +172,21 @@ module soporteExtrusor()
 {
   difference()
   {
-    translate([0, alturaSoporte, 0]) cube([mainWidth, 13.5, extruderSeparation+e3dDiam/2+2-epsilon]); // 41
+    translate([0, alturaSoporte, 0]) cube([mainWidth, 13.5, extruderSeparation+diam/2+2-epsilon]); // 41
         
     difference()
     {
-	translate([mainWidth/2+headDist/2,alturaSoporte+3,extruderSeparation])mirror([1,0,0])rotate([90,180,0]) extruderMount(mirror=true);
+	translate([mainWidth/2+headDist/2,alturaSoporte+3,extruderSeparation])mirror([1,0,0])rotate([90,180,0]) extruderMount(dualExtruder=true);
 	//Support. Remove after printing
-	translate([mainWidth/2+headDist/2-8, alturaSoporte+3+e3dHeight1, extruderSeparation+e3dDiam/2+2-epsilon-1]) 
-	  cube([16, e3dHeight2,1]);
+	translate([mainWidth/2+headDist/2-8, alturaSoporte+3+height1, extruderSeparation+diam/2+2-epsilon-1]) 
+	  cube([16, height2,1]);
     }
 
     difference()
     {
-      translate([mainWidth/2-headDist/2, alturaSoporte+3, extruderSeparation]) rotate([90, 180, 0]) extruderMount(mirror=false);
-	translate([mainWidth/2-headDist/2-8, alturaSoporte+3+e3dHeight1, extruderSeparation+e3dDiam/2+2-epsilon-1]) 
-	  cube([16, e3dHeight2,1]);
+      translate([mainWidth/2-headDist/2, alturaSoporte+3, extruderSeparation]) rotate([90, 180, 0]) extruderMount(dualExtruder=true);
+	translate([mainWidth/2-headDist/2-8, alturaSoporte+3+height1, extruderSeparation+diam/2+2-epsilon-1]) 
+	  cube([16, height2,1]);
     }
 	
     for(i=[-1, 1])
@@ -263,6 +264,6 @@ module pieza(){
 rotate([0, -90, 0]) //uncomment this for printing, comment for modeling
   pieza();
 translate([-30, 10, +height1+height2+mountB_H3+7]) rotate([-90, 0, 0])  //uncomment this for printing, comment for modeling
-    e3dMountB();
+    extruderMountB();
 translate([-30, -5, +height1+height2+mountB_H3+7]) rotate([-90, 0, 0])  //uncomment this for printing, comment for modeling
-    e3dMountB(); //uncomment this for printing, comment for modeling
+    extruderMountB(); //uncomment this for printing, comment for modeling

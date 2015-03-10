@@ -65,6 +65,6 @@ module DViejosCompactExtruder()
 }
 
 DViejosCompactExtruder();
-translate([-45, 10, mountB_H3]) rotate([-90, 0, 90])  //uncomment this for printing, comment for modeling
+translate([-45, 10, mountB_H3+0.25]) rotate([-90, 0, 90])  //uncomment this for printing, comment for modeling
     extruderMountB();
 translate([42, 25, -baseHeight - mainHeight/2-offset]) rotate(210) idler();

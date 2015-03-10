@@ -58,8 +58,8 @@ module idler()
     //idler attaching hole
     rotate(-9) translate([15.5 - 10 - filament_d+2.5, -15.5 + fineTunning, 0])
     {
-      translate([0, 0, 5.3])
-	cylinder(r = 2.5/2, h = 2);
+      translate([0, 0, 5.3 - 1])
+	cylinder(r = 2.5/2, h = 3.5);
       translate([0, 0, mainHeight/2 + offset + 2.25+0.35])
 	cylinder(r = 3.2/2, h = 10);
       translate([0, 0, mainHeight/2 + offset + 4.5])
@@ -106,7 +106,7 @@ module idler()
 	  translate([0, -15.5, -1]) cylinder(r=5.25, h=5);
 	  translate([-5.25, -11, -1]) cube([5.25*2, 5.25*2, 5]);
 	}
-	translate([0, 0, -1]) cylinder(r=bearingRad+1.5, h=10);
+	translate([0, 0, -1.1]) cylinder(r=bearingRad+1.5, h=10);
       }
 
   }

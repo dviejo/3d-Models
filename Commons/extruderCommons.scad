@@ -117,7 +117,7 @@ module tracker()
  */
 
 e3dDiam = 16 + 0.7;
-e3dDiam2 = 12 + 0.625;
+e3dDiam2 = 12 + 0.6125;
 
 e3dHeight1 = 3.75 + 0.4; 
 e3dHeight2 = 6 - 0.4; 
@@ -129,7 +129,7 @@ e3dHeight3 = 15;
  */
 
 jhDiam = 16 + 0.7;
-jhDiam2 = 12 + 0.625;
+jhDiam2 = 12 + 0.6125;
 
 jhHeight1 = 4.8 + 0.4; 
 jhHeight2 = 4.6 - 0.4; 

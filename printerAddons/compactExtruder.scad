@@ -43,7 +43,7 @@ module DViejosCompactExtruder()
 	  {
 	    for(j = [-1, 0])
 	    {
-	      translate([i*15.5, j*20, 0]) cylinder(r=5, h=baseHeight + mainHeight/2 + offset + diam/2 + 2 - 0.4);
+	      translate([i*15.5, j*20, 0]) cylinder(r=5, h=baseHeight + mainHeight/2 + offset + diam/2 + 2 - 0.6);
 	      
 	    }
 	  }

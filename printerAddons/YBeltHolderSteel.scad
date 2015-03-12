@@ -14,43 +14,44 @@ belt_tooth_ratio = 0.8; //0.675//0.5;
 
 holeSeparation = 24;
 
-height = 15.5+0.75;
+holeSeparation2 = 14;
+
+height = 15.5+1.75;
 
 module heels()
 {
   difference()
   {
-    translate([-3.5, 0, 0]) 
+    translate([-8/2, 0, 0]) 
     {
-      cube([7, 32, height]);
+      cube([8, 32, height]);
     }
     
     //belt slit
     translate([-4.5, (32-7)/2, height-0.75]) cube([9, 7, 1]);
-    //bolts
-    translate([0, (32-holeSeparation)/2, -1]) cylinder(r=1.65, h=height+2, $fn=10);
-    translate([0, (32+holeSeparation)/2, -1]) cylinder(r=1.65, h=height+2, $fn=10);
-    //nuts
-    hull()
+    
+    for(i = [-1, 1])
     {
-      translate([0, (32-holeSeparation)/2, 2.5]) cylinder(r=6.625/2, h=3, $fn=6);
-      translate([10, (32-holeSeparation)/2, 2.5]) cylinder(r=6.625/2, h=3, $fn=6);
+      //bolts
+      translate([0, (32-i*holeSeparation)/2, -1]) cylinder(r=1.65, h=height-5, $fn=10);
+      
+      //nuts
+      hull()
+      {
+	translate([0, (32+i*holeSeparation)/2, 2.5]) cylinder(r=6.625/2, h=3, $fn=6);
+	translate([10, (32+i*holeSeparation)/2, 2.5]) cylinder(r=6.625/2, h=3, $fn=6);
+      }
+      
+      translate([0, (32+i*holeSeparation2)/2, height/2]) cylinder(r=1.65, h=height/2+1, $fn=10);    
+      
+      //nuts
+      hull()
+      {
+	translate([0, (32+i*holeSeparation2)/2, height-5.5]) cylinder(r=6.625/2, h=3, $fn=6);
+	translate([10, (32+i*+holeSeparation2)/2, height-5.5]) cylinder(r=6.625/2, h=3, $fn=6);
+      }
     }
-    hull()
-    {
-      translate([0, (32+holeSeparation)/2, 2.5]) cylinder(r=6.625/2, h=3, $fn=6);
-      translate([10, (32+holeSeparation)/2, 2.5]) cylinder(r=6.625/2, h=3, $fn=6);
-    }
-    hull()
-    {
-      translate([0, (32-holeSeparation)/2, height-5.5]) cylinder(r=6.625/2, h=3, $fn=6);
-      translate([10, (32-holeSeparation)/2, height-5.5]) cylinder(r=6.625/2, h=3, $fn=6);
-    }
-    hull()
-    {
-      translate([0, (32+holeSeparation)/2, height-5.5]) cylinder(r=6.625/2, h=3, $fn=6);
-      translate([10, (32+holeSeparation)/2, height-5.5]) cylinder(r=6.625/2, h=3, $fn=6);
-    }
+    
   }
 }
 
@@ -58,16 +59,17 @@ module head()
 {
   difference()
   {
-    translate([-3.5, 0, 0]) 
+    translate([-8/2, 10/2, 0]) 
     {
-      cube([7, 32, 4]);
+      cube([8, 32-10, 4]);
     }
     
     //bolts
-    translate([0, (32-holeSeparation)/2, -1]) cylinder(r=1.65, h=height+2, $fn=10);
-    translate([0, (32+holeSeparation)/2, -1]) cylinder(r=1.65, h=height+2, $fn=10);
-    translate([0, (32-holeSeparation)/2, -1]) cylinder(r=6.65/2, h=2.5, $fn=10);
-    translate([0, (32+holeSeparation)/2, -1]) cylinder(r=6.65/2, h=2.5, $fn=10);
+    for(i = [-1, 1])
+    {
+      translate([0, (32+i*holeSeparation2)/2, -1]) cylinder(r=1.65, h=height+2, $fn=10);
+      translate([0, (32+i*holeSeparation2)/2, -1]) cylinder(r=6.65/2, h=2.5, $fn=10);
+    }
 
     //teeth
     for ( i = [0 : 8] ){

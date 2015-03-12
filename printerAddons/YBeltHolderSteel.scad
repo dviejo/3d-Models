@@ -52,6 +52,15 @@ module heels()
       }
     }
     
+    //Clearance
+    translate([0, (32-holeSeparation2-7)/2, height+0.1]) 
+      rotate([-35, 0, 0]) 
+	translate([-8/2-1, -10, -height]) 
+	  cube([10, 8+2, height]);
+    translate([0, (32+holeSeparation2+7)/2, height+0.1]) 
+      rotate([35, 0, 0]) 
+	translate([-8/2-1, 0, -height]) 
+	  cube([10, 8+2, height]);
   }
 }
 
@@ -59,9 +68,9 @@ module head()
 {
   difference()
   {
-    translate([-8/2, 10/2, 0]) 
+    translate([-8/2, 11/2, 0]) 
     {
-      cube([8, 32-10, 4]);
+      cube([8, 32-11, 4]);
     }
     
     //bolts
@@ -79,7 +88,7 @@ module head()
   }
 }
 
-
+/*
 module belt_holder_base(){
  translate([-33-8.5, 0,-1-8]) cube([33,26,16+6]);
  translate([-33-8.5, 22, -1-8]) cube([33, 4, 16+16]);	
@@ -137,9 +146,9 @@ module belt_holder(){
   belt_holder_holes();
  }
 }
+*/
 
 
-
-translate([25, 0, 3.5]) rotate([0, -90, 0])
+translate([25, 0, 4]) rotate([0, -90, 0])
 heels();
 translate([0, 0, 4]) rotate([0, 180, 0]) head();

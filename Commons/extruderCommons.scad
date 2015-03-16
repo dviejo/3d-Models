@@ -116,11 +116,11 @@ module tracker()
  * Tolerances are set up for a .4 mm nozzle 
  */
 
-e3dDiam = 16 + 0.7;
-e3dDiam2 = 12 + 0.6125;
+e3dDiam = 16 + 0.6;
+e3dDiam2 = 12 + 0.6;
 
-e3dHeight1 = 3.75 + 0.4; 
-e3dHeight2 = 6 - 0.4; 
+e3dHeight1 = 3.75 + 0.35; 
+e3dHeight2 = 6 - 0.45; 
 e3dHeight3 = 15; 
 
 /*
@@ -135,17 +135,17 @@ jhHeight1 = 4.8 + 0.4;
 jhHeight2 = 4.6 - 0.4; 
 jhHeight3 = 15; 
 
-//Next should be set by the method who calls extruderMount.
-height1 = e3dHeight1;
-height2 = e3dHeight2;
-height3 = e3dHeight3; 
-diam = e3dDiam;
-diam2 = e3dDiam2;
-// height1 = jhHeight1;
-// height2 = jhHeight2;
-// height3 = jhHeight3; 
-// diam = jhDiam;
-// diam2 = jhDiam2;
+//TODO Next should be set by the method who calls extruderMount.
+// height1 = e3dHeight1;
+// height2 = e3dHeight2;
+// height3 = e3dHeight3; 
+// diam = e3dDiam;
+// diam2 = e3dDiam2;
+height1 = jhHeight1;
+height2 = jhHeight2;
+height3 = jhHeight3; 
+diam = jhDiam;
+diam2 = jhDiam2;
 
 /**
  * Grooved extruder mounting

@@ -42,13 +42,13 @@ Issues:
   * It is difficult to maintain both hotends leveled due to sliding between extruder and XCarriage
   * Flexible material support is not working.
   
-### V2.0 (Last update: Feb 12, 2015)
+### V2.0 (Last update: March 16, 2015)
 
 Printing time: about 150 minutes at 65mm/min 3mm filament.
 
-Status: **Beta**. Under development and testing. More than 25 hours printing without any problem (Feb 11th 2015). Next week I'll try to reach 100 hours and promote it to a stable version.
+Status: **Beta**. Under development and testing. More than 100 hours printing. 
 
-V2.0 design fits e3D v6 3mm direct extruder. I'll design mountings for JHead and prusanozzle soon. 
+V2.0 design fits e3D v6 3mm direct extruder or JHead by changhing a set of parameters. 
 
 > Budas extruder is too big to be fitted in this extruder so I decided do not develop the mounting for this extruder.
 

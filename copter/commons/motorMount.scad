@@ -1,3 +1,13 @@
+/**
+ * motorMount.scad
+ * 
+ * Common piece for holding a brushless motor
+ * 
+ * Created by Diego Viejo after the idea of OpenRC copter from Daniel Noree
+ * 21/May/2015
+ * 
+ */
+
 outerDiam = 37;
 innerDiam = 32;
 
@@ -8,7 +18,10 @@ platformWidth = 3.75;
 
 axleDiam = 3.75;
 
-module motorMount()
+//wire openning
+wireDiameter = 8;
+
+module motorMount() translate([0, 0, -(platformHeight + platformWidth + wireDiameter/2)])
 {
     difference()
     {
@@ -31,6 +44,9 @@ module motorMount()
                 translate([0, 12, 0]) cylinder(d=3, h=height, $fn=20);
             }
         }
+        
+        //wire openning
+        #translate([innerDiam/2-1, 0, platformHeight + platformWidth + wireDiameter/2]) rotate([0, 90, 0]) cylinder(d2=wireDiameter, d1=wireDiameter+2, h=(outerDiam-innerDiam)/2+1);
     }
 }
 

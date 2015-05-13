@@ -36,22 +36,33 @@ module armMount(positive_shape = true)
         
         //housing
         //left
-        hull()
+        #hull()
         {
             translate([-10-20, -10, -0.1]) cube([20, 20, 0.1]);
-            translate([-25.1, -10, 14]) cube([0.1, 20, 0.1]);
+            translate([-25.1, -10, 15]) cube([0.1, 20, 0.1]);
         }
         //right
         mirror([1, 0, 0]) hull()
         {
             translate([-10-20, -10, -0.1]) cube([20, 20, 0.1]);
-            translate([-25.1, -10, 14]) cube([0.1, 20, 0.1]);
+            translate([-25.1, -10, 15]) cube([0.1, 20, 0.1]);
         }
-        #translate([-15, 14.6/2, -1]) cube([30, 5, 20]);
-        #translate([-15, -14.6/2-5, -1]) cube([30, 5, 20]);
+        translate([-15, 14.5/2, -1]) cube([30, 5, 20+1]);
+        translate([-15, -14.5/2-5, -1]) cube([30, 5, 20+1]);
+        for(i=[1, -1])
+        {
+            translate([13*i, 14.6/2-sqrt(2.5*2.5+2.5*2.5)+0.4525, -1]) rotate(45) cube([5, 5, 20+1]);
+            #translate([13*i, -14.6/2-sqrt(2.5*2.5+2.5*2.5-0.4525), -1]) rotate(45) cube([5, 5, 20+1]);
+        }
     }
 }
 
+color("red")
+translate([0, 36.0, 100.4]) //z=106.4
+{
+    rotate([0, 90, 0]) import("../stl/OpenRC_Quad_Alpha_Arm_Part_1.stl");
+    rotate([180, 90, 0]) import("../stl/OpenRC_Quad_Alpha_Arm_Part_2.stl");
+}
 
 difference()
 {

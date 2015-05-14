@@ -10,13 +10,17 @@
 
 include<config.scad>
 
-entryWidth = 50/2;
-entryHeight = 18/2;
-entryDepth = 14;
+// suavizar las superficies curvas
+$fs= 1 ; 
+$fa= 1 ; 
 
-outputWidth = 49/2;
+entryWidth = 50.75/2;
+entryHeight = 18.25/2;
+entryDepth = 12;
+
+outputWidth = 45/2; //49/2;
 outputHeight = 18/2;
-outputDepth = 6; //For modelling, this is the position of the further ellipse
+outputDepth = 8 +15; //For modelling, this is the position of the further ellipse
 
 module armMount(positive_shape = true)
 {
@@ -32,11 +36,11 @@ module armMount(positive_shape = true)
     else
     {
         //wire hole
-        translate([0, 0, -1]) cylinder(d = wireDiameter, h = 1.1 +outputDepth + entryDepth);
+        translate([0, 0, -5]) cylinder(d = wireDiameter, h = 10 +outputDepth + entryDepth);
         
         //housing
         //left
-        #hull()
+        hull()
         {
             translate([-10-20, -10, -0.1]) cube([20, 20, 0.1]);
             translate([-25.1, -10, 15]) cube([0.1, 20, 0.1]);
@@ -47,18 +51,23 @@ module armMount(positive_shape = true)
             translate([-10-20, -10, -0.1]) cube([20, 20, 0.1]);
             translate([-25.1, -10, 15]) cube([0.1, 20, 0.1]);
         }
-        translate([-15, 14.5/2, -1]) cube([30, 5, 20+1]);
-        translate([-15, -14.5/2-5, -1]) cube([30, 5, 20+1]);
+        translate([-15, 14.5/2+0.3, -1]) cube([30, 5, 20+1]);
+        translate([-15, -14.5/2-5+0.39125, -1]) cube([30, 5, 20+1]);
         for(i=[1, -1])
         {
-            translate([13*i, 14.6/2-sqrt(2.5*2.5+2.5*2.5)+0.4525, -1]) rotate(45) cube([5, 5, 20+1]);
-            #translate([13*i, -14.6/2-sqrt(2.5*2.5+2.5*2.5-0.4525), -1]) rotate(45) cube([5, 5, 20+1]);
+            translate([13*i, 14.6/2-sqrt(2.5*2.5+2.5*2.5)+0.7525, -1]) rotate(45) cube([5, 5, 20+1]);
+            translate([13*i, -14.6/2-sqrt(2.5*2.5+2.5*2.5)-0.1, -1]) rotate(45) cube([5, 5, 20+1]);
         }
+        //end housing
+        
+        //attaching holes
+        for(i=[1, -1])
+            translate([13*i, -30, 12.5125]) rotate([-90, 0, 0]) cylinder(d=3.55, h = 60);
     }
 }
 
-color("red")
-translate([0, 36.0, 100.4]) //z=106.4
+*color("red")
+translate([0, 36.30, 106.4]) //z=106.4
 {
     rotate([0, 90, 0]) import("../stl/OpenRC_Quad_Alpha_Arm_Part_1.stl");
     rotate([180, 90, 0]) import("../stl/OpenRC_Quad_Alpha_Arm_Part_2.stl");
@@ -70,3 +79,4 @@ difference()
     armMount(positive_shape = false);
 
 }
+

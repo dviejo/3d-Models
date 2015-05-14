@@ -22,9 +22,9 @@ outputWidth = 45/2; //49/2;
 outputHeight = 18/2;
 outputDepth = 8 +15; //For modelling, this is the position of the further ellipse
 
-module armMount(positive_shape = true)
+module armMount(action)
 {
-    if(positive_shape)
+    if(action == "add")
     {
         hull()
         {
@@ -33,11 +33,8 @@ module armMount(positive_shape = true)
                 oval(w=outputWidth, h=outputHeight, height=0.1);
         }
     }
-    else
+    else if(action == "remove")
     {
-        //wire hole
-        translate([0, 0, -5]) cylinder(d = wireDiameter, h = 10 +outputDepth + entryDepth);
-        
         //housing
         //left
         hull()
@@ -59,6 +56,10 @@ module armMount(positive_shape = true)
             translate([13*i, -14.6/2-sqrt(2.5*2.5+2.5*2.5)-0.1, -1]) rotate(45) cube([5, 5, 20+1]);
         }
         //end housing
+    } else //holes
+    {
+        //wire hole
+        translate([0, 0, -5]) cylinder(d = wireDiameter, h = 10 +outputDepth + entryDepth);
         
         //attaching holes
         for(i=[1, -1])
@@ -73,10 +74,24 @@ translate([0, 36.30, 106.4]) //z=106.4
     rotate([180, 90, 0]) import("../stl/OpenRC_Quad_Alpha_Arm_Part_2.stl");
 }
 
-difference()
-{
-    armMount(positive_shape = true);
-    armMount(positive_shape = false);
+    difference()
+    {
+        armMount(action="add");
+        armMount(action="remove");
+        armMount(action="holes");
+    }
 
+
+translate([0,30,0]) difference()
+{
+    translate([-52/2, -20/2, 0]) cube([52, 20, entryDepth+outputDepth]);
+    translate([0, 0, 1]) {
+        difference()
+        {
+            armMount(action="add");
+            armMount(action="remove");
+        }
+        armMount(action="holes");
+    }
 }
 

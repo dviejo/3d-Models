@@ -40,7 +40,7 @@ module armMount(action)
         hull()
         {
             translate([-10-20, -10, -0.1]) cube([20, 20, 0.1]);
-            translate([-25.1, -10, 15]) cube([0.1, 20, 0.1]);
+            translate([-25.1, -10, 14.4338]) cube([0.1, 20, 0.1]); //25*tan(30)
         }
         //right
         mirror([1, 0, 0]) hull()
@@ -86,14 +86,39 @@ translate([0, 0, entryDepth+outputDepth]) rotate([0, 180, 0])
 
 translate([0,30,0]) difference()
 {
-    translate([-57/2, -20/2, 0]) cube([57, 20, entryDepth+outputDepth/2]);
+    translate([-60/2, -25/2, 0]) cube([60, 25, entryDepth+outputDepth/2]);
     translate([0, 0, 1]) {
-        scale([1, 1.1, 1]) difference()
+        difference()
         {
-            scale([1.1, 1, 1])armMount(action="add");
-            scale([1, 1, 1.1])armMount(action="remove");
+            hull()
+            {
+                oval(w=entryWidth+1, h = entryHeight+1, height=entryDepth);
+                translate([0, 0, entryDepth + outputDepth - 0.1])
+                    oval(w=outputWidth+2, h=outputHeight+1, height=0.1);
+            }
+            
+            //left
+            hull()
+            {
+                translate([-10-20, -10, -0.1]) cube([20, 20, 0.1]);
+                translate([-30.1, -10, 17.3205]) cube([0.1, 20, 0.1]);
+            }
+            //right
+            mirror([1, 0, 0]) hull()
+            {
+                translate([-10-20, -10, -0.1]) cube([20, 20, 0.1]);
+                translate([-30.1, -10, 17.3205]) cube([0.1, 20, 0.1]);
+            }
+            translate([-15, 14.5/2+0.5, -1]) cube([30, 5, 20+1]);
+            translate([-15, -14.5/2-5+0.2, -1]) cube([30, 5, 20+1]);
+            #for(i=[1, -1])
+            {
+                translate([13*i, 14.6/2-sqrt(2.5*2.5+2.5*2.5)+0.8525, -1]) rotate(45) cube([4.5, 4.5, 20+1]);
+                translate([13*i, -14.6/2-sqrt(2.5*2.5+2.5*2.5)-0.2, -1]) rotate(45) cube([4.5, 4.5, 20+1]);
+            }
         }
-        scale([1, 1, 1.1])armMount(action="holes");
+        armMount(action="holes");
     }
 }
 
+//malePart();

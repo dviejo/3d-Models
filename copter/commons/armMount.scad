@@ -87,7 +87,18 @@ translate([0, 0, entryDepth+outputDepth]) rotate([0, 180, 0])
 translate([0,30,0]) difference()
 {
     translate([-60/2, -25/2, 0]) cube([60, 25, entryDepth+outputDepth/2]);
-    translate([0, 0, 1]) {
+    translate([0, 0, 1]) femalePart();
+}
+
+translate([0,-30,25/2]) rotate([90, 0, 0]) difference()
+{
+    translate([-60/2, -25/2, 0]) cube([60, 25, entryDepth+outputDepth/2]);
+    translate([0, 0, 1]) femalePart();
+    translate([-50, 0, -1]) cube([100, 100, 100]);
+}
+
+
+module femalePart() {
         difference()
         {
             hull()
@@ -111,14 +122,13 @@ translate([0,30,0]) difference()
             }
             translate([-15, 14.5/2+0.5, -1]) cube([30, 5, 20+1]);
             translate([-15, -14.5/2-5+0.2, -1]) cube([30, 5, 20+1]);
-            #for(i=[1, -1])
+            for(i=[1, -1])
             {
                 translate([13*i, 14.6/2-sqrt(2.5*2.5+2.5*2.5)+0.8525, -1]) rotate(45) cube([4.5, 4.5, 20+1]);
                 translate([13*i, -14.6/2-sqrt(2.5*2.5+2.5*2.5)-0.2, -1]) rotate(45) cube([4.5, 4.5, 20+1]);
             }
         }
         armMount(action="holes");
-    }
 }
 
 //malePart();

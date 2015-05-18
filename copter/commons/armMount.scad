@@ -48,8 +48,8 @@ module armMount(action)
             translate([-10-20, -10, -0.1]) cube([20, 20, 0.1]);
             translate([-25.1, -10, 15]) cube([0.1, 20, 0.1]);
         }
-        translate([-15, 14.5/2+0.3, -1]) cube([30, 5, 20+1]);
-        translate([-15, -14.5/2-5+0.39125, -1]) cube([30, 5, 20+1]);
+        translate([-15, 14.5/2+0.27, -1]) cube([30, 5, 20+1]);
+        translate([-15, -14.5/2-5+0.41125, -1]) cube([30, 5, 20+1]);
         for(i=[1, -1])
         {
             translate([13*i, 14.6/2-sqrt(2.5*2.5+2.5*2.5)+0.7525, -1]) rotate(45) cube([5, 5, 20+1]);
@@ -74,6 +74,8 @@ translate([0, 36.30, 106.4]) //z=106.4
     rotate([180, 90, 0]) import("../stl/OpenRC_Quad_Alpha_Arm_Part_2.stl");
 }
 
+module malePart()
+translate([0, 0, entryDepth+outputDepth]) rotate([0, 180, 0]) 
     difference()
     {
         armMount(action="add");
@@ -84,14 +86,14 @@ translate([0, 36.30, 106.4]) //z=106.4
 
 translate([0,30,0]) difference()
 {
-    translate([-52/2, -20/2, 0]) cube([52, 20, entryDepth+outputDepth]);
+    translate([-57/2, -20/2, 0]) cube([57, 20, entryDepth+outputDepth/2]);
     translate([0, 0, 1]) {
-        difference()
+        scale([1, 1.1, 1]) difference()
         {
-            armMount(action="add");
-            armMount(action="remove");
+            scale([1.1, 1, 1])armMount(action="add");
+            scale([1, 1, 1.1])armMount(action="remove");
         }
-        armMount(action="holes");
+        scale([1, 1, 1.1])armMount(action="holes");
     }
 }
 

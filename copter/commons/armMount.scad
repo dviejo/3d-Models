@@ -113,13 +113,13 @@ module femalePart() {
             hull()
             {
                 translate([-10-20, -10, -0.1]) cube([20, 20, 0.1]);
-                translate([-30.1, -10, 30]) cube([0.1, 20, 0.1]);
+                translate([-30.1-10, -10, 30]) cube([0.1, 20, 0.1]);
             }
             //right
             mirror([1, 0, 0]) hull()
             {
                 translate([-10-20, -10, -0.1]) cube([20, 20, 0.1]);
-                translate([-30.1, -10, 30]) cube([0.1, 20, 0.1]);
+                translate([-30.1-10, -10, 30]) cube([0.1, 20, 0.1]);
             }
             translate([-15, 14.5/2+0.5, -1]) cube([30, 5, 20+1]);
             translate([-15, -14.5/2-5+0.2, -1]) cube([30, 5, 20+1]);

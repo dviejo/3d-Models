@@ -40,13 +40,13 @@ module armMount(action)
         hull()
         {
             translate([-10-20, -10, -0.1]) cube([20, 20, 0.1]);
-            translate([-25.1, -10, 25]) cube([0.1, 20, 0.1]); 
+            translate([-25.1-10, -10, 25]) cube([0.1, 20, 0.1]); 
         }
         //right
         mirror([1, 0, 0]) hull()
         {
             translate([-10-20, -10, -0.1]) cube([20, 20, 0.1]);
-            translate([-25.1, -10, 25]) cube([0.1, 20, 0.1]);
+            translate([-25.1-10, -10, 25]) cube([0.1, 20, 0.1]);
         }
         translate([-15, 14.5/2+0.27, -1]) cube([30, 5, 20+1]);
         translate([-15, -14.5/2-5+0.41125, -1]) cube([30, 5, 20+1]);
@@ -68,14 +68,15 @@ module armMount(action)
 }
 
 *color("red")
-translate([0, 36.30, 106.4]) //z=106.4
+translate([0, 36.30+5, -71.4]) //z=106.4
 {
-    rotate([0, 90, 0]) import("../stl/OpenRC_Quad_Alpha_Arm_Part_1.stl");
-    rotate([180, 90, 0]) import("../stl/OpenRC_Quad_Alpha_Arm_Part_2.stl");
+    rotate([0, -90, 0]) import("../stl/OpenRC_Quad_Alpha_Arm_Part_1.stl");
+    rotate([180, -90, 0]) import("../stl/OpenRC_Quad_Alpha_Arm_Part_2.stl");
 }
 
 module malePart()
-translate([0, 0, entryDepth+outputDepth]) rotate([0, 180, 0]) 
+translate([0, 0, entryDepth+outputDepth]) 
+   rotate([0, 180, 0]) 
     difference()
     {
         armMount(action="add");
@@ -131,4 +132,4 @@ module femalePart() {
         armMount(action="holes");
 }
 
-//malePart();
+malePart();

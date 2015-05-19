@@ -10,17 +10,17 @@
 
 include<config.scad>
 
-// suavizar las superficies curvas
-$fs= 1 ; 
-$fa= 1 ; 
-
-entryWidth = 50.75/2;
-entryHeight = 18.25/2;
-entryDepth = 12;
-
-outputWidth = 45/2; //49/2;
-outputHeight = 18/2;
-outputDepth = 8 +15; //For modelling, this is the position of the further ellipse
+// // suavizar las superficies curvas
+// $fs= 1 ; 
+// $fa= 1 ; 
+// 
+// entryWidth = 50.75/2;
+// entryHeight = 18.25/2;
+// entryDepth = 12;
+// 
+// outputWidth = 45/2; //49/2;
+// outputHeight = 18/2;
+// outputDepth = 8 +15; //For modelling, this is the position of the further ellipse
 
 module armMount(action)
 {
@@ -75,8 +75,8 @@ translate([0, 36.30+5, -71.4]) //z=106.4
 }
 
 module malePart()
-translate([0, 0, entryDepth+outputDepth]) 
-   rotate([0, 180, 0]) 
+translate([0, 0, 0]) //entryDepth+outputDepth]) 
+   rotate([-90, 0, 0]) 
     difference()
     {
         armMount(action="add");

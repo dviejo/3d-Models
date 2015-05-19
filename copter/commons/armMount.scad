@@ -40,13 +40,13 @@ module armMount(action)
         hull()
         {
             translate([-10-20, -10, -0.1]) cube([20, 20, 0.1]);
-            translate([-25.1, -10, 14.4338]) cube([0.1, 20, 0.1]); //25*tan(30)
+            translate([-25.1, -10, 25]) cube([0.1, 20, 0.1]); 
         }
         //right
         mirror([1, 0, 0]) hull()
         {
             translate([-10-20, -10, -0.1]) cube([20, 20, 0.1]);
-            translate([-25.1, -10, 15]) cube([0.1, 20, 0.1]);
+            translate([-25.1, -10, 25]) cube([0.1, 20, 0.1]);
         }
         translate([-15, 14.5/2+0.27, -1]) cube([30, 5, 20+1]);
         translate([-15, -14.5/2-5+0.41125, -1]) cube([30, 5, 20+1]);
@@ -112,13 +112,13 @@ module femalePart() {
             hull()
             {
                 translate([-10-20, -10, -0.1]) cube([20, 20, 0.1]);
-                translate([-30.1, -10, 17.3205]) cube([0.1, 20, 0.1]);
+                translate([-30.1, -10, 30]) cube([0.1, 20, 0.1]);
             }
             //right
             mirror([1, 0, 0]) hull()
             {
                 translate([-10-20, -10, -0.1]) cube([20, 20, 0.1]);
-                translate([-30.1, -10, 17.3205]) cube([0.1, 20, 0.1]);
+                translate([-30.1, -10, 30]) cube([0.1, 20, 0.1]);
             }
             translate([-15, 14.5/2+0.5, -1]) cube([30, 5, 20+1]);
             translate([-15, -14.5/2-5+0.2, -1]) cube([30, 5, 20+1]);

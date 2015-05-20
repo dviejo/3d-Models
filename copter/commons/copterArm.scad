@@ -66,7 +66,7 @@ rotate([-90,0,0])
     difference()
     {
         ovalBlend();
-        hull()
+        *hull()
         {
             translate([0, -10, 20]) rotate([-100, 0, 0]) cylinder(d1=35, d2=8, h=100);
             translate([0, 0, 60]) rotate([-90, 0, 0]) cylinder(d1=35, d2=8, h=100);
@@ -93,25 +93,16 @@ translate([0, 106.4, -36.3])
 module ovalBlend(start=0, end=103)
 {
     aux = end*end/100;
-    change = 50;
+    change = 10;
+    middle = (end-change)/2;
     for(i=[start:end])
     {
-//        hull()
+        //hull()
         {
-            if(i<change)
-            {
-                rotate([-(i), 0, 0]) translate([0, 0, (i)*(i)/500 + i*0.75]) 
-                    oval(w=56/2+i/3 , h=outputHeight, height=1);
-                rotate([-(i+1), 0, 0]) translate([0, 0, (i+1)*(i+1)/500 + (i+1)*0.75]) 
-                    oval(w=56/2+(i+1)/3 , h=outputHeight, height=1);
-            }
-            else
-            {
-                rotate([-(i), 0, 0]) translate([0, 0, (i)*(i)/500 +change*0.75 + (i-change)/3]) 
-                    oval(w=56/2+change/3-(i-change)*0.8 , h=outputHeight, height=1);
-                rotate([-(i+1), 0, 0]) translate([0, 0, (i+1)*(i+1)/500 +change*0.75 + (i+1-change)/3]) 
-                    oval(w=56/2+change/3-(i+1-change)*0.8 , h=outputHeight, height=1);
-            }
+            rotate([-(i), 0, 0]) translate([0, 0, (i)*(i)/500 + i*0.55]) 
+                oval(w=56/2 - (i-middle)*(i-middle)/150 +(middle)*(middle)/150, h=outputHeight+0.05*i, height=1);
+            rotate([-(i+1), 0, 0]) translate([0, 0, (i+1)*(i+1)/500 + (i+1)*0.55]) 
+                oval(w=56/2 - ((i+1)-middle)*((i+1)-middle)/150 +(middle)*(middle)/150, h=outputHeight+0.05*(i+1), height=1);
         }
     }
 }

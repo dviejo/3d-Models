@@ -25,9 +25,10 @@ bottomClearanceHeight = 2;
 //wire openning
 wireDiameter = 8;
 
-module motorMount() translate([0, 0, -(platformHeight + platformWidth + wireDiameter/2)])
+module motorMount(action="add") 
+translate([0, 0, -(platformHeight + platformWidth + wireDiameter/2)])
 {
-    difference()
+    if(action == "add")
     {
 //        cylinder(d=outerDiam, h=height);
         nestedHull()
@@ -36,6 +37,9 @@ module motorMount() translate([0, 0, -(platformHeight + platformWidth + wireDiam
             translate([0, 0, platformHeight]) cylinder(d=outerDiam+2, h=platformWidth);
             translate([0, 0, height-0.1]) cylinder(d=outerDiam-1, h=0.1);
         }
+    }
+    else
+    {
         
         translate([0, 0, -1]) cylinder(d=innerDiam, h=1+platformHeight);
         translate([0, 0, platformHeight + platformWidth]) cylinder(d=innerDiam, h=height);
@@ -66,5 +70,8 @@ module motorMount() translate([0, 0, -(platformHeight + platformWidth + wireDiam
     }
 }
 
-
-motorMount();
+difference()
+{
+    motorMount(action="add");
+    motorMount(action="remove");
+}

@@ -14,77 +14,88 @@ use<armMount.scad>
 
 length = 184; //from the beginning of armMount/malePart to the center of motorMount
 
-malePart();
-
-translate([0, length, 0]) rotate(-90) motorMount();
-
-rotate([-90,0,0])
+difference()
 {
-    hull()
-    {
-        translate([0, 0, entryDepth + outputDepth - 0.1])
-            oval(w=outputWidth, h=outputHeight, height=0.1);
+union()
+{
+    malePart();
 
-        translate([0, 0, length-44-20])
-            oval(w=25/2+10*10/100, h=outputHeight, height=1);
-    }
-    
-    for(i=[-10:0])
+    translate([0, length, 0]) rotate(-90) motorMount(action="add");
+
+    rotate([-90,0,0])
     {
         hull()
         {
-            translate([0, 0, length-44+i*2])
-                oval(w=25/2+i*i/100, h=outputHeight, height=1);
-            translate([0, 0, 140+(i+1)*2])
-                oval(w=25/2+(i+1)*(i+1)/100, h=outputHeight, height=1);
+            translate([0, 0, entryDepth + outputDepth - 0.1])
+                oval(w=outputWidth, h=outputHeight, height=0.1);
+
+            translate([0, 0, length-44-20])
+                oval(w=25/2+10*10/100, h=outputHeight, height=1);
         }
-    }
     
-    for(i=[0:29])
-    {
-        hull()
+        for(i=[-10:0])
         {
-            translate([0, 0, length-44+i])
-                oval(w=25/2+i*i/100, h=outputHeight, height=1);
-            translate([0, 0, length-44+i+1])
-                oval(w=25/2+(i+1)*(i+1)/100, h=outputHeight, height=1);
+            hull()
+            {
+                translate([0, 0, length-44+i*2])
+                    oval(w=25/2+i*i/100, h=outputHeight, height=1);
+                translate([0, 0, 140+(i+1)*2])
+                    oval(w=25/2+(i+1)*(i+1)/100, h=outputHeight, height=1);
+            }
         }
-    }
     
-    nestedHull()
-    {
-        translate([0, 0, length-44+30])
-            oval(w=25/2+30*30/100, h=outputHeight, height=1);
+        for(i=[0:29])
+        {
+            hull()
+            {
+                translate([0, 0, length-44+i])
+                    oval(w=25/2+i*i/100, h=outputHeight, height=1);
+                translate([0, 0, length-44+i+1])
+                    oval(w=25/2+(i+1)*(i+1)/100, h=outputHeight, height=1);
+            }
+        }
+    
+        nestedHull()
+        {
+            translate([0, 0, length-44+30])
+                oval(w=25/2+30*30/100, h=outputHeight, height=1);
         
-        translate([0, 0, length-1])
-            oval(w=55/2, h=outputHeight, height=1);
+            translate([0, 0, length-1])
+                oval(w=55/2, h=outputHeight, height=1);
 
-        translate([0, 0, length]) rotate([-1, 0, 0]) translate([0, 0, 1/500+1]) 
-            oval(w=56/2+1/2 , h=outputHeight, height=1);
-    }
-    translate([0, 0, length]) 
-    difference()
-    {
-        ovalBlend();
-        hull()
-        {
-            translate([0, 52.5, -5]) rotate([-90, 0, 0]) cylinder(d=17.5, h=30);
-            translate([0, 52.5, 20]) rotate([-90, 0, 0]) cylinder(d=33, h=30);
+            translate([0, 0, length]) rotate([-1, 0, 0]) translate([0, 0, 1/500+1]) 
+                oval(w=56/2+1/2 , h=outputHeight, height=1);
         }
-        hull()
+        translate([0, 0, length]) 
+    
+        //landing Gear
+        difference()
         {
-            translate([0, 20, 2]) scale([1.15, 1, 1]) cylinder(d=45, h=30);
-            translate([0, 46, -5]) cylinder(d=35, h=30);
-            
-            translate([16, -8, 17]) rotate([-90, 0, 0]) cylinder(d=10, h=50);
-//            translate([22, -8, 57]) rotate([-90, 0, 0]) cylinder(d=10, h=50);
+            ovalBlend();
+            hull()
+            {
+                translate([0, 52.5, -5]) rotate([-90, 0, 0]) cylinder(d=17.5, h=30);
+                translate([0, 52.5, 20]) rotate([-90, 0, 0]) cylinder(d=33, h=30);
+            }
+            difference()
+            { 
+                translate([0, 24, -15])  scale([1, 1.7, 1]) cylinder(d=50, h=60);
+                translate([-40, -70, -30]) cube([80, 80, 45]);
+            }
+            hull()
+            {
+                translate([16, -8, 18]) rotate([-90, 0, 0]) cylinder(d=15, h=40);
+                translate([19, -8, 38]) rotate([-90, 0, 0]) cylinder(d=15, h=25);
 
-            translate([-16, -8, 17]) rotate([-90, 0, 0]) cylinder(d=10, h=50);
-//            translate([-22, -8, 57]) rotate([-90, 0, 0]) cylinder(d=10, h=50);
+                translate([-16, -8, 18]) rotate([-90, 0, 0]) cylinder(d=15, h=40);
+                translate([-20, -8, 38]) rotate([-90, 0, 0]) cylinder(d=15, h=25);
+            }
         }
     }
 
-}
+} //union
+    translate([0, length, 0]) rotate(-90) motorMount(action="remove");
+} //difference
 
 *difference()
 {

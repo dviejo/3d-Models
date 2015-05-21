@@ -66,10 +66,21 @@ rotate([-90,0,0])
     difference()
     {
         ovalBlend();
-        *hull()
+        hull()
         {
-            translate([0, -10, 20]) rotate([-100, 0, 0]) cylinder(d1=35, d2=8, h=100);
-            translate([0, 0, 60]) rotate([-90, 0, 0]) cylinder(d1=35, d2=8, h=100);
+            translate([0, 52.5, -5]) rotate([-90, 0, 0]) cylinder(d=17.5, h=30);
+            translate([0, 52.5, 20]) rotate([-90, 0, 0]) cylinder(d=33, h=30);
+        }
+        hull()
+        {
+            translate([0, 20, 2]) scale([1.15, 1, 1]) cylinder(d=45, h=30);
+            translate([0, 46, -5]) cylinder(d=35, h=30);
+            
+            translate([16, -8, 17]) rotate([-90, 0, 0]) cylinder(d=10, h=50);
+//            translate([22, -8, 57]) rotate([-90, 0, 0]) cylinder(d=10, h=50);
+
+            translate([-16, -8, 17]) rotate([-90, 0, 0]) cylinder(d=10, h=50);
+//            translate([-22, -8, 57]) rotate([-90, 0, 0]) cylinder(d=10, h=50);
         }
     }
 
@@ -80,24 +91,24 @@ rotate([-90,0,0])
     ovalBlend();
     hull()
     {
-        translate([0, 0, 20]) rotate([-100, 0, 0]) cylinder(d1=35, d2=8, h=100);
+        translate([0, 0, 20]) rotate([-100, 0, 0]) cylinder(d1=10, h=100);
         translate([0, 0, 60]) rotate([-90, 0, 0]) cylinder(d1=35, d2=8, h=100);
     }
 }
 
-color("red")
+*color("red")
 translate([0, 106.4, -36.3]) 
     rotate([0, 90, 0]) rotate(-90) 
         import("../stl/OpenRC_Quad_Alpha_Arm_Part_1.stl");
 
-module ovalBlend(start=0, end=103)
+module ovalBlend(start=0, end=105)
 {
     aux = end*end/100;
-    change = 10;
+    change = 27;
     middle = (end-change)/2;
     for(i=[start:end])
     {
-        //hull()
+        hull()
         {
             rotate([-(i), 0, 0]) translate([0, 0, (i)*(i)/500 + i*0.55]) 
                 oval(w=56/2 - (i-middle)*(i-middle)/150 +(middle)*(middle)/150, h=outputHeight+0.05*i, height=1);

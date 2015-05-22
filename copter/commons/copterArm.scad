@@ -14,6 +14,11 @@ use<armMount.scad>
 
 length = 184; //from the beginning of armMount/malePart to the center of motorMount
 
+ESCLength = 90;
+ESCStart = 32;
+ESCHeight = 10;
+ESCWidth = 27;
+
 difference()
 {
 union()
@@ -93,18 +98,31 @@ union()
         }
     }
 
-} //union
+} //end union
+    //motor mount holes
     translate([0, length, 0]) rotate(-90) motorMount(action="remove");
+    
+    //main hole
     rotate([-90,0,0]) cylinder(d = wireDiameter, h=length);
+    
+    // zip ties
+    rotate([-90,0,0])
+    {
+        translate([0, 0, outputDepth+2.5]) laze(w = outputWidth*0.8, h=outputHeight*0.8);
+
+        translate([0, 0, length-64]) laze(w = (25/2+1)*0.8, h=outputHeight*0.8);
+
+        translate([0, 0, length-28]) laze(w = (25/2+16*16/100)*0.8, h=outputHeight*0.8);
+    }
     
     //Uncomment next line to get part1
     //translate([0, -1, -90]) cube([100, length+30, 180]);
     //Uncomment next line to get part2
     mirror([1,0,0]) translate([0, -1, -90]) cube([100, length+30, 180]);
-} //difference
+} //end difference
 
 
-color("red")
+*color("red")
 translate([0, 106.4, -36.3]) 
     rotate([0, 90, 0]) rotate(-90) 
         import("../stl/OpenRC_Quad_Alpha_Arm_Part_1.stl");
@@ -126,6 +144,26 @@ module ovalBlend(start=0, end=105)
     }
 }
 
-module laze()
+module laze(w=10, h=8, width=2.5)
 {
+    difference()
+    {
+        oval(w=w, h=h, height = width);
+        translate([0, 0, -1]) oval(w=w-1.75, h=h-1.75, height = width+2);
+        translate([-w-1, 0, -1]) cube([2*w+2, h+1, width+2]);
+    }
+    extra=2;
+    difference()
+    {
+        translate([extra, 0, 0]) oval(w=w+extra, h=h, height = width);
+        translate([extra, 0, -1]) oval(w=w+extra-1.75, h=h-1.75, height = width+2);
+        translate([-w-1, -h-1, -1]) cube([3*w+2, h+1, width+2]);
+        translate([w, -h, -1]) cube([3*w+2, 2*h+1, width+2]);
+    }
+    translate([w-1.75, 0, 0]) cube([1.75, 5, width]);
+    
+    translate([w-2.5, 3.65, -2]) rotate(-25) cube([10, 4, width+4]);
+    
 }
+
+//laze();

@@ -115,12 +115,23 @@ union()
         translate([0, 0, length-28]) laze(w = (30/2+16*16/100)*0.8, h=outputHeight*0.8);
     }
     //ESC Holder
-    rotate([-90,0,0]) translate([-ESCWidth/2, -ESCHeight/2, ESCStart]) cube([ESCWidth, ESCHeight, ESCLength]);
+    rotate([-90,0,0]) 
+    {
+        translate([-ESCWidth/2, -ESCHeight/2, ESCStart]) cube([ESCWidth, ESCHeight, ESCLength]);
+        //cooling window
+            translate([3, -15, ESCStart+ESCLength*0.8]) rotate([-20,0,0]) cube([7, 15, 7]);
+            translate([3, -15, ESCStart+ESCLength*0.5]) rotate([-20,0,0]) cube([7, 15, 7]);
+            translate([3, -15, ESCStart+ESCLength*0.2]) rotate([-20,0,0]) cube([7, 15, 7]);
+            translate([-7-3, -15, ESCStart+ESCLength*0.8]) rotate([-20,0,0]) cube([7, 15, 7]);
+            translate([-7-3, -15, ESCStart+ESCLength*0.5]) rotate([-20,0,0]) cube([7, 15, 7]);
+            translate([-7-3, -15, ESCStart+ESCLength*0.2]) rotate([-20,0,0]) cube([7, 15, 7]);
+    }
+    
     
     //Uncomment next line to get part1
     //translate([0, -1, -90]) cube([100, length+30, 180]);
     //Uncomment next line to get part2
-    mirror([1,0,0]) translate([0, -1, -90]) cube([100, length+30, 180]);
+    //mirror([1,0,0]) translate([0, -1, -90]) cube([100, length+30, 180]);
 } //end difference
 
 

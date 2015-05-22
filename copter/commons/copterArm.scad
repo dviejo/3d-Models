@@ -35,7 +35,7 @@ union()
                 oval(w=outputWidth, h=outputHeight, height=0.1);
 
             translate([0, 0, length-44-20])
-                oval(w=25/2+10*10/100, h=outputHeight, height=1);
+                oval(w=32/2+10*10/100, h=outputHeight, height=1);
         }
     
         for(i=[-10:0])
@@ -43,9 +43,9 @@ union()
             hull()
             {
                 translate([0, 0, length-44+i*2])
-                    oval(w=25/2+i*i/100, h=outputHeight, height=1);
+                    oval(w=32/2+i*i/100, h=outputHeight, height=1);
                 translate([0, 0, 140+(i+1)*2])
-                    oval(w=25/2+(i+1)*(i+1)/100, h=outputHeight, height=1);
+                    oval(w=32/2+(i+1)*(i+1)/100, h=outputHeight, height=1);
             }
         }
     
@@ -54,16 +54,16 @@ union()
             hull()
             {
                 translate([0, 0, length-44+i])
-                    oval(w=25/2+i*i/100, h=outputHeight, height=1);
+                    oval(w=32/2+i*i/100, h=outputHeight, height=1);
                 translate([0, 0, length-44+i+1])
-                    oval(w=25/2+(i+1)*(i+1)/100, h=outputHeight, height=1);
+                    oval(w=32/2+(i+1)*(i+1)/100, h=outputHeight, height=1);
             }
         }
     
         nestedHull()
         {
             translate([0, 0, length-44+30])
-                oval(w=25/2+30*30/100, h=outputHeight, height=1);
+                oval(w=32/2+30*30/100, h=outputHeight, height=1);
         
             translate([0, 0, length-1])
                 oval(w=55/2, h=outputHeight, height=1);
@@ -110,10 +110,12 @@ union()
     {
         translate([0, 0, outputDepth+2.5]) laze(w = outputWidth*0.8, h=outputHeight*0.8);
 
-        translate([0, 0, length-64]) laze(w = (25/2+1)*0.8, h=outputHeight*0.8);
+        translate([0, 0, length-56]) laze(w = (30/2+6*6/100)*0.8, h=outputHeight*0.8);
 
-        translate([0, 0, length-28]) laze(w = (25/2+16*16/100)*0.8, h=outputHeight*0.8);
+        translate([0, 0, length-28]) laze(w = (30/2+16*16/100)*0.8, h=outputHeight*0.8);
     }
+    //ESC Holder
+    rotate([-90,0,0]) translate([-ESCWidth/2, -ESCHeight/2, ESCStart]) cube([ESCWidth, ESCHeight, ESCLength]);
     
     //Uncomment next line to get part1
     //translate([0, -1, -90]) cube([100, length+30, 180]);

@@ -88,26 +88,23 @@ union()
                 translate([19, -8, 38]) rotate([-90, 0, 0]) cylinder(d=15, h=25);
 
                 translate([-16, -8, 18]) rotate([-90, 0, 0]) cylinder(d=15, h=40);
-                translate([-20, -8, 38]) rotate([-90, 0, 0]) cylinder(d=15, h=25);
+                translate([-19, -8, 38]) rotate([-90, 0, 0]) cylinder(d=15, h=25);
             }
         }
     }
 
 } //union
     translate([0, length, 0]) rotate(-90) motorMount(action="remove");
+    rotate([-90,0,0]) cylinder(d = wireDiameter, h=length);
+    
+    //Uncomment next line to get part1
+    //translate([0, -1, -90]) cube([100, length+30, 180]);
+    //Uncomment next line to get part2
+    mirror([1,0,0]) translate([0, -1, -90]) cube([100, length+30, 180]);
 } //difference
 
-*difference()
-{
-    ovalBlend();
-    hull()
-    {
-        translate([0, 0, 20]) rotate([-100, 0, 0]) cylinder(d1=10, h=100);
-        translate([0, 0, 60]) rotate([-90, 0, 0]) cylinder(d1=35, d2=8, h=100);
-    }
-}
 
-*color("red")
+color("red")
 translate([0, 106.4, -36.3]) 
     rotate([0, 90, 0]) rotate(-90) 
         import("../stl/OpenRC_Quad_Alpha_Arm_Part_1.stl");
@@ -127,4 +124,8 @@ module ovalBlend(start=0, end=105)
                 oval(w=56/2 - ((i+1)-middle)*((i+1)-middle)/150 +(middle)*(middle)/150, h=outputHeight+0.05*(i+1), height=1);
         }
     }
+}
+
+module laze()
+{
 }

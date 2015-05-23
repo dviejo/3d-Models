@@ -108,7 +108,7 @@ union()
     // zip ties
     rotate([-90,0,0])
     {
-        translate([0, 0, outputDepth+2.5]) laze(w = outputWidth*0.8, h=outputHeight*0.8);
+        translate([0, 0, outputDepth+3]) laze(w = outputWidth*0.8, h=outputHeight*0.8);
 
         translate([0, 0, length-56]) laze(w = (30/2+6*6/100)*0.8, h=outputHeight*0.8);
 
@@ -118,7 +118,7 @@ union()
     rotate([-90,0,0]) 
     {
         translate([-ESCWidth/2, -ESCHeight/2, ESCStart]) cube([ESCWidth, ESCHeight, ESCLength]);
-        //cooling window
+        //cooling windows as sugested by Sicherlich Nicht
             translate([3, -15, ESCStart+ESCLength*0.8]) rotate([-20,0,0]) cube([7, 15, 7]);
             translate([3, -15, ESCStart+ESCLength*0.5]) rotate([-20,0,0]) cube([7, 15, 7]);
             translate([3, -15, ESCStart+ESCLength*0.2]) rotate([-20,0,0]) cube([7, 15, 7]);
@@ -127,6 +127,14 @@ union()
             translate([-7-3, -15, ESCStart+ESCLength*0.2]) rotate([-20,0,0]) cube([7, 15, 7]);
     }
     
+    //union beams
+    for(i=[-1,1]) translate([0, 0, outputHeight*0.7*i])
+    rotate([-90,0,0]) 
+    {
+        translate([0, 0, outputDepth]) rotate([0, 90, 0]) translate([0,0,-15/2]) cylinder(d=1.5, h=15);
+        translate([0, 0, length-59]) rotate([0, 90, 0]) translate([0,0,-15/2]) cylinder(d=1.5, h=15);
+        translate([0, 0, length-40]) rotate([0, 90, 0]) translate([0,0,-15/2]) cylinder(d=1.5, h=15);
+    }
     
     //Uncomment next line to get part1
     //translate([0, -1, -90]) cube([100, length+30, 180]);

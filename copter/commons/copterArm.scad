@@ -136,6 +136,13 @@ union()
         translate([0, 0, length-40]) rotate([0, 90, 0]) translate([0,0,-15/2]) cylinder(d=1.5, h=15);
     }
     
+    //bolt for the landing gear union
+    rotate([-90,0,0]) 
+    {
+        translate([-30/2, 75, 166.5]) rotate([0,90,0]) cylinder(r=1.65, h=25);
+        translate([-30/2, 75, 166.5]) rotate([0,90,0]) cylinder(r=3.25, h=10);
+    }    
+    
     //Uncomment next line to get part1
     //translate([0, -1, -90]) cube([100, length+30, 180]);
     //Uncomment next line to get part2

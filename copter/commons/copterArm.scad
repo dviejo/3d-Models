@@ -27,7 +27,7 @@ union()
 
     translate([0, length, 0]) rotate(-90) motorMount(action="add");
 
-    rotate([-90,0,0])
+    rotate([-90,0,0]) union()
     {
         hull()
         {
@@ -43,9 +43,9 @@ union()
             hull()
             {
                 translate([0, 0, length-44+i*2])
-                    oval(w=32/2+i*i/100, h=outputHeight, height=1);
-                translate([0, 0, 140+(i+1)*2])
-                    oval(w=32/2+(i+1)*(i+1)/100, h=outputHeight, height=1);
+                    oval(w=32/2+i*i/100, h=outputHeight, height=0.5);
+                translate([0, 0, length-44+(i+1)*2])
+                    oval(w=32/2+(i+1)*(i+1)/100, h=outputHeight, height=0.5);
             }
         }
     
@@ -106,7 +106,7 @@ union()
     rotate([-90,0,0]) cylinder(d = wireDiameter, h=length);
     
     // zip ties
-    rotate([-90,0,0])
+*    rotate([-90,0,0])
     {
         translate([0, 0, outputDepth+3]) laze(w = outputWidth*0.8, h=outputHeight*0.8);
 
@@ -174,24 +174,26 @@ module ovalBlend(start=0, end=105)
 
 module laze(w=10, h=8, width=2.5)
 {
-    difference()
-    {
-        oval(w=w, h=h, height = width);
-        translate([0, 0, -1]) oval(w=w-1.75, h=h-1.75, height = width+2);
-        translate([-w-1, 0, -1]) cube([2*w+2, h+1, width+2]);
-    }
     extra=2;
-    difference()
+    union()
     {
-        translate([extra, 0, 0]) oval(w=w+extra, h=h, height = width);
-        translate([extra, 0, -1]) oval(w=w+extra-1.75, h=h-1.75, height = width+2);
-        translate([-w-1, -h-1, -1]) cube([3*w+2, h+1, width+2]);
-        translate([w, -h, -1]) cube([3*w+2, 2*h+1, width+2]);
-    }
-    translate([w-1.75, 0, 0]) cube([1.75, 5, width]);
+        difference()
+        {
+            oval(w=w, h=h, height = width);
+            translate([0, 0, -1]) oval(w=w-1.75, h=h-1.75, height = width+2);
+            translate([-w-1, 0, -1]) cube([2*w+2, h+1, width+2]);
+        }
+
+        difference()
+        {
+            translate([extra, 0, 0]) oval(w=w+extra, h=h, height = width);
+            translate([extra, 0, -1]) oval(w=w+extra-1.75, h=h-1.75, height = width+2);
+            translate([-w-1, -h-1, -1]) cube([3*w+2, h+1, width+2]);
+            translate([w, -h, -1]) cube([3*w+2, 2*h+1, width+2]);
+        }
+        translate([w-1.75, 0, 0]) cube([1.75, 5, width]);
     
-    translate([w-2.5, 3.65, -2]) rotate(-25) cube([10, 4, width+4]);
+        translate([w-2.5, 3.65, -2]) rotate(-25) cube([10, 4, width+4]);
+    }
     
 }
-
-//laze();

@@ -12,13 +12,29 @@ use<motorMount.scad>
 
 use<armMount.scad>
 
+
+copterArm(part=0);
+
 length = 184; //from the beginning of armMount/malePart to the center of motorMount
 
+ESCStart = 32; //distance from the beginning of the arm
+//Setup you ESC parameters here. Just check that the hole for it is big enough to hold it
 ESCLength = 90;
-ESCStart = 32;
 ESCHeight = 10;
 ESCWidth = 27;
 
+
+/**
+ * module copterArm
+ * 
+ * Creates a copter arm with compartments for ESC and brushless motor.
+ * For printing it is halved. It uses 2mm. diam. beams and zip ties for stick the two 
+ * parts together.
+ * 
+ * @param part. 0: hole arm. 1: left part. 2: right part.
+ * 
+ */
+module copterArm(part = 0)
 difference()
 {
 union()
@@ -143,10 +159,10 @@ union()
         translate([-30/2, 75, 166.5]) rotate([0,90,0]) cylinder(r=3.25, h=10);
     }    
     
-    //Uncomment next line to get part1
-    //translate([0, -1, -90]) cube([100, length+30, 180]);
-    //Uncomment next line to get part2
-    //mirror([1,0,0]) translate([0, -1, -90]) cube([100, length+30, 180]);
+    if(part==1)
+        translate([0, -1, -90]) cube([100, length+30, 180]);
+    else if(part==2)
+        mirror([1,0,0]) translate([0, -1, -90]) cube([100, length+30, 180]);
 } //end difference
 
 

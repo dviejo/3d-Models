@@ -15,7 +15,7 @@ use<armMount.scad>
 
 copterArm(part=0);
 
-length = 184; //from the beginning of armMount/malePart to the center of motorMount
+armLength = 184; //from the beginning of armMount/malePart to the center of motorMount
 
 ESCStart = 32; //distance from the beginning of the arm
 //Setup you ESC parameters here. Just check that the hole for it is big enough to hold it
@@ -34,7 +34,7 @@ ESCWidth = 27;
  * @param part. 0: hole arm. 1: left part. 2: right part.
  * 
  */
-module copterArm(part = 0)
+module copterArm(part = 0, length = armLength)
 difference()
 {
 union()

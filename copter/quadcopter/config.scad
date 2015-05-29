@@ -11,9 +11,11 @@ elecHeight = 66.42;
 elecHolesWidth = 35.31;
 elecHolesHeight = 61.09;
 
-baseLength = 200;
+wallThick = 6;
 
-baseWidth = elecHeight+15*2;
+baseLength = 125;
+
+baseWidth = elecHeight/2+15*2;
 
 baseHeight = 25;
 

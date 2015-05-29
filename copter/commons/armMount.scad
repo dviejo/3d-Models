@@ -75,7 +75,6 @@ translate([0, 36.30+5, -71.4]) //z=106.4
 }
 
 module malePart()
-translate([0, 0, 0]) //entryDepth+outputDepth]) 
    rotate([-90, 0, 0]) 
     difference()
     {
@@ -85,21 +84,9 @@ translate([0, 0, 0]) //entryDepth+outputDepth])
     }
 
 
-translate([0,30,0]) difference()
-{
-    translate([-60/2, -25/2, 0]) cube([60, 25, entryDepth+outputDepth/2]);
-    translate([0, 0, 1]) femalePart();
-}
-
-translate([0,-30,25/2]) rotate([90, 0, 0]) difference()
-{
-    translate([-60/2, -25/2, 0]) cube([60, 25, entryDepth+outputDepth/2]);
-    translate([0, 0, 1]) femalePart();
-    translate([-50, 0, -1]) cube([100, 100, 100]);
-}
-
-
 module femalePart() {
+   rotate([-90, 0, 0])
+   {
         difference()
         {
             hull()
@@ -107,6 +94,14 @@ module femalePart() {
                 oval(w=entryWidth+1, h = entryHeight+1, height=entryDepth);
                 translate([0, 0, entryDepth + outputDepth - 0.1])
                     oval(w=outputWidth+2, h=outputHeight+1, height=0.1);
+        hull()
+        {
+            translate([0, 0, entryDepth + outputDepth - 0.1])
+                oval(w=outputWidth, h=outputHeight, height=0.1);
+
+            translate([0, 0, armLength-44-20])
+                oval(w=32/2+10*10/100, h=outputHeight, height=1);
+        }
             }
             
             //left
@@ -130,6 +125,8 @@ module femalePart() {
             }
         }
         armMount(action="holes");
+   }
 }
 
 malePart();
+femalePart();

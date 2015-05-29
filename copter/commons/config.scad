@@ -24,7 +24,7 @@ outputHeight = 18/2;
 outputDepth = 8 +15; //For modelling, this is the position of the further ellipse
 
 
-
+armLength = 184; //from the beginning of armMount/malePart to the center of motorMount
 
 //auxiliary method
 module oval(w,h, height, center = false) {

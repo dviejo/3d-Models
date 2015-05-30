@@ -50,6 +50,7 @@ difference()
             }
         }
         
+        mainElectronics(action="add");
         
     }
 
@@ -65,9 +66,10 @@ difference()
         translate([i*(baseWidth-wallThick), 0, 0]) unionBeam(action="nut");
         translate([0, i*(baseLength-wallThick), 0]) unionBeam(action="nut");
     }
+    mainElectronics(action="remove");
 
     //Uncomment next line to get the lower half
-    //translate([-300, -300, baseHeight/2]) cube([600,600,100]);
+    translate([-300, -300, baseHeight/2]) cube([600,600,100]);
     //Uncomment next line to get the upper half
     //translate([-300, -300, -1]) cube([600,600,baseHeight/2+1]);
 }
@@ -77,8 +79,15 @@ for(i=[45, 135, -45, -135])
     rotate(i) translate([0,baseWidth-15,baseHeight/2]) import("../stl/copterArm.stl");
 
 
-module mainElectronics()
+module mainElectronics(action = "add")
 {
+    for(i=[-1,1])
+    {
+        for(j=[-1,1])
+        {
+            translate([i*elecHolesHeight/2, j*elecHolesWidth/2,0]) unionBeam(action=action, height=6);
+        }
+    }
 }
 
 module unionBeam(action="add", height=baseHeight)

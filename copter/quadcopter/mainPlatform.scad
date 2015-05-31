@@ -13,6 +13,10 @@ use<../commons/armMount.scad>
 use<../commons/copterArm.scad>
 
 
+
+armRectification = -17;
+
+
 difference()
 {
     union()
@@ -32,11 +36,28 @@ difference()
                 }
             }
         }
-        for(i=[45, 135, -45, -135])
+        for(i=[45, -45])
         {
             intersection()
             {
-                rotate(i) translate([0,baseWidth-15,0])
+                translate([0, 10, 0]) rotate(i) translate([0,baseWidth+armRectification,0])
+                {
+                    difference()
+                    {
+                        linear_extrude(height=baseHeight)  projection() minkowski() {
+                            hull() malePart();
+                            sphere(4);
+                        }
+                    }
+                }
+                oval(w=baseWidth, h=baseLength, height=baseHeight);
+            }
+        }
+        for(i=[135, -135])
+        {
+            intersection()
+            {
+                translate([0, -10, 0]) rotate(i) translate([0,baseWidth+armRectification,0])
                 {
                     difference()
                     {
@@ -54,15 +75,21 @@ difference()
         
     }
 
-    for(i=[45, 135, -45, -135])
-        rotate(i) translate([0,baseWidth-15,baseHeight/2])
+    
+    translate([0, 10, 0])
+    for(i=[45, -45])
+        rotate(i) translate([0,baseWidth+armRectification,baseHeight/2])
+            femalePart();
+    translate([0, -10, 0])
+    for(i=[135, -135])
+        rotate(i) translate([0,baseWidth+armRectification,baseHeight/2])
             femalePart();
 
     //unions
     for(i=[1,-1])
     {
-        translate([i*(baseWidth-wallThick), 0, 0]) unionBeam(action="remove");
-        translate([0, i*(baseLength-wallThick), 0]) unionBeam(action="remove");
+        translate([i*(baseWidth-wallThick), 0, 0]) unionBeam(action="boltHead");
+        translate([0, i*(baseLength-wallThick), 0]) unionBeam(action="boltHead");
         translate([i*(baseWidth-wallThick), 0, 0]) unionBeam(action="nut");
         translate([0, i*(baseLength-wallThick), 0]) unionBeam(action="nut");
     }
@@ -74,9 +101,12 @@ difference()
     //translate([-300, -300, -1]) cube([600,600,baseHeight/2+1]);
 }
 
-
-for(i=[45, 135, -45, -135])
-    rotate(i) translate([0,baseWidth-15,baseHeight/2]) import("../stl/copterArm.stl");
+translate([0, 10, 0])
+for(i=[45, -45])
+    rotate(i) translate([0,baseWidth+armRectification,baseHeight/2]) import("../stl/copterArm.stl");
+translate([0, -10, 0])
+for(i=[135, -135])
+    rotate(i) translate([0,baseWidth+armRectification,baseHeight/2]) import("../stl/copterArm.stl");
 
 
 module mainElectronics(action = "add")
@@ -85,9 +115,10 @@ module mainElectronics(action = "add")
     {
         for(j=[-1,1])
         {
-            translate([i*elecHolesHeight/2, j*elecHolesWidth/2,0]) unionBeam(action=action, height=6);
+            translate([i*monimacHolesHeight/2, j*monimacHolesWidth/2,0]) unionBeam(action=action, height=6);
         }
     }
+    color("grey") translate([-monimacLength/2, -monimacWidth/2, 6]) cube([monimacLength, monimacWidth, 3]);
 }
 
 module unionBeam(action="add", height=baseHeight)
@@ -100,7 +131,12 @@ module unionBeam(action="add", height=baseHeight)
     {
         translate([0, 0, -1]) cylinder(r=1.65, h=height+2);
     }
-    else 
+    else if(action=="boltHead") //height>5
+    {
+        translate([0, 0, -1]) cylinder(r=3, h=4+1);
+        translate([0, 0, 4.3]) cylinder(r=1.65, h=height+2);
+    }
+    else //nut at height-2.5
     {
         echo(height);
         translate([0, 0, height-2.5]) cylinder(r=3.15, h=height+2, $fn=6);

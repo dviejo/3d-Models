@@ -96,7 +96,7 @@ difference()
     mainElectronics(action="remove");
 
     //Uncomment next line to get the lower half
-    //translate([-300, -300, baseHeight/2]) cube([600,600,100]);
+    translate([-300, -300, baseHeight/2]) cube([600,600,100]);
     //Uncomment next line to get the upper half
     //translate([-300, -300, -1]) cube([600,600,baseHeight/2+1]);
 }

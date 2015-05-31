@@ -96,7 +96,7 @@ difference()
     mainElectronics(action="remove");
 
     //Uncomment next line to get the lower half
-    translate([-300, -300, baseHeight/2]) cube([600,600,100]);
+    //translate([-300, -300, baseHeight/2]) cube([600,600,100]);
     //Uncomment next line to get the upper half
     //translate([-300, -300, -1]) cube([600,600,baseHeight/2+1]);
 }
@@ -118,7 +118,7 @@ module mainElectronics(action = "add")
             translate([i*monimacHolesHeight/2, j*monimacHolesWidth/2,0]) unionBeam(action=action, height=6);
         }
     }
-    color("grey") translate([-monimacLength/2, -monimacWidth/2, 6]) cube([monimacLength, monimacWidth, 3]);
+    *color("grey") translate([-monimacLength/2, -monimacWidth/2, 6]) cube([monimacLength, monimacWidth, 3]);
 }
 
 module unionBeam(action="add", height=baseHeight)

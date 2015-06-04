@@ -14,13 +14,6 @@ include<config.scad>
 // $fs= 1 ; 
 // $fa= 1 ; 
 // 
-// entryWidth = 50.75/2;
-// entryHeight = 18.25/2;
-// entryDepth = 12;
-// 
-// outputWidth = 45/2; //49/2;
-// outputHeight = 18/2;
-// outputDepth = 8 +15; //For modelling, this is the position of the further ellipse
 
 module armMount(action)
 {
@@ -124,9 +117,9 @@ module femalePart() {
                 translate([13*i, -14.6/2-sqrt(2.5*2.5+2.5*2.5)-0.2, -1]) rotate(45) cube([4.5, 4.5, 20+1]);
             }
         }
-        armMount(action="holes");
+        %translate([0, 0, 0.15]) armMount(action="holes");
    }
 }
 
-malePart();
+//malePart();
 femalePart();

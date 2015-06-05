@@ -16,6 +16,8 @@ use<armMount.scad>
 copterArm(part=0);
 
 
+*translate([25, 205, -30]) 
+    rotate([10, 0, -35]) u();
 
 ESCStart = 32; //distance from the beginning of the arm
 //Setup you ESC parameters here. Just check that the hole for it is big enough to hold it
@@ -76,34 +78,43 @@ union()
             }
         }
     
-        nestedHull()
+        hull()
         {
             translate([0, 0, length-44+30])
                 oval(w=32/2+30*30/100, h=outputHeight, height=1);
         
-            translate([0, 0, length-1])
+            *translate([0, 0, length-1])
                 oval(w=55/2, h=outputHeight, height=1);
 
-            translate([0, 0, length]) rotate([-1, 0, 0]) translate([0, 0, 1/500+1]) 
+            *translate([0, 0, length]) rotate([-1, 0, 0]) translate([0, 0, 1/500+1]) 
                 oval(w=56/2+1/2 , h=outputHeight, height=1);
+            translate([0, 0, length]) 
+            {
+                translate([31, 19.5, 20]) rotate([-75, 0, 0]) rotate([0,90,35])
+                    translate([20, 20*20/27, 0]) scale([1.0, 1.0, 1.35]) sphere(r=8);
+                mirror([1,0,0])
+                translate([31, 19.5, 20]) rotate([-75, 0, 0]) rotate([0,90,35])
+                    translate([20, 20*20/27, 0]) scale([1.0, 1.0, 1.35]) sphere(r=8);
+            }
         }
+
         translate([0, 0, length]) 
-    
         //landing Gear
         difference()
         {
-            ovalBlend();
-            hull()
+//            ovalBlend();
+            u();
+            *hull()
             {
-                translate([0, 52.5, -5]) rotate([-90, 0, 0]) cylinder(d=17.5, h=30);
-                translate([0, 52.5, 20]) rotate([-90, 0, 0]) cylinder(d=33, h=30);
-            }
-            difference()
+                #translate([0, 52.5, -5]) rotate([-90, 0, 0]) cylinder(d=17.5, h=30);
+                *translate([0, 52.5, 20]) rotate([-90, 0, 0]) cylinder(d=33, h=30);
+            
+            #difference()
             { 
-                translate([0, 24, -15])  scale([1, 1.7, 1]) cylinder(d=50, h=60);
+                translate([0, 24, -15])  scale([1, 1.0, 1]) cylinder(d=55, h=60);
                 translate([-40, -70, -30]) cube([80, 80, 45]);
-            }
-            hull()
+            }}
+            *hull()
             {
                 translate([16, -8, 18]) rotate([-90, 0, 0]) cylinder(d=15, h=40);
                 translate([19, -8, 38]) rotate([-90, 0, 0]) cylinder(d=15, h=25);
@@ -122,7 +133,7 @@ union()
     rotate([-90,0,0]) cylinder(d = wireDiameter, h=length);
     
     // zip ties
-*    rotate([-90,0,0])
+    rotate([-90,0,0])
     {
         translate([0, 0, outputDepth+3]) laze(w = outputWidth*0.8, h=outputHeight*0.8);
 
@@ -186,6 +197,38 @@ module ovalBlend(start=0, end=105)
                 oval(w=56/2 - ((i+1)-middle)*((i+1)-middle)/150 +(middle)*(middle)/150, h=outputHeight+0.05*(i+1), height=1);
         }
     }
+}
+
+
+module u()
+{
+    sep = 31;
+    translate([sep, 19.5, 20])
+    rotate([-75, 0, 0])
+    rotate([0,90,35])
+    for(x=[-40:1:20])
+    {
+        hull()
+        {
+            translate([x, x*x/27, 0]) scale([1.0, 1.0, 1.35]) sphere(r=8);
+            translate([x+1, (x+1)*(x+1)/27, 0]) scale([1.0, 1.0, 1.35])sphere(r=8);
+        }
+    }
+    
+    //mirror
+    mirror([1,0,0])
+    translate([sep, 19.5, 20])
+    rotate([-75, 0, 0])
+    rotate([0,90,35])
+    for(x=[-40:1:20])
+    {
+        hull()
+        {
+            translate([x, x*x/27, 0]) scale([1.0, 1.0, 1.35]) sphere(r=8);
+            translate([x+1, (x+1)*(x+1)/27, 0]) scale([1.0, 1.0, 1.35])sphere(r=8);
+        }
+    }
+
 }
 
 module laze(w=10, h=8, width=2.5)

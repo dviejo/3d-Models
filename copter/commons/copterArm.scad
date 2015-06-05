@@ -12,6 +12,7 @@ use<motorMount.scad>
 
 use<armMount.scad>
 
+*laze();
 
 copterArm(part=0);
 
@@ -144,9 +145,9 @@ union()
     }    
     
     if(part==1)
-        translate([0, -1, -90]) cube([100, length+30, 180]);
+        translate([0, -1, -90]) cube([100, length+40, 180]);
     else if(part==2)
-        mirror([1,0,0]) translate([0, -1, -90]) cube([100, length+30, 180]);
+        mirror([1,0,0]) translate([0, -1, -90]) cube([100, length+40, 180]);
 } //end difference
 
 
@@ -156,9 +157,9 @@ translate([0, 106.4, -36.3])
         import("../stl/OpenRC_Quad_Alpha_Arm_Part_1.stl");
 
 
+sep = 31;
 module u()
-{
-    sep = 31;
+union() {
     translate([sep, 19.5, 20])
     rotate([-75, 0, 0])
     rotate([0,90,35])
@@ -208,7 +209,7 @@ module laze(w=10, h=8, width=2.5)
         }
         translate([w-1.75, 0, 0]) cube([1.75, 5, width]);
     
-        translate([w-2.5, 3.65, -2]) rotate(-25) cube([10, 4, width+4]);
+        translate([w-2.75, 3.65, -2]) rotate(-25) cube([10, 4, width+4]);
     }
     
 }

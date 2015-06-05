@@ -117,7 +117,7 @@ module femalePart() {
                 translate([13*i, -14.6/2-sqrt(2.5*2.5+2.5*2.5)-0.2, -1]) rotate(45) cube([4.5, 4.5, 20+1]);
             }
         }
-        %translate([0, 0, 0.15]) armMount(action="holes");
+        translate([0, 0, 0.15]) armMount(action="holes");
    }
 }
 

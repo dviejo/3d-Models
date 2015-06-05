@@ -26,7 +26,7 @@ difference()
             oval(w=baseWidth, h=baseLength, height=baseHeight);
             difference()
             {
-                translate([0, 0, 4]) oval(w=baseWidth-wallThick, h=baseLength-wallThick, height=baseHeight-4*2);
+                translate([0, 0, 4]) oval(w=baseWidth-wallThick, h=baseLength-wallThick, height=baseHeight+4*2);
                 
                 //unions
                 for(i=[1,-1])
@@ -73,6 +73,11 @@ difference()
         
         mainElectronics(action="add");
         
+        translate([0, 0, baseHeight-4]) 
+            hollowify() difference()
+            {
+                oval(w=baseWidth-wallThick, h=baseLength-wallThick, height=4);
+                translate([-97/2, -80/2, -1]) cube([97, 80, 6]);            }
     }
 
     
@@ -96,7 +101,7 @@ difference()
     mainElectronics(action="remove");
 
     //Uncomment next line to get the lower half
-    translate([-300, -300, baseHeight/2]) cube([600,600,100]);
+    //translate([-300, -300, baseHeight/2]) cube([600,600,100]);
     //Uncomment next line to get the upper half
     //translate([-300, -300, -1]) cube([600,600,baseHeight/2+1]);
 }
@@ -115,7 +120,7 @@ module mainElectronics(action = "add")
     {
         for(j=[-1,1])
         {
-            translate([i*monimacHolesHeight/2, j*monimacHolesWidth/2,0]) unionBeam(action=action, height=6);
+            translate([i*monimacHolesHeight/2, j*monimacHolesWidth/2,0]) unionBeam(action=action, height=5);
         }
     }
     *color("grey") translate([-monimacLength/2, -monimacWidth/2, 6]) cube([monimacLength, monimacWidth, 3]);

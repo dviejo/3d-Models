@@ -12,13 +12,10 @@ use<motorMount.scad>
 
 use<armMount.scad>
 
-*laze();
+//laze();
 
-copterArm(part=0);
+copterArm(part=2);
 
-
-*translate([25, 205, -30]) 
-    rotate([10, 0, -35]) u();
 
 ESCStart = 32; //distance from the beginning of the arm
 //Setup you ESC parameters here. Just check that the hole for it is big enough to hold it
@@ -188,7 +185,7 @@ union() {
 
 }
 
-module laze(w=10, h=8, width=2.5)
+module laze(w=10, h=8, width=3.5)
 {
     extra=2;
     union()
@@ -197,14 +194,14 @@ module laze(w=10, h=8, width=2.5)
         {
             oval(w=w, h=h, height = width);
             translate([0, 0, -1]) oval(w=w-1.75, h=h-1.75, height = width+2);
-            translate([-w-1, 0, -1]) cube([2*w+2, h+1, width+2]);
+            translate([-w-1, 0.1, -1]) cube([2*w+2, h+1, width+2]);
         }
 
         difference()
         {
             translate([extra, 0, 0]) oval(w=w+extra, h=h, height = width);
             translate([extra, 0, -1]) oval(w=w+extra-1.75, h=h-1.75, height = width+2);
-            translate([-w-1, -h-1, -1]) cube([3*w+2, h+1, width+2]);
+            translate([-w-1, -h-1.1, -1]) cube([3*w+2, h+1, width+2]);
             translate([w, -h, -1]) cube([3*w+2, 2*h+1, width+2]);
         }
         translate([w-1.75, 0, 0]) cube([1.75, 5, width]);

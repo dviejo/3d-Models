@@ -34,6 +34,11 @@ difference()
                     translate([i*(baseWidth-wallThick), 0, 0]) unionBeam(action="add");
                     translate([0, i*(baseLength-wallThick), 0]) unionBeam(action="add");
                 }
+                //battery container attaching holes
+                for(i=[1,-1]) for(j=[1,-1])
+                {
+                    translate([i*(baseWidth*0.535), j*baseLength*0.7, 0]) unionBeam(action="add", height=7);
+                }
             }
         }
         for(i=[45, -45])
@@ -99,17 +104,32 @@ difference()
         translate([0, i*(baseLength-wallThick), 0]) unionBeam(action="nut");
     }
     mainElectronics(action="remove");
+    
+    //base holes for connecting the battery
+    for(i=[1, -1])
+        translate([0, i*baseLength*0.75, -1]) cylinder(d=20, h=4+2);
+    
+    //battery container attaching holes
+    for(i=[1,-1]) for(j=[1,-1])
+    {
+        translate([i*(baseWidth*0.535), j*baseLength*0.7, 0]) 
+            unionBeam(action="remove", height=7);
+        translate([i*(baseWidth*0.535), j*baseLength*0.7, 0]) 
+            unionBeam(action="nut", height=7);
+    }
+    
+    
 
     //Uncomment next line to get the lower half
-    //translate([-300, -300, baseHeight/2]) cube([600,600,100]);
+    translate([-300, -300, baseHeight/2]) cube([600,600,100]);
     //Uncomment next line to get the upper half
     //translate([-300, -300, -1]) cube([600,600,baseHeight/2+1]);
 }
 
-translate([0, 10, 0])
+*translate([0, 10, 0])
 for(i=[45, -45])
     rotate(i) translate([0,baseWidth+armRectification,baseHeight/2]) import("../stl/copterArm.stl");
-translate([0, -10, 0])
+*translate([0, -10, 0])
 for(i=[135, -135])
     rotate(i) translate([0,baseWidth+armRectification,baseHeight/2]) import("../stl/copterArm.stl");
 
@@ -143,7 +163,6 @@ module unionBeam(action="add", height=baseHeight)
     }
     else //nut at height-2.5
     {
-        echo(height);
         translate([0, 0, height-2.5]) cylinder(r=3.15, h=height+2, $fn=6);
     }
 }

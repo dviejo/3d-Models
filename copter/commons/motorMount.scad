@@ -58,8 +58,8 @@ translate([0, 0, -(platformHeight + platformWidth + wireDiameter/2)])
             echo(45*i);
             rotate(45*i) hull()
             {
-                translate([0, 6, 0]) cylinder(d=3, h=height, $fn=20);
-                translate([0, 12, 0]) cylinder(d=3, h=height, $fn=20);
+                translate([0, 6, 0]) cylinder(d=3+0.15, h=height, $fn=20);
+                translate([0, 12, 0]) cylinder(d=3+0.15, h=height, $fn=20);
             }
         }
         

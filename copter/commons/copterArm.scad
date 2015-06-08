@@ -108,7 +108,7 @@ union()
     {
         translate([0, 0, outputDepth+3]) laze(w = outputWidth*0.8, h=outputHeight*0.8);
 
-        translate([0, 0, length-56]) laze(w = (30/2+6*6/100)*0.8, h=outputHeight*0.8);
+        translate([0, 0, length-55]) laze(w = (30/2+6*6/100)*0.8, h=outputHeight*0.8);
 
         translate([0, 0, length-28]) laze(w = (30/2+16*16/100)*0.8, h=outputHeight*0.8);
     }
@@ -129,9 +129,9 @@ union()
     for(i=[-1,1]) translate([0, 0, outputHeight*0.7*i])
     rotate([-90,0,0]) 
     {
-        translate([0, 0, outputDepth]) rotate([0, 90, 0]) translate([0,0,-15/2]) cylinder(d=1.75, h=15);
-        translate([0, 0, length-59]) rotate([0, 90, 0]) translate([0,0,-15/2]) cylinder(d=1.75, h=15);
-        translate([0, 0, length-40]) rotate([0, 90, 0]) translate([0,0,-15/2]) cylinder(d=1.75, h=15);
+        translate([0, 0, outputDepth]) rotate([0, 90, 0]) translate([0,0,-15/2]) cylinder(d=1.95, h=15);
+        translate([0, 0, length-59]) rotate([0, 90, 0]) translate([0,0,-15/2]) cylinder(d=1.95, h=15);
+        translate([0, 0, length-40]) rotate([0, 90, 0]) translate([0,0,-15/2]) cylinder(d=1.95, h=15);
     }
     
     //bolt for the landing gear union

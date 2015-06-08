@@ -129,9 +129,9 @@ union()
     for(i=[-1,1]) translate([0, 0, outputHeight*0.7*i])
     rotate([-90,0,0]) 
     {
-        translate([0, 0, outputDepth]) rotate([0, 90, 0]) translate([0,0,-15/2]) cylinder(d=1.5, h=15);
-        translate([0, 0, length-59]) rotate([0, 90, 0]) translate([0,0,-15/2]) cylinder(d=1.5, h=15);
-        translate([0, 0, length-40]) rotate([0, 90, 0]) translate([0,0,-15/2]) cylinder(d=1.5, h=15);
+        translate([0, 0, outputDepth]) rotate([0, 90, 0]) translate([0,0,-15/2]) cylinder(d=1.75, h=15);
+        translate([0, 0, length-59]) rotate([0, 90, 0]) translate([0,0,-15/2]) cylinder(d=1.75, h=15);
+        translate([0, 0, length-40]) rotate([0, 90, 0]) translate([0,0,-15/2]) cylinder(d=1.75, h=15);
     }
     
     //bolt for the landing gear union
@@ -204,9 +204,9 @@ module laze(w=10, h=8, width=3.5)
             translate([-w-1, -h-1.1, -1]) cube([3*w+2, h+1, width+2]);
             translate([w, -h, -1]) cube([3*w+2, 2*h+1, width+2]);
         }
-        translate([w-1.75, 0, 0]) cube([1.75, 5, width]);
+        translate([w-1.85, -1, 0]) rotate(-15) cube([1.75, 7.5, width]);
     
-        translate([w-2.75, 3.65, -2]) rotate(-25) cube([10, 4, width+4]);
+        translate([w-3.5, 3.65, -2]) rotate(-15) cube([10, 4, width+4]);
     }
     
 }

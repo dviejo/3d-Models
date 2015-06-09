@@ -12,7 +12,6 @@ I'm trying to keep copter arms fully compatible with those from Daniel's design.
 
 My idea is to make this project fully parameterizable: the number of arms, size for the body, battery compartment and so on. 
 
-## Current Status: Design Phase
+## Current Status: Moved
 
-* Copter arm is almost finished
-* Copter body design will start soon
+This project has been moved to [https://github.com/dviejo/openMultiCopter](https://github.com/dviejo/openMultiCopter)

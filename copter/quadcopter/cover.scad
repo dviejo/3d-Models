@@ -44,8 +44,8 @@ union()
                 {
                     translate([i*107/2, j*90/2, -1]) cylinder(r1=7, r2=0, h=10);
                 }
-                translate([i*40/2, -1-90/2, 4]) rotate([-90, 0, 0]) cylinder(r=1.65, h=2+90);
-                translate([i*40/2, -1-90/2, 9]) rotate([-90, 0, 0]) cylinder(r=1.65, h=2+90);
+                translate([i*40/2, -1-90/2, 5]) rotate([-90, 0, 0]) cylinder(r=1.65, h=2+90);
+                translate([i*40/2, -1-90/2, 11]) rotate([-90, 0, 0]) cylinder(r=1.65, h=2+90);
             }
             
         }
@@ -54,11 +54,36 @@ union()
     
 }
 
+for(i=[-1, 1]) for(j=[-1,1])
+    translate([i*(baseWidth+10), j*20, 0]) rotate(90)
+grip();
 
-
+gripLength = 14 + 4 + 3;
+module grip()
+{
+    difference()
+    {
+        union()
+        {
+            translate([-gripLength/2, -8/2, 0]) cube([gripLength, 8, 2.5]);
+            
+            intersection()
+            {
+                translate([gripLength/2-2.8, -8/2, 0]) cube([2.8, 8, 4]);
+                translate([gripLength/2-5, -8/2, 0.75]) rotate([0, 30, 0]) cube([13, 8, 4]);
+            }
+        }
+        translate([gripLength/2-3-4-5, 0, 1.8]) cylinder(r=1.7, h=5, $fn=12);
+        translate([gripLength/2-3-4-11, 0, 1.8]) cylinder(r=1.7, h=5, $fn=12);
+        translate([gripLength/2-3-4-5, 0, -1]) rotate(30) cylinder(r=3, h=1.5, $fn=6);
+        translate([gripLength/2-3-4-11, 0, -1]) rotate(30) cylinder(r=3, h=1.5, $fn=6);
+        
+        translate([gripLength/2-2.8-5, -10/2, 2.5-1]) cube([5, 10, 1+1]);
+    }
+}
 
 armRectification = -17;
-translate([0, 0, -baseHeight])
+*translate([0, 0, -baseHeight])
 {
 //    import("../output/mainPlatformPart1.stl");
     import("../output/mainPlatformPart2.stl");

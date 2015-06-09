@@ -13,7 +13,7 @@ use<../commons/armMount.scad>
 use<../commons/copterArm.scad>
 
 
-
+//This value pulls copter arms to the center of the platform
 armRectification = -17;
 
 
@@ -126,12 +126,6 @@ difference()
     //translate([-300, -300, -1]) cube([600,600,baseHeight/2+1]);
 }
 
-*translate([0, 10, 0])
-for(i=[45, -45])
-    rotate(i) translate([0,baseWidth+armRectification,baseHeight/2]) import("../stl/copterArm.stl");
-*translate([0, -10, 0])
-for(i=[135, -135])
-    rotate(i) translate([0,baseWidth+armRectification,baseHeight/2]) import("../stl/copterArm.stl");
 
 
 module mainElectronics(action = "add")

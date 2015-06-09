@@ -14,7 +14,7 @@ use<armMount.scad>
 
 //laze();
 
-copterArm(part=0);
+copterArm(part=1);
 
 
 ESCStart = 32; //distance from the beginning of the arm

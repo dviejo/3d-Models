@@ -7,7 +7,7 @@
  * Created by DViejo
  * 05/Nov/2014
  * 
- * TODO: include a handler for object pieces
+ * Include a handler for object pieces
  */
 
 height = 8;
@@ -18,6 +18,8 @@ objectGap= 8;
 
 objectSide = objectHoleSide*0.95;
 objectHeight = 15;
+
+gripDiam = 15;
 
 module puzzleBase()
 {
@@ -65,8 +67,16 @@ module pieceSet()
     for(j = [0:3])
       translate([objectGap+(objectGap+objectHoleSide)*i*2, objectGap+(objectGap+objectHoleSide)*j, height/2])
       {
-	piece1();
-	translate([objectGap+objectHoleSide, 0, 0]) piece2();
+          difference()
+          {
+              piece1();
+              translate([0.9*objectSide/2, 0.9*objectSide/2, -1])cylinder(d=gripDiam, h=objectHeight+2);
+          }
+	translate([objectGap+objectHoleSide, 0, 0]) difference()
+        {
+            piece2();
+            translate([objectSide/2, objectSide/2, -1])cylinder(d=gripDiam, h=objectHeight+2);
+        }
       }
 }
 

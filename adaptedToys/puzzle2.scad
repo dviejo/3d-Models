@@ -16,7 +16,7 @@ boardSide = 180;
 objectHoleSide = 35;
 objectGap= 8;
 
-objectSide = objectHoleSide*0.875;
+objectSide = objectHoleSide*0.95;
 objectHeight = 15;
 
 module puzzleBase()
@@ -44,11 +44,15 @@ module puzzle2Board()
   }
 }
 
+
+// cube piece
 module piece1(side = objectSide)
 {
-  cube([side, side, objectHeight]);
+    //cube side reduced to avoid the fitting of piece 2
+    cube([side*0.9, side*0.9, objectHeight]);
 }
 
+// cylinder piece
 module piece2(side = objectSide)
 {
   translate([side/2, side/2, 0])

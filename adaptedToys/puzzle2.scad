@@ -10,11 +10,15 @@
  * Include a handler for object pieces
  */
 
-height = 8;
-boardSide = 180;
-
+//number of pieces in a row (pair number)
+piecesNumber = 3;
 objectHoleSide = 35;
-objectGap= 8;
+objectGap= 7;
+
+height = 8;
+//boardSide = 180;
+boardSide = piecesNumber * (objectHoleSide+objectGap) + objectGap;
+
 
 objectSide = objectHoleSide*0.95;
 objectHeight = 15;
@@ -26,16 +30,30 @@ module puzzleBase()
   cube([boardSide, boardSide, height]);
 }
 
+// module puzzleHoles()
+// {
+//   for(i = [0:piecesNumber-1])
+//     for(j = [0:piecesNumber-1])
+//       translate([objectGap+(objectGap+objectHoleSide)*i*2-(objectGap+objectHoleSide)*j, objectGap+(objectGap+objectHoleSide)*j, height/2])
+//       {
+// 	piece1(objectHoleSide);
+// 	translate([objectGap+objectHoleSide, 0, 0]) piece2(objectHoleSide);
+//       }
+// }
+
 module puzzleHoles()
 {
-  for(i = [0:3])
-    for(j = [0:3])
-      translate([objectGap+(objectGap+objectHoleSide)*i*2-(objectGap+objectHoleSide)*j, objectGap+(objectGap+objectHoleSide)*j, height/2])
+  for(i = [0:piecesNumber-1])
+    for(j = [0:piecesNumber-1])
+      translate([objectGap+(objectGap+objectHoleSide)*i, objectGap+(objectGap+objectHoleSide)*j, height/2])
       {
-	piece1(objectHoleSide);
-	translate([objectGap+objectHoleSide, 0, 0]) piece2(objectHoleSide);
+	if(j%2==i%2)
+	  piece1(objectHoleSide);
+	else
+	  piece2(objectHoleSide);
       }
 }
+
 
 module puzzle2Board()
 {
@@ -63,20 +81,22 @@ module piece2(side = objectSide)
 
 module pieceSet()
 {
-  for(i = [0:1])
-    for(j = [0:3])
-      translate([objectGap+(objectGap+objectHoleSide)*i*2, objectGap+(objectGap+objectHoleSide)*j, height/2])
+  for(i = [0:piecesNumber-1])
+    for(j = [0:piecesNumber-1])
+      translate([objectGap+(objectGap+objectHoleSide)*i, objectGap+(objectGap+objectHoleSide)*j, height/2])
       {
+	if(j%2==i%2)
           difference()
           {
               piece1();
               translate([0.9*objectSide/2, 0.9*objectSide/2, -1])cylinder(d=gripDiam, h=objectHeight+2);
-          }
-	translate([objectGap+objectHoleSide, 0, 0]) difference()
+	  }
+	else
+	    difference()
         {
             piece2();
             translate([objectSide/2, objectSide/2, -1])cylinder(d=gripDiam, h=objectHeight+2);
-        }
+        }      
       }
 }
 

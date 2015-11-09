@@ -131,8 +131,8 @@ e3dHeight3 = 15;
 jhDiam = 16 + 0.7;
 jhDiam2 = 12 + 0.6125;
 
-jhHeight1 = 4.8 + 0.4; 
-jhHeight2 = 4.6 - 0.4; 
+jhHeight1 = 4.8 + 0.25; 
+jhHeight2 = 4.6 - 0.25; 
 jhHeight3 = 15; 
 
 //TODO Next should be set by the method who calls extruderMount.

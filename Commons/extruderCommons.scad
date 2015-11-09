@@ -128,7 +128,7 @@ e3dHeight3 = 15;
  * Tolerances are set up for a .4 mm nozzle 
  */
 
-jhDiam = 16 + 0.7;
+jhDiam = 16 + 0.6125;
 jhDiam2 = 12 + 0.6125;
 
 jhHeight1 = 4.8 + 0.25; 

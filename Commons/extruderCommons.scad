@@ -203,7 +203,7 @@ module extruderMount(dualExtruder=false)
     for(i=[-1, 1]) //general
     {
       translate([i*(diam2/2 + 7), -20, -height1-height2/2]) rotate([-90, 0, 0]) 
-	cylinder(r=1.55, h=30);
+	cylinder(r=1.55, h=30, $fn=30);
       hull()
       {
 	translate([i*(diam2/2 + 7), -2, -height1-height2/2]) rotate([-90, 90, 0]) 
@@ -240,7 +240,7 @@ module extruderMountB() translate([0, 0, -height1-height2-mountB_H3])
     for(i=[-1, 1]) 
     {
       translate([i*(diam2/2 + 7), 0, mountB_H3+height2/2]) rotate([-90, 0, 0]) 
-	cylinder(r=1.55, h=diam/2+6);
+	cylinder(r=1.55, h=diam/2+6, $fn=30);
       translate([i*(diam2/2 + 7), diam/2+6.3, mountB_H3+height2/2]) rotate([-90, 0, 0]) 
 	cylinder(r=3.2, h=6);
 

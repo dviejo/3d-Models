@@ -30,26 +30,26 @@ module plankHolderHoles()
     translate([-1, side/2, side/2])
         rotate([0, 90, 0])
             cylinder(d=4.5, h=side);
-    translate([5, side/2, side/2])
+    translate([2.5, side/2, side/2])
         rotate([0, 90, 0])
             cylinder(d=8, h=side);
     
     //bolts for the plank
     translate([2*side-side/3, -1, side/2])
         rotate([-90, 0, 0])
-            cylinder(d=3.2, h=height+2);
+            cylinder(d=3.5, h=height+2);
     translate([side-side/6, -1, side/2])
         rotate([-90, 0, 0])
-            cylinder(d=3.2, h=side);
+            cylinder(d=3.5, h=side);
     translate([side-side/6, height, side/2])
         rotate([-90, 0, 0])
             cylinder(d=7, h=side);
     translate([2*side-side/3, height-1.5, side/2])
         rotate([-90, 0, 0])
-            cylinder(d1=3.2, d2=6.4, h=2);
+            cylinder(d1=3.5, d2=7, h=2);
     translate([side-side/6, height-1.5, side/2])
         rotate([-90, 0, 0])
-            cylinder(d1=3.2, d2=6.4, h=2);
+            cylinder(d1=3.5, d2=7, h=2);
 }
 
 

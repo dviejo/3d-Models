@@ -37,8 +37,8 @@ rotate([-90, 0, 0]) difference()
     translate([5.75, -15/2, -1]) cube([5, 15, legLength+2]);
     translate([-5-5.75, -15/2, -1]) cube([5, 15, legLength+2]);
     
-    translate([5.25/2, -1.85, -1]) cube([5, 10, legLength+2]);
-    translate([-5-5.25/2, -1.85, -1]) cube([5, 10, legLength+2]);
+    translate([5.25/2, -2, -1]) cube([5, 10, legLength+2]);
+    translate([-5-5.25/2, -2, -1]) cube([5, 10, legLength+2]);
 
 }
     

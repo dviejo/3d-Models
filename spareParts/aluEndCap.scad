@@ -15,7 +15,11 @@ typeDepth = 6.35;
 
 difference()
 {
-    cube(side+wall*2);
+    union()
+    {
+        cube(side+wall*2);
+        translate([0, 0, -20]) seta();
+    }
     
     translate([wall-1/2, wall-1/2, height])
     difference()
@@ -31,4 +35,19 @@ difference()
         translate([side+1-typeDepth*0.85, (side+1-typeWidth)/2, -1])
             cube([1 + typeDepth, typeWidth, side+2*wall+2]);
     }
+}
+
+module seta()
+rotate([-90, 0, 0]) 
+difference()
+{
+    cylinder(r=6.35, h=legLength);
+
+    
+    translate([5.75, -15/2, -1]) cube([5, 15, legLength+2]);
+    translate([-5-5.75, -15/2, -1]) cube([5, 15, legLength+2]);
+    
+    translate([5.25/2, -2-0.2, -1]) cube([5, 10, legLength+2]);  //-0.2 is added to 
+    translate([-5-5.25/2, -2-0.2, -1]) cube([5, 10, legLength+2]);//give room
+
 }

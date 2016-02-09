@@ -29,7 +29,8 @@ difference()
 
 
 module seta()
-rotate([-90, 0, 0]) difference()
+rotate([-90, 0, 0]) 
+difference()
 {
     cylinder(r=6.35, h=legLength);
 
@@ -37,8 +38,8 @@ rotate([-90, 0, 0]) difference()
     translate([5.75, -15/2, -1]) cube([5, 15, legLength+2]);
     translate([-5-5.75, -15/2, -1]) cube([5, 15, legLength+2]);
     
-    translate([5.25/2, -2, -1]) cube([5, 10, legLength+2]);
-    translate([-5-5.25/2, -2, -1]) cube([5, 10, legLength+2]);
+    translate([5.25/2, -2-0.2, -1]) cube([5, 10, legLength+2]);  //-0.2 is added to 
+    translate([-5-5.25/2, -2-0.2, -1]) cube([5, 10, legLength+2]);//give room
 
 }
     

@@ -37,19 +37,19 @@ module plankHolderHoles()
     //bolts for the plank
     translate([2*side-side/3, -1, side/2])
         rotate([-90, 0, 0])
-            cylinder(d=3.5, h=height+2);
+            cylinder(d=3.5, h=height+2, $fn=15);
     translate([side-side/6, -1, side/2])
         rotate([-90, 0, 0])
-            cylinder(d=3.5, h=side);
+            cylinder(d=3.5, h=side, $fn=15);
     translate([side-side/6, height, side/2])
         rotate([-90, 0, 0])
             cylinder(d=7, h=side);
     translate([2*side-side/3, height-1.5, side/2])
         rotate([-90, 0, 0])
-            cylinder(d1=3.5, d2=7, h=2);
+            cylinder(d1=3.5, d2=8, h=2);
     translate([side-side/6, height-1.5, side/2])
         rotate([-90, 0, 0])
-            cylinder(d1=3.5, d2=7, h=2);
+            cylinder(d1=3.5, d2=8, h=2);
 }
 
 
@@ -60,4 +60,5 @@ difference()
     plankHolderHoles();
 }
 
+rotate([90,0,0])
 plankHolder();

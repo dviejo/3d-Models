@@ -136,16 +136,16 @@ jhHeight2 = 4.6 - 0.25;
 jhHeight3 = 15; 
 
 //TODO Next should be set by the method who calls extruderMount.
-// height1 = e3dHeight1;
-// height2 = e3dHeight2;
-// height3 = e3dHeight3; 
-// diam = e3dDiam;
-// diam2 = e3dDiam2;
-height1 = jhHeight1;
-height2 = jhHeight2;
-height3 = jhHeight3; 
-diam = jhDiam;
-diam2 = jhDiam2;
+ height1 = e3dHeight1;
+ height2 = e3dHeight2;
+ height3 = e3dHeight3; 
+ diam = e3dDiam;
+ diam2 = e3dDiam2;
+//height1 = jhHeight1;
+//height2 = jhHeight2;
+//height3 = jhHeight3; 
+//diam = jhDiam;
+//diam2 = jhDiam2;
 
 /**
  * Grooved extruder mounting

@@ -19,10 +19,14 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  * 
+ * Uses Write.scad from Harlan Martin - harlan@sutlog.com
+ * 
  */
 
+use<Write.scad>
+
 mainLength = 150;
-mainWidth = 20;
+mainWidth = 24;
 bottomHeight = 14;
 bladeWidth = 8;
 wallWidth = (mainWidth - bladeWidth) / 2;
@@ -30,9 +34,17 @@ topHeight = 10;
 totalHeight = bottomHeight + topHeight;
 endDiam = totalHeight*2;
 
+Text1 = "Blade Cover";
+Text2 = "by DViejo";
+textHeight = 2;
+textSize = 6;
+charLength = textSize * 0.125 * 5.5;
+
 bladeCover();
 
 translate([0, -15, 0])
+bladeJoint();
+translate([0, -30, 0])
 bladeJoint();
 
 module bladeCover()
@@ -67,6 +79,7 @@ module bladeCoverBody()
         translate([mainLength-10, 0, totalHeight/2 + 30 ]) rotate([-90, 0, 0]) cylinder(d=20, h=mainWidth);
         translate([mainLength-10, 0, 20/2 ]) rotate([-90, 0, 0]) cylinder(d=20, h=mainWidth);
     }
+    
     }//end of union
 }
 
@@ -101,18 +114,69 @@ module bladeCoverHoles()
     {
         translate([i*20, -1, (bottomHeight)/2]) rotate([-90, 0, 0]) cylinder(d=4, h=mainWidth+2, $fn=30 );
         translate([i*20, wallWidth, (bottomHeight)/2]) rotate([-90, 0, 0]) cylinder(d=6, h=bladeWidth);
+        
+        if(i*20-6-topHeight*0.7>charLength*len(Text2))
+        translate([i*20, 0, bottomHeight+topHeight*0.35]) 
+            hull()
+            {
+                translate([6, 0, 0]) scale([1, 1, 1.3]) sphere(d=0.7*topHeight);
+                translate([-6, 0, 0]) scale([1, 1, 1.3]) sphere(d=0.7*topHeight);
+            }
+        if(i*20-6-topHeight*0.7>charLength*len(Text1))
+        translate([i*20, mainWidth, bottomHeight+topHeight*0.35]) 
+            hull()
+            {
+                translate([6, 0, 0]) scale([1, 1, 1.3]) sphere(d=0.7*topHeight);
+                translate([-6, 0, 0]) scale([1, 1, 1.3]) sphere(d=0.7*topHeight);
+            }
     }
     for(i=[0, 1])
     translate([-1, i*mainWidth, (bottomHeight)/2]) hull()
     {
-        sphere(d=7);
-        translate([mainLength, 0, 0]) sphere(d=7);
+        sphere(d=6.5);
+        translate([mainLength, 0, 0]) sphere(d=6.5);
     }
+    
+    
+    translate([2.5, textHeight/2, bottomHeight]) rotate([0, 0, 0])
+        rotate([90, 0, 0]) write(Text2, h=textSize, t=textHeight, space=1);
+
+    translate([charLength * len(Text1) + 2.5, mainWidth-textHeight/2, bottomHeight]) rotate([0, 0, 0])
+        rotate([-90, 180, 0]) write(Text1, h=textSize, t=textHeight, space=1);
+
+        
+    *difference()
+    {
+        hull()
+        {
+            translate([charLength*len(Text2)+5.5*2, 0, bottomHeight+topHeight*0.35]) 
+                scale([1, 1, 1.3]) sphere(d=0.7*topHeight);
+            translate([mainLength+8, 0, bottomHeight+topHeight*0.35]) 
+                scale([1, 1, 1.3]) sphere(d=0.7*topHeight);
+        }
+        for(i=[1:10])
+            translate([25*i, 0 ,0]) cube([2, 50, 50]);
+    }
+    *difference()
+    {
+        hull()
+        {
+            translate([charLength*len(Text1)+5.5*2, mainWidth, bottomHeight+topHeight*0.35]) 
+                scale([1, 1, 1.3]) sphere(d=0.7*topHeight);
+            translate([mainLength+8, mainWidth, bottomHeight+topHeight*0.35]) 
+                scale([1, 1, 1.3]) sphere(d=0.7*topHeight);
+        }
+        for(i=[1:10])
+            translate([25*i, 0 ,0]) cube([2, 50, 50]);
+    }
+
     
 }
 
 
 module bladeJoint()
+translate([0, 0, 1.5])
+rotate([-90, 0, 0])
 difference()
 {
     union()
@@ -130,4 +194,6 @@ difference()
             sphere(d=5, $fn=100);
         }
     }
+    
+    translate([-15, 1.5, -20]) cube([125, 20, 40]);
 }

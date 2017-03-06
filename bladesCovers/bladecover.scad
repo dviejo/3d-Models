@@ -25,10 +25,10 @@
 
 use<Write.scad>
 
-mainLength = 150;
-mainWidth = 24;
-bottomHeight = 14;
-bladeWidth = 8;
+mainLength = 155;
+mainWidth = 18;
+bottomHeight = 11;
+bladeWidth = 4.4;
 wallWidth = (mainWidth - bladeWidth) / 2;
 topHeight = 10;
 totalHeight = bottomHeight + topHeight;
@@ -44,7 +44,7 @@ bladeCover();
 
 translate([0, -15, 0])
 bladeJoint();
-translate([0, -30, 0])
+*translate([0, -30, 0])
 bladeJoint();
 
 module bladeCover()
@@ -76,8 +76,8 @@ module bladeCoverBody()
     {
         translate([mainLength, 0, totalHeight/2+5 ]) rotate([-90, 0, 0]) 
             cylinder(d=totalHeight+10, h=mainWidth);
-        translate([mainLength-10, 0, totalHeight/2 + 30 ]) rotate([-90, 0, 0]) cylinder(d=20, h=mainWidth);
-        translate([mainLength-10, 0, 20/2 ]) rotate([-90, 0, 0]) cylinder(d=20, h=mainWidth);
+        translate([mainLength-5, 0, totalHeight/2 + 34 ]) rotate([-90, 0, 0]) cylinder(d=20, h=mainWidth);
+        translate([mainLength-8, 0, 20/2 ]) rotate([-90, 0, 0]) cylinder(d=20, h=mainWidth);
     }
     
     }//end of union
@@ -90,11 +90,14 @@ module bladeCoverHoles()
     {
         hull()
         {
-            translate([mainLength-totalHeight/3+5, (mainWidth-bladeWidth)/2, bottomHeight+totalHeight/3]) 
+            translate([mainLength-totalHeight/3+5, (mainWidth-bladeWidth)/2, bottomHeight+totalHeight/3+4/2]) 
+                rotate([-90, 0, 0]) 
+                    cylinder(d=totalHeight*2/3+4, h=bladeWidth);
+        
+            translate([mainLength-totalHeight/3-6, (mainWidth-bladeWidth)/2, totalHeight*2+10]) 
                 rotate([-90, 0, 0]) 
                     cylinder(d=totalHeight*2/3, h=bladeWidth);
-        
-            translate([mainLength-totalHeight/3-30, (mainWidth-bladeWidth)/2, totalHeight*2]) 
+            translate([mainLength-totalHeight/3-30, (mainWidth-bladeWidth)/2, bottomHeight+totalHeight/3]) 
                 rotate([-90, 0, 0]) 
                     cylinder(d=totalHeight*2/3, h=bladeWidth);
         }
@@ -113,7 +116,7 @@ module bladeCoverHoles()
     for(i=[1:7])
     {
         translate([i*20, -1, (bottomHeight)/2]) rotate([-90, 0, 0]) cylinder(d=4, h=mainWidth+2, $fn=30 );
-        translate([i*20, wallWidth, (bottomHeight)/2]) rotate([-90, 0, 0]) cylinder(d=6, h=bladeWidth);
+        translate([i*20, wallWidth-1, (bottomHeight)/2]) rotate([-90, 0, 0]) cylinder(d=6, h=bladeWidth+2);
         
         if(i*20-6-topHeight*0.7>charLength*len(Text2))
         translate([i*20, 0, bottomHeight+topHeight*0.35]) 
@@ -131,7 +134,7 @@ module bladeCoverHoles()
             }
     }
     for(i=[0, 1])
-    translate([-1, i*mainWidth, (bottomHeight)/2]) hull()
+    translate([-1, i*(mainWidth), (bottomHeight)/2]) hull()
     {
         sphere(d=6.5);
         translate([mainLength, 0, 0]) sphere(d=6.5);
@@ -143,32 +146,6 @@ module bladeCoverHoles()
 
     translate([charLength * len(Text1) + 2.5, mainWidth-textHeight/2, bottomHeight]) rotate([0, 0, 0])
         rotate([-90, 180, 0]) write(Text1, h=textSize, t=textHeight, space=1);
-
-        
-    *difference()
-    {
-        hull()
-        {
-            translate([charLength*len(Text2)+5.5*2, 0, bottomHeight+topHeight*0.35]) 
-                scale([1, 1, 1.3]) sphere(d=0.7*topHeight);
-            translate([mainLength+8, 0, bottomHeight+topHeight*0.35]) 
-                scale([1, 1, 1.3]) sphere(d=0.7*topHeight);
-        }
-        for(i=[1:10])
-            translate([25*i, 0 ,0]) cube([2, 50, 50]);
-    }
-    *difference()
-    {
-        hull()
-        {
-            translate([charLength*len(Text1)+5.5*2, mainWidth, bottomHeight+topHeight*0.35]) 
-                scale([1, 1, 1.3]) sphere(d=0.7*topHeight);
-            translate([mainLength+8, mainWidth, bottomHeight+topHeight*0.35]) 
-                scale([1, 1, 1.3]) sphere(d=0.7*topHeight);
-        }
-        for(i=[1:10])
-            translate([25*i, 0 ,0]) cube([2, 50, 50]);
-    }
 
     
 }
@@ -183,14 +160,14 @@ difference()
     {
         rotate([0, 90, 0]) cylinder(d=5, h=4*20, $fn=30);
 
-        cylinder(d=3.5, h=wallWidth+2+5/2-6/2, $fn=30);
-        translate([0, 0, 5/2+wallWidth+1-6/2]) cylinder(d1=5, d2=2, h=bladeWidth/3, $fn=15);
+        #cylinder(d=3.5, h=wallWidth+0.2, $fn=30);
+        translate([0, 0, wallWidth]) cylinder(d1=5, d2=2, h=bladeWidth/3+1, $fn=25);
         sphere(d=5, $fn=100);
         
         translate([4*20, 0, 0])
         {
-            cylinder(d=3.5, h=wallWidth+2+5/2-6/2, $fn=30);
-            translate([0, 0, 5/2+wallWidth+1-6/2]) cylinder(d1=5, d2=2, h=bladeWidth/3, $fn=15);
+            cylinder(d=3.5, h=wallWidth+0.2, $fn=30);
+            translate([0, 0, wallWidth]) cylinder(d1=5, d2=2, h=bladeWidth/3+1, $fn=25);
             sphere(d=5, $fn=100);
         }
     }

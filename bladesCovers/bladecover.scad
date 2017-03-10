@@ -28,7 +28,7 @@ use<Write.scad>
 mainLength = 155;
 mainWidth = 18;
 bottomHeight = 11;
-bladeWidth = 4.4;
+bladeWidth = 4.15;
 wallWidth = (mainWidth - bladeWidth) / 2;
 topHeight = 10;
 totalHeight = bottomHeight + topHeight;
@@ -160,14 +160,14 @@ difference()
     {
         rotate([0, 90, 0]) cylinder(d=5, h=4*20, $fn=30);
 
-        #cylinder(d=3.5, h=wallWidth+0.2, $fn=30);
-        translate([0, 0, wallWidth]) cylinder(d1=5, d2=2, h=bladeWidth/3+1, $fn=25);
+        cylinder(d=3.5, h=wallWidth+0.2, $fn=30);
+        translate([0, 0, wallWidth-1]) cylinder(d1=5.5, d2=2, h=bladeWidth/3+2, $fn=25);
         sphere(d=5, $fn=100);
         
         translate([4*20, 0, 0])
         {
             cylinder(d=3.5, h=wallWidth+0.2, $fn=30);
-            translate([0, 0, wallWidth]) cylinder(d1=5, d2=2, h=bladeWidth/3+1, $fn=25);
+            translate([0, 0, wallWidth-1]) cylinder(d1=5.5, d2=2, h=bladeWidth/3+2, $fn=25);
             sphere(d=5, $fn=100);
         }
     }

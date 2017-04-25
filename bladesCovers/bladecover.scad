@@ -40,12 +40,32 @@ textHeight = 2;
 textSize = 6;
 charLength = textSize * 0.125 * 5.5;
 
-bladeCover();
+//bladeCover();
 
 translate([0, -15, 0])
 bladeJoint();
-*translate([0, -30, 0])
+translate([100, -15, 0])
 bladeJoint();
+
+translate([0, 0, 1.5])
+difference()
+{
+    rotate([0, 90, 0])
+        cylinder(d=4, h=212, $fn=25);
+
+    for(i=[0:12])
+    {
+        translate([(11+6.5)*i, 0, 0])
+            hull()
+            {
+                translate([0, -10, 0]) sphere(d=6.5);
+                translate([0, 10, 0]) sphere(d=6.5);
+            }
+    }
+    translate([-1, -20, -20]) cube([212+2, 40, 20-1.5]); 
+}
+    
+
 
 module bladeCover()
 {
@@ -159,17 +179,19 @@ difference()
     union()
     {
         rotate([0, 90, 0]) cylinder(d=5, h=4*20, $fn=30);
-
-        cylinder(d=3.5, h=wallWidth+0.2, $fn=30);
-        translate([0, 0, wallWidth-1]) cylinder(d1=5.5, d2=2, h=bladeWidth/3+2, $fn=25);
-        sphere(d=5, $fn=100);
         
-        translate([4*20, 0, 0])
+        for(i=[0, 1])
+        translate([4*20*i, 0, 0])
         {
             cylinder(d=3.5, h=wallWidth+0.2, $fn=30);
-            translate([0, 0, wallWidth-1]) cylinder(d1=5.5, d2=2, h=bladeWidth/3+2, $fn=25);
+            translate([0, 0, wallWidth-1.5]) 
+            {
+                //cylinder(d1=6, d2=2.5, h=bladeWidth/3+2.5, $fn=25);
+                sphere(d=6, $fn=25);
+            }
             sphere(d=5, $fn=100);
         }
+
     }
     
     translate([-15, 1.5, -20]) cube([125, 20, 40]);

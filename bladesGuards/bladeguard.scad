@@ -1,5 +1,5 @@
 /**
- * bladecover.scad
+ * bladeguard.scad
  * 
  * created by Diego Viejo
  * 14/Feb/2017
@@ -23,7 +23,7 @@
  * 
  */
 
-use<Write.scad>
+use<Writescad/write.scad>
 
 mainLength = 155;
 mainWidth = 18;
@@ -34,20 +34,20 @@ topHeight = 10;
 totalHeight = bottomHeight + topHeight;
 endDiam = totalHeight*2;
 
-Text1 = "Blade Cover";
-Text2 = "by DViejo";
+Text1 = "Blade Guard";
+Text2 = "by D.Viejo";
 textHeight = 2;
 textSize = 6;
 charLength = textSize * 0.125 * 5.5;
 
-//bladeCover();
+bladeCover();
 
 translate([0, -15, 0])
 bladeJoint();
-translate([100, -15, 0])
+*translate([100, -15, 0])
 bladeJoint();
 
-translate([0, 0, 1.5])
+*translate([0, 0, 1.5])
 difference()
 {
     rotate([0, 90, 0])
@@ -78,8 +78,6 @@ module bladeCover()
 
 module bladeCoverBody()
 {
-    *cube([mainLength, mainWidth, totalHeight]);
-    *translate([mainLength, 0, totalHeight]) rotate([-90, 0, 0]) cylinder(d=endDiam, h=mainWidth);
     
     union()
     {
@@ -94,10 +92,10 @@ module bladeCoverBody()
     
     hull()
     {
-        translate([mainLength, 0, totalHeight/2+5 ]) rotate([-90, 0, 0]) 
-            cylinder(d=totalHeight+10, h=mainWidth);
+        translate([mainLength, 0, totalHeight/2+4 ]) rotate([-90, 0, 0]) 
+            cylinder(d=totalHeight+8, h=mainWidth);
         translate([mainLength-5, 0, totalHeight/2 + 34 ]) rotate([-90, 0, 0]) cylinder(d=20, h=mainWidth);
-        translate([mainLength-8, 0, 20/2 ]) rotate([-90, 0, 0]) cylinder(d=20, h=mainWidth);
+        *translate([mainLength-8, 0, 20/2 ]) rotate([-90, 0, 0]) cylinder(d=20, h=mainWidth);
     }
     
     }//end of union
@@ -106,18 +104,18 @@ module bladeCoverBody()
 module bladeCoverHoles()
 {
     
-    union()
+    union() //blade slot
     {
         hull()
         {
-            translate([mainLength-totalHeight/3+5, (mainWidth-bladeWidth)/2, bottomHeight+totalHeight/3+4/2]) 
+            translate([mainLength-totalHeight/3+5, (mainWidth-bladeWidth)/2-2, bottomHeight+totalHeight/3+4/2]) 
                 rotate([-90, 0, 0]) 
-                    cylinder(d=totalHeight*2/3+4, h=bladeWidth);
+                    cylinder(d=totalHeight*2/3+4, h=bladeWidth+4);
         
-            translate([mainLength-totalHeight/3-6, (mainWidth-bladeWidth)/2, totalHeight*2+10]) 
+            translate([mainLength-totalHeight/3-6, (mainWidth-bladeWidth)/2-1, totalHeight*2+10]) 
                 rotate([-90, 0, 0]) 
-                    cylinder(d=totalHeight*2/3, h=bladeWidth);
-            translate([mainLength-totalHeight/3-30, (mainWidth-bladeWidth)/2, bottomHeight+totalHeight/3]) 
+                    cylinder(d=totalHeight*2/3, h=bladeWidth+2);
+            translate([mainLength-totalHeight/3-15, (mainWidth-bladeWidth)/2, bottomHeight+totalHeight/3]) 
                 rotate([-90, 0, 0]) 
                     cylinder(d=totalHeight*2/3, h=bladeWidth);
         }
@@ -153,6 +151,11 @@ module bladeCoverHoles()
                 translate([-6, 0, 0]) scale([1, 1, 1.3]) sphere(d=0.7*topHeight);
             }
     }
+    for(i=[1:6])
+    {
+        translate([i*20+9, (mainWidth-bladeWidth)/2, -1]) cube([2, bladeWidth, bottomHeight+2]);
+    }
+    
     for(i=[0, 1])
     translate([-1, i*(mainWidth), (bottomHeight)/2]) hull()
     {
@@ -162,10 +165,10 @@ module bladeCoverHoles()
     
     
     translate([2.5, textHeight/2, bottomHeight]) rotate([0, 0, 0])
-        rotate([90, 0, 0]) write(Text2, h=textSize, t=textHeight, space=1);
+        rotate([90, 0, 0]) write(Text2, h=textSize, t=textHeight, font="knewave.dxf", space=1);
 
     translate([charLength * len(Text1) + 2.5, mainWidth-textHeight/2, bottomHeight]) rotate([0, 0, 0])
-        rotate([-90, 180, 0]) write(Text1, h=textSize, t=textHeight, space=1);
+        rotate([-90, 180, 0]) write(Text1, h=textSize, t=textHeight, font="knewave.dxf", space=1);
 
     
 }

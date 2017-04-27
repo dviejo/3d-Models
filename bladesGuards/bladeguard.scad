@@ -25,7 +25,16 @@
 
 use<Writescad/write.scad>
 
-mainLength = 155;
+//Configurable parameters
+mainLength = 155; //for a 10 2/3 inch blade ~= 271mm/2 = 135.5 + 19.5 = 155
+                  //for a 10 inch blade  = 254mm/2 = 127 + 20 = 147
+                  //for a 8 inch blade ~= 203mm/2 101.5 + 19.5 = 121
+                  // 1 inch ~= 25.4 mm.
+Text1 = "Blade Guard";
+Text2 = "by D.Viejo";
+
+
+
 mainWidth = 18;
 bottomHeight = 11;
 bladeWidth = 4.15;
@@ -34,8 +43,6 @@ topHeight = 10;
 totalHeight = bottomHeight + topHeight;
 endDiam = totalHeight*2;
 
-Text1 = "Blade Guard";
-Text2 = "by D.Viejo";
 textHeight = 2;
 textSize = 6;
 charLength = textSize * 0.125 * 5.5;

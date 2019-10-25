@@ -83,12 +83,12 @@ difference()
     #translate([AdjX, -1, AdjZ]) rotate([-90, 0, 0]) cylinder(d=AdjDiam, h=10);
     
     // +
-    #translate([Width-1, Length-7, 15-6/2]) cube([2, 1.5, 6]);
-    #translate([Width-1, Length-7-6/2+1.5/2, 15-1.5/2]) cube([2, 6, 1.5]);
+    translate([Width-1, Length-7, 15-6/2]) cube([2, 1.5, 6]);
+    translate([Width-1, Length-7-6/2+1.5/2, 15-1.5/2]) cube([2, 6, 1.5]);
     // separation
-    #translate([Width-1, Length-16, 27.5-1.5/2]) cube([2, 13, 1.5]);
+    translate([Width-1, Length-16, 27.5-1.5/2]) cube([2, 13, 1.5]);
     // -
-    #translate([Width-1, Length-7, 40-6/2]) cube([2, 1.5, 6]);
+    translate([Width-1, Length-7, 40-6/2]) cube([2, 1.5, 6]);
 }
 
 module frameInner()
@@ -114,7 +114,13 @@ union ()
             translate([0, -plugFaceLength/2+0.5, 0]) cylinder(d=1, h=Wall);
         }
         
-        translate([-plugWidth/2, -plugLength/2, 0]) cube([plugWidth, plugLength, 15]);
+        difference()
+        {
+            translate([-plugWidth/2-1, -plugLength/2, 0]) cube([plugWidth, plugLength, 15]);
+            
+            translate([-plugWidth/2-10, 0, 0]) rotate(45) cube([20,20,20]);
+            translate([-plugWidth/2-10, -plugLength, 0]) rotate(45) cube([20,20,20]);
+        }
     
         translate([0, plugFaceLength/2-plugHoleDist, 0]) cylinder(d=2.7, h=20);
         translate([0, -plugFaceLength/2+plugHoleDist, 0]) cylinder(d=2.7, h=20);

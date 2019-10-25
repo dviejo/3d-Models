@@ -24,14 +24,17 @@ module idlerPlate()
 {
   difference()
   {
-    hull()
-    {
-      cube([35, 10, height]);
-      translate([1.5, 13.5, 0]) cylinder(r=1.5, h=height);
-      translate([motorHeight, 15, 0]) cylinder(r=5, h=height);
+    union() {
+        hull()
+        {
+        translate([10, 0, 0]) cube([35-10, 10, height]);
+        translate([1.5+10, 13.5, 0]) cylinder(r=1.5, h=height);
+        translate([motorHeight, 15, 0]) cylinder(r=5, h=height);
+        }
+        translate([motorHeight, 15, 0]) cylinder(r=4.5, h=height+1.5);
     }
     //bearing beam hole
-    translate([motorHeight, 15, -1]) cylinder(r=pulleyInnerRad, h=height+2);
+    translate([motorHeight, 15, -1]) cylinder(r=pulleyInnerRad, h=height+3);
     
     //frame attaching hole
     #translate([26.5, -1, height/2]) rotate([-90, 0, 0]) cylinder(r=1.65, h=15);

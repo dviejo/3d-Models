@@ -24,12 +24,12 @@ support = false;
 //Adjustment. Check this to match your PSU 
 AdjZ = H1 + 8;
 AdjX = 14;
-AdjDiam = 6;
+AdjDiam = 7;
 
 //PSU connection
 HoleZ = 32; //From H1
-HoleY1 = 13;
-HoleY2 = 38;
+HoleY1 = 15;
+HoleY2 = 40;
 
 //plug combo
 
@@ -40,10 +40,10 @@ plugFaceLength = 50;
 plugHoleDist = 5; //from plugFaceLength edges
 
 //voltage display
-vdWidth = 46;
-vdLength = 27;
-vdFaceWidth = 49;
-vdFaceLength = 29;
+vdWidth = 46.5;
+vdLength = 27.5;
+vdFaceWidth = 50;
+vdFaceLength = 30.5;
 
 
 module frame()
@@ -74,21 +74,21 @@ difference()
     }
     
     //bannana conectors
-    translate([Width-8, Length-12, 10]) rotate([0, 90, 0]) cylinder(d=6, h=10);
-    translate([Width-8, Length-12, 20]) rotate([0, 90, 0]) cylinder(d=6, h=10);
-    translate([Width-8, Length-12, 35]) rotate([0, 90, 0]) cylinder(d=6, h=10);
-    translate([Width-8, Length-12, 45]) rotate([0, 90, 0]) cylinder(d=6, h=10);
+    translate([Width-8, Length-12, 10]) rotate([0, 90, 0]) cylinder(d=6.75, h=10);
+    translate([Width-8, Length-12, 20]) rotate([0, 90, 0]) cylinder(d=6.75, h=10);
+    translate([Width-8, Length-12, 35]) rotate([0, 90, 0]) cylinder(d=6.75, h=10);
+    translate([Width-8, Length-12, 45]) rotate([0, 90, 0]) cylinder(d=6.75, h=10);
     
     //adjustmen HoleY1
     #translate([AdjX, -1, AdjZ]) rotate([-90, 0, 0]) cylinder(d=AdjDiam, h=10);
     
     // +
-    translate([Width-1, Length-7, 15-6/2]) cube([2, 1.5, 6]);
-    translate([Width-1, Length-7-6/2+1.5/2, 15-1.5/2]) cube([2, 6, 1.5]);
+    translate([Width-1, Length-6.5, 15-6/2]) cube([2, 1.5, 6]);
+    translate([Width-1, Length-6.5-6/2+1.5/2, 15-1.5/2]) cube([2, 6, 1.5]);
     // separation
-    translate([Width-1, Length-16, 27.5-1.5/2]) cube([2, 13, 1.5]);
+    translate([Width-1, Length-15.5, 27.5-1.5/2]) cube([2, 12, 1.5]);
     // -
-    translate([Width-1, Length-7, 40-6/2]) cube([2, 1.5, 6]);
+    translate([Width-1, Length-6.5, 40-6/2]) cube([2, 1.5, 6]);
 }
 
 module frameInner()

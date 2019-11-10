@@ -19,7 +19,7 @@ Length = 51;
 Wall = 2;
 
 // change this to true if your printer can place removable support (eg. PVA)
-support = false;
+support = true;
 
 //Adjustment. Check this to match your PSU 
 AdjZ = H1 + 8;
@@ -89,6 +89,20 @@ difference()
     translate([Width-1, Length-15.5, 27.5-1.5/2]) cube([2, 12, 1.5]);
     // -
     translate([Width-1, Length-6.5, 40-6/2]) cube([2, 1.5, 6]);
+    
+    //fancy cuts
+    dist = 8;
+    intersection()
+
+    {
+        translate([15, -1, 15]) cube([Width-30, 12, 40]);
+        
+        for(i=[0:7]) for(j=[0:11])
+        translate([15+2+(dist+4)*i+(dist/2+2)*(j%2), -1, 15+3+(dist/2+2)*j]) rotate([-90, 0, 0]) 
+            #cylinder(d=dist, h=10, $fn=6);
+    }
+    
+    
 }
 
 module frameInner()
@@ -96,7 +110,14 @@ difference()
 {
     union()
     {
-        translate([3.5*Wall, 2*Wall, 2*Wall]) cube([Width-7*Wall, Length-3*Wall, Height]);
+        difference()
+        {
+            translate([3.5*Wall, Wall, 2*Wall]) cube([Width-7*Wall, Length-3*Wall, Height]);
+            
+            translate([3.5*Wall, Length-15, -1]) rotate(45) cube([20, 20, Height+2]);
+            translate([Width-3.5*Wall, Length-8, -1]) rotate(45) cube([9, 9, Height+2]);
+            translate([0, Length-13, 2*Wall]) rotate([-45, 0, 0]) cube([Width, 15, 15]);
+        }
         translate([Wall, Wall, H1]) cube([Width-2*Wall, Length, Height]);
     }
     
@@ -136,4 +157,7 @@ union()
 
 }
 
+rotate([90, 0, 0])
 frame();
+
+//frameInner();

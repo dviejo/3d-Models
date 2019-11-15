@@ -45,6 +45,7 @@ vdLength = 27.5;
 vdFaceWidth = 50;
 vdFaceLength = 30.5;
 
+bananaPos = 12;
 
 module frame()
 difference()
@@ -72,34 +73,35 @@ difference()
         translate([0, 0, -4.75/2]) rotate([0, 90, 0]) cylinder(d=4.75, h=120, $fn=20);
         translate([0, 0, 4.75/2]) rotate([0, 90, 0]) cylinder(d=4.75, h=120, $fn=20);
     }
-    
-    //bannana conectors
-    translate([Width-8, Length-12, 10]) rotate([0, 90, 0]) cylinder(d=6.75, h=10);
-    translate([Width-8, Length-12, 20]) rotate([0, 90, 0]) cylinder(d=6.75, h=10);
-    translate([Width-8, Length-12, 35]) rotate([0, 90, 0]) cylinder(d=6.75, h=10);
-    translate([Width-8, Length-12, 45]) rotate([0, 90, 0]) cylinder(d=6.75, h=10);
-    
+
     //adjustmen HoleY1
-    #translate([AdjX, -1, AdjZ]) rotate([-90, 0, 0]) cylinder(d=AdjDiam, h=10);
+    translate([AdjX, -1, AdjZ]) rotate([-90, 0, 0]) cylinder(d=AdjDiam, h=10);
+    
+
+    //bannana conectors
+    translate([Width-8, Length-12, bananaPos]) rotate([0, 90, 0]) cylinder(d=6.75, h=10);
+    translate([Width-8, Length-12, bananaPos+10]) rotate([0, 90, 0]) cylinder(d=6.75, h=10);
+    translate([Width-8, Length-12, bananaPos+25]) rotate([0, 90, 0]) cylinder(d=6.75, h=10);
+    translate([Width-8, Length-12, bananaPos+35]) rotate([0, 90, 0]) cylinder(d=6.75, h=10);
     
     // +
-    translate([Width-1, Length-6.5, 15-6/2]) cube([2, 1.5, 6]);
-    translate([Width-1, Length-6.5-6/2+1.5/2, 15-1.5/2]) cube([2, 6, 1.5]);
+    translate([Width-1, Length-6.5, bananaPos+5-6/2]) cube([2, 1.5, 6]);
+    translate([Width-1, Length-6.5-6/2+1.5/2, bananaPos+5-1.5/2]) cube([2, 6, 1.5]);
     // separation
-    translate([Width-1, Length-15.5, 27.5-1.5/2]) cube([2, 12, 1.5]);
+    translate([Width-1, Length-15.5, bananaPos+17.5-1.5/2]) cube([2, 12, 1.5]);
     // -
-    translate([Width-1, Length-6.5, 40-6/2]) cube([2, 1.5, 6]);
+    translate([Width-1, Length-6.5, bananaPos+30-6/2]) cube([2, 1.5, 6]);
     
     //fancy cuts
-    dist = 8;
+    dist = 12.2;
     intersection()
 
     {
-        translate([15, -1, 15]) cube([Width-30, 12, 40]);
+        translate([15, -1, 15]) cube([Width-30, 12, 43]);
         
         for(i=[0:7]) for(j=[0:11])
-        translate([15+2+(dist+4)*i+(dist/2+2)*(j%2), -1, 15+3+(dist/2+2)*j]) rotate([-90, 0, 0]) 
-            #cylinder(d=dist, h=10, $fn=6);
+        translate([9+(dist*3/2)*i+(dist*3/4)*(j%2), -1, 16+(dist*3/7)*j]) rotate([-90, 0, 0]) 
+            cylinder(d=dist*0.88, h=10, $fn=6);
     }
     
     
@@ -153,11 +155,16 @@ union()
 {
     translate([-vdWidth/2, -vdLength/2, 0]) cube([vdWidth, vdLength, 15]);
     translate([-vdFaceWidth/2, -vdFaceLength/2, 0]) cube([vdFaceWidth, vdFaceLength, Wall+1]);
-    translate([-vdFaceWidth/2, -vdFaceLength/2, 4.25]) cube([vdFaceWidth, vdFaceLength, 6]);
+    hull()
+    {
+        translate([-(vdFaceWidth-1)/2, -vdFaceLength/2, 4.25]) 
+            cube([(vdFaceWidth-1), vdFaceLength, 0.15]);
+        translate([-(vdFaceWidth-1)/2, -vdFaceLength/2, 4.24+6-0.15]) cube([(vdFaceWidth-1), vdFaceLength+2, 0.15]);
+    }
 
 }
 
 rotate([90, 0, 0])
-frame();
+    frame();
 
-//frameInner();
+//voltageDisplay();

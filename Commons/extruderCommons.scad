@@ -8,9 +8,9 @@
 filament_d = 3;
 spring_d = 10;
 
-mainHeight = 14;
+mainHeight = 14 + 3;
 baseHeight = 6; 
-offset = 3;
+offset = 0;
 
 b623zzRad = 5;
 b624zzRad = 6.5;
@@ -35,7 +35,8 @@ tubeRad = simpleTubeRad;
  * 
  */
 
-module base(action) translate([-trackerDiam/2 - AjusteNozzle, 15.5*2+5, -baseHeight - mainHeight/2-offset])
+module base(action) 
+translate([-trackerDiam/2 - AjusteNozzle, 15.5*2+5, -baseHeight - mainHeight/2-offset])
 {
 	if(action == "add") {
 		union() {
@@ -54,7 +55,8 @@ module base(action) translate([-trackerDiam/2 - AjusteNozzle, 15.5*2+5, -baseHei
 	{
 		//motor mounting holes
 		//up
-		for (side = [1, -1]) translate([side * 15.5, 0, -1]) cylinder(r = 3.1 * 7/12, $fn = 6, h=baseHeight*2 + mainHeight+2);
+		for (side = [1, -1]) translate([side * 15.5, 0, -1]) 
+                    cylinder(r = 3.1 * 7/12, $fn = 6, h=baseHeight*2 + mainHeight+2);
 		//bottom with room for bolt cap
 		for (side = [1, -1]) 
 		{
@@ -62,8 +64,8 @@ module base(action) translate([-trackerDiam/2 - AjusteNozzle, 15.5*2+5, -baseHei
 		  translate([side * 15.5, -31, -1]) cylinder(r=3.2, h=8.7);
 		}
 		
-		translate([0, -15.5, baseHeight*2 + mainHeight-7]) cylinder(r=12, h=10);
-		translate([0, -15.5, -1]) cylinder(r=3.25, h=baseHeight*2 + mainHeight+2); //TODO This can be replaced by holder for a 625zz bearing
+		translate([0, -15.5, (baseHeight+mainHeight/2+offset)+4]) cylinder(r=12, h=15);
+		translate([0, -15.5, -1]) cylinder(r=3.25, h=baseHeight*2 + mainHeight+2, $fn=30); //TODO This can be replaced by holder for a 625zz bearing
 		
 		//idler cut-out
 		difference()
@@ -76,18 +78,22 @@ module base(action) translate([-trackerDiam/2 - AjusteNozzle, 15.5*2+5, -baseHei
 		  translate([-10, -20, -2]) cube([100, 25, baseHeight+2]);
 		}
 		//Springs
-		#translate([-15.5, 0, baseHeight + mainHeight / 2+offset+3]) rotate([90, 0, 150 - 4.5]) translate([5, 0, 5.5+correction*1.25]) 
+		#translate([-15.5, 0, (baseHeight+mainHeight/2+offset)+1.5+spring_d/2]) rotate([90, 0, 150 - 4.5]) translate([5, 0, 5.5+correction*1.25]) 
 		  cylinder(r = spring_d * 7/12, h = 10, $fn = 6);
-		#translate([-15.5, 0, baseHeight + mainHeight / 2+offset-9]) rotate([90, 0, 150 - 4.5]) translate([5, 0, 5.5+correction*1.25]) 
+		#translate([-15.5, 0, (baseHeight+mainHeight/2+offset)-1.5-spring_d/2]) rotate([90, 0, 150 - 4.5]) translate([5, 0, 5.5+correction*1.25]) 
 		  cylinder(r = spring_d * 7/12, h = 10, $fn = 6);
 		//hole for filament intake
-		translate([trackerDiam/2 + AjusteNozzle, -60, baseHeight + mainHeight/2+offset]) rotate([-90, 0, 0]) cylinder(r=1.85, h=100, $fn = 25);
-		translate([trackerDiam/2 + AjusteNozzle-5, -15.5, baseHeight + mainHeight/2+offset+5]) rotate([-90, 0, 0]) cube([10, 15, 10]);
+		translate([trackerDiam/2 + AjusteNozzle, -60, baseHeight + mainHeight/2+offset])          
+                    rotate([-90, 0, 0]) cylinder(r=1.85, h=100, $fn = 25);
+		translate([trackerDiam/2 + AjusteNozzle-5, -15.5, baseHeight]) //rotate([-90, 0, 0])
+                    cube([10, 15, 25]);
 
 		//internal room. The structure for guiding filament is here!
 		translate([-21, -26, baseHeight]) cube([21, 20, mainHeight+baseHeight+1]);
 		translate([7, -26, baseHeight]) cube([14.1, 20, mainHeight+baseHeight+1]);		//Idler hole
-		translate([trackerDiam + AjusteNozzle+filament_d, -15.5, baseHeight]) cylinder(r=bearingRad*1.25, h=22);
+		translate([trackerDiam + AjusteNozzle+filament_d, -15.5, baseHeight])
+                    cylinder(r=bearingRad*1.25, h=22);
+                //tracker hole
 		translate([0, -15.5, baseHeight]) cylinder(r=(trackerDiam/2)*1.30, h=22);
 		
 		%translate([0, -15.5, baseHeight + mainHeight/2+offset+7.7]) mirror([0, 0, 1]) tracker();
@@ -136,16 +142,16 @@ jhHeight2 = 4.6 - 0.25;
 jhHeight3 = 15; 
 
 //TODO Next should be set by the method who calls extruderMount.
- height1 = e3dHeight1;
- height2 = e3dHeight2;
- height3 = e3dHeight3; 
- diam = e3dDiam;
- diam2 = e3dDiam2;
-//height1 = jhHeight1;
-//height2 = jhHeight2;
-//height3 = jhHeight3; 
-//diam = jhDiam;
-//diam2 = jhDiam2;
+//  height1 = e3dHeight1;
+//  height2 = e3dHeight2;
+//  height3 = e3dHeight3; 
+//  diam = e3dDiam;
+//  diam2 = e3dDiam2;
+height1 = jhHeight1;
+height2 = jhHeight2;
+height3 = jhHeight3; 
+diam = jhDiam;
+diam2 = jhDiam2;
 
 /**
  * Grooved extruder mounting
@@ -202,7 +208,7 @@ module extruderMount(dualExtruder=false)
   {
     for(i=[-1, 1]) //general
     {
-      translate([i*(diam2/2 + 7), -20, -height1-height2/2]) rotate([-90, 0, 0]) 
+      #translate([i*(diam2/2 + 7), -20, -height1-height2/2]) rotate([-90, 0, 0]) 
 	cylinder(r=1.55, h=30, $fn=30);
       hull()
       {
@@ -217,17 +223,35 @@ module extruderMount(dualExtruder=false)
 }
 
 mountB_H3 = 1;
-module extruderMountB() translate([0, 0, -height1-height2-mountB_H3])
+DFan = 40;
+SFan = 32;
+fanHeight = 6; //25;
+
+module extruderMountB() 
+//translate([0, 0, -height1-height2-mountB_H3])
+difference()
 {
-  difference()
-  {
     union()
     {
       translate([-(diam-0.4)/2, 0, 0]) cube([diam-0.4, diam/2+3, height1+height2+mountB_H3]);
-      translate([-35/2, diam/2+2, 0]) cube([35, 7, height1+height2+mountB_H3]);
+      translate([-DFan/2+1.75, diam/2+2, 0]) cube([DFan, 7+fanHeight, height1+height2+mountB_H3]);
+*      translate([-DFan/2+1.75, diam/2+2+3+fanHeight, -DFan+3]) 
+        cube([DFan, 4, height1+height2+mountB_H3+DFan-3]);
+        
+//quitamos los dos '*' de las próximas líneas para tener dos vías de refrigeración      
+*      hull()
+      {
+          translate([1.75, diam/2+2+7+fanHeight, -DFan/2+3]) rotate([90, 0, 0]) 
+            cylinder(d=DFan+4, h=4+6);
+ *         translate([0, 10, -30]) cylinder(d=diam, h=25);
+          translate([0, 12, -40]) cylinder(d=diam, h=10);
+        
+      }
+      
+      *translate([0, 0, -40]) %cylinder(d=diam, h=50);
     }
     
-    translate([0, 0, -1]) cylinder(d=diam, h=1+mountB_H3);
+    translate([0, 0, -1-50]) cylinder(d=diam, h=1+mountB_H3+50);
     translate([0, 0, -1]) cylinder(d=diam2, h=height1+height2+mountB_H3+2);
     translate([0, 0, height2+mountB_H3]) cylinder(d=diam, h=1+height1);
     
@@ -237,18 +261,59 @@ module extruderMountB() translate([0, 0, -height1-height2-mountB_H3])
     translate([-diam/2-1, -1, -1]) cube([diam+2, diam2/2+1, 1+mountB_H3]);
     translate([-diam/2-1, -1, mountB_H3+height2]) cube([diam+2, diam2/2+1, 1+height1]);
     
+    //extruder mount holes
     for(i=[-1, 1]) 
     {
       translate([i*(diam2/2 + 7), 0, mountB_H3+height2/2]) rotate([-90, 0, 0]) 
 	cylinder(r=1.55, h=diam/2+6, $fn=30);
       translate([i*(diam2/2 + 7), diam/2+6.3, mountB_H3+height2/2]) rotate([-90, 0, 0]) 
-	cylinder(r=3.2, h=6);
+	cylinder(r=3.2, h=11+fanHeight);
 
     }
-  }
-  
-}
 
+    
+    //FAN extension mounting holes
+    
+#    for(i=[-1, 1]) 
+    {
+      translate([i*(7), 14, mountB_H3+height2/2]) rotate([-90, 0, 0]) 
+	cylinder(d=2.75, h=30);
+
+    }
+    
+    
+    //fan screws
+*    for(i=[-1, 1]) for(j=[-1, 1])
+        translate([i*SFan/2+1.75, diam/2+2+7+fanHeight+1, -DFan/2+j*SFan/2+3]) rotate([90, 0, 0]) 
+            cylinder(d=3, h=7);
+
+//quitamos los dos '*' de las próximas líneas para tener dos vías de refrigeración        
+    *nestedHull()
+    {
+        translate([1.75, diam/2+2+7+fanHeight+1, -DFan/2+3]) rotate([90, 0, 0]) 
+        difference()
+        {
+            cylinder(d=DFan+0.25, h=4);
+            translate([-50, -99, -1]) cube([100, 100, fanHeight]);
+        }
+        translate([0, 5, -30]) cylinder(d=diam-4, h=23);
+    }
+    
+*    nestedHull()
+    {
+        translate([1.75, diam/2+2+7+fanHeight+1, -DFan/2+3]) rotate([90, 0, 0]) 
+        difference()
+        {
+            cylinder(d=DFan+0.25, h=2);
+            *translate([-50, -1, -1]) cube([100, 100, fanHeight]);
+        }
+        translate([0, 16, -38]) cylinder(d=diam-6, h=1);
+        translate([0, -2, -40.5]) cylinder(d=diam+3, h=1);
+    }
+    
+    translate([-20, 0, -48]) cube([40, 7, 46]);
+
+}
 
 
 

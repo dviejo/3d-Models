@@ -64,7 +64,68 @@ module DViejosCompactExtruder()
   }
 }
 
-DViejosCompactExtruder();
-translate([-45, 10, mountB_H3+0.25]) rotate([-90, 0, 90])  //uncomment this for printing, comment for modeling
-    extruderMountB();
-translate([42, 25, -baseHeight - mainHeight/2-offset]) rotate(210) idler();
+FHDFan = 30;
+IDFan = 24;
+FHHeight = 25;
+
+module fanHolder()
+difference()
+{
+    union()
+    {
+        cube([FHDFan, FHDFan+15, 3]);
+
+        nestedHull()
+        {
+            translate([FHDFan/2, FHDFan/2, 3]) cylinder(d=FHDFan, h=1);
+            
+            translate([FHDFan/2, 12, 5]) cylinder(d=FHDFan-5, h=4);
+        
+            hull()
+            {
+                translate([FHDFan/2-5, 5/2-2.5, FHHeight-10]) cylinder(d=5.5, h=1);
+                translate([FHDFan/2+5, 5/2-2.5, FHHeight-10]) cylinder(d=5.5, h=1);
+            }
+            hull()
+            {
+                translate([FHDFan/2-4, 3.5/2-7, FHHeight]) cylinder(d=3, h=1);
+                translate([FHDFan/2+4, 3.5/2-7, FHHeight]) cylinder(d=3, h=1);
+            }
+        }
+    }
+    
+    nestedHull()
+    {
+        translate([FHDFan/2, FHDFan/2, -1]) cylinder(d=FHDFan-2, h=1);
+        translate([FHDFan/2, FHDFan/2, 3]) cylinder(d=FHDFan-2, h=1);
+
+        translate([FHDFan/2, 12, 5]) cylinder(d=FHDFan-8, h=3);
+        
+        hull()
+        {
+            translate([FHDFan/2-5, 5/2-2, FHHeight-11]) cylinder(d=3, h=1);
+            translate([FHDFan/2+5, 5/2-2, FHHeight-11]) cylinder(d=3, h=1);
+        }
+
+        
+        hull()
+        {
+            translate([FHDFan/2-4, 3.5/2-7, FHHeight]) cylinder(d=1.5, h=1);
+            translate([FHDFan/2+4, 3.5/2-7, FHHeight]) cylinder(d=1.5, h=1);
+        }
+
+    }
+    
+    translate([-40, -10, 17]) cube([80, 30, 15]);
+}
+
+translate([FHDFan/2, -35, 26.3])
+rotate([0, 180, 0])
+fanHolder();
+
+//DViejosCompactExtruder();
+//translate([-0, -8.225, mountB_H3]) rotate([-90, 0, 90])  //uncomment this for printing, comment for modeling 
+rotate([-90, 180, 0]) //for viewing
+        extruderMountB();
+//translate([42, 25, -baseHeight - mainHeight/2-offset]) rotate(210) idler();
+

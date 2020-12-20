@@ -27,7 +27,6 @@ include<../Commons/idler.scad>
 carriagePos = -4.5;
 
 
-
 module DViejosCompactExtruder()
 {
   difference()
@@ -58,13 +57,14 @@ module DViejosCompactExtruder()
     //xcarriage holes for PowerCode/Hephestos XCarriage
     for(i=[-1, 1])
     {
-      #translate([i*15-2, carriagePos, -25]) cylinder(r=1.65, h=50);
+      translate([i*15-2, carriagePos, -25]) cylinder(r=1.65, h=50);
       translate([i*15-2, carriagePos, baseHeight - mainHeight/2 - offset]) cylinder(r=3.3, h=50);
     }
   }
 }
 
-DViejosCompactExtruder();
-translate([-45, 10, mountB_H3+0.25]) rotate([-90, 0, 90])  //uncomment this for printing, comment for modeling
+//DViejosCompactExtruder();
+*translate([0, carriagePos-4, 0]) rotate([90, 0, 180]) //uncomment for modeling
     extruderMountB();
-translate([42, 25, -baseHeight - mainHeight/2-offset]) rotate(210) idler();
+translate([42, 25, -baseHeight - mainHeight/2-offset]) rotate(210) 
+    idler();
